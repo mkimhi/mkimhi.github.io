@@ -4,7 +4,7 @@ collection: talks
 type: "Talk"
 permalink: /talks/2022
 venue: #"UC San Francisco, Department of Testing"
-date: #2012-03-01
+date: 2022-03-08
 location: "Zoom"
 ---
 
