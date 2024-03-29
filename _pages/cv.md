@@ -11,35 +11,34 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+* Ph.D in CS, focus on Deep learning with imperfect data, Technion, 2026 (expected)
+* M.S. in EE, focus on efficient neural networks, Technion, 2023
+* B.S. in EE, Computer engineering, Technion, 2021
 
 Work experience
 ======
-* Spring 2024: Academic Pages Collaborator
-  * Github University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
+* 2022 - now: Head TA for deep learning
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+* 2022-2023: TA for algorithms and aplications in computer vision
 
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* Summer 2023: Research intern at Bosch Center of AI
+  * Focus: Semi-supervised instance segmentation for robotic grasping
+
+* 2021: Algorithm engineer at GE Healthcare
+  * Developed models for cardiac ultrasound real time aplications
+
+* 2019-2020: Firmwere verification engineer (student) - Nvidia
+  * design and verification in the PCIe group
+
+* 2017-2019: Chip design (student) - Intel
+
   
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+* Curiosity.
+* Coding: proficient in Python, mostly in the context of deep learning (Torch, Timm, Transformers, etc). 
+  * prior knowledge in C++, Javascript, tcl, erlang, MATLAB.
+* Problem solving with a "can do" attitude
 
 Publications
 ======
@@ -61,4 +60,5 @@ Teaching
   
 Service and leadership
 ======
-* Currently signed in to 43 different slack teams
+* Serves in the IDK reservs, rank of a Major (Company commander)
+
