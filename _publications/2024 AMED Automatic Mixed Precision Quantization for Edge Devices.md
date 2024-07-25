@@ -3,7 +3,7 @@ title: "AMED: Automatic Mixed-Precision Quantization for Edge Devices"
 collection: publications
 permalink: /publication/AMED Automatic Mixed Precision Quantization for Edge Devices
 excerpt: ' This work look at quantization of neural network as a markov decision process'
-date: 2024-07-04
+date: 2023-07-04
 venue: 'Mathematics 12 (12)'
 paperurl: 'https://www.mdpi.com/2227-7390/12/12/1810'
 citation: #'Your Name, You. (2009). &quot;Paper Title Number 1.&quot; <i>Journal 1</i>. 1(1).'
