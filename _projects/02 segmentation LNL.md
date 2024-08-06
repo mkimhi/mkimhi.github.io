@@ -4,7 +4,8 @@ excerpt: "Investigate the biasses of self annotation and how to combat noisy lab
 collection: projects
 ---
 
-<br/><img src='/images/noises_giraph_exag.pdf'>
+<br/><img src='/images/noises_giraph_exag.pdf',width="600"/><br/>
+Image from our [Benchmark](https://arxiv.org/abs/2406.10891)
 
 This is actually a line of projects relate to our publication about spatial noise effects on instance segmentation models: https://arxiv.org/abs/2406.10891 
 

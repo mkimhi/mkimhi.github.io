@@ -15,4 +15,4 @@ If you want to read similar idea for OD, [ExtremeNet](https://arxiv.org/abs/1901
 The idea is to compare FPS with [YOLOv10](https://arxiv.org/abs/2405.14458)
 
 
-<br/><img src='/images/bear.webp'>
+<br/><img src='/images/bear.webp',width="600"/><br/>

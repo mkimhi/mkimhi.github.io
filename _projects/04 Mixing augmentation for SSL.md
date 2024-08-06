@@ -14,5 +14,5 @@ The goal of this project is to try to understand if mixing labeled and unlabeled
 
 Since SSL requires scedualing for thresholding in most cases, it could lead to better understanding about a curriculum augmentation strategy, similar to [CUDA](https://arxiv.org/abs/2302.05499).
 
-<br/><img src='/images/mixing.png'>
+<br/><img src='/images/mixing.png',width="600"/><br/>
 image from https://arxiv.org/pdf/2212.10888
