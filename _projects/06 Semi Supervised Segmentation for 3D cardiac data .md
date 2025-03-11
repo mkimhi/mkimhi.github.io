@@ -14,7 +14,7 @@ and challange existing SOTA [CrossMatch](https://arxiv.org/pdf/2405.00354)
 
 While the first project employ the existing work of S4MC, this can lead to a Masters thesis.
 
-<br/><img src='/images/LA.png',width="600"/><br/>
+<br/><img src=/images/LA.png,width="600"/><br/>
 image from LA challange
 
 LA dataset consists of 80 gadoliniumenhanced MRI for training and 20 for validation.

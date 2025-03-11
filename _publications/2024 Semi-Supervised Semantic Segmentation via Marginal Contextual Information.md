@@ -17,11 +17,14 @@ visit us from awsome SSSS: https://github.com/BBBBchan/Awesome-Semi-Supervised-S
 
 bibtex:
 ```
-@article{Kimhi2023SemiSupervisedSS,
-  title={Semi-Supervised Semantic Segmentation via Marginal Contextual Information},
-  author={Moshe Kimhi and Shai Kimhi and Evgenii Zheltonozhskii and Or Litany and Chaim Baskin},
-  journal={ArXiv},
-  year={2023},
-  volume={abs/2308.13900},
+@article{
+kimhi2023semi,
+title={Semi-Supervised Semantic Segmentation via Marginal Contextual Information},
+author={Moshe Kimhi and Shai Kimhi and Evgenii Zheltonozhskii and Or Litany and Chaim Baskin},
+journal={Transactions on Machine Learning Research},
+issn={2835-8856},
+year={2024},
+url={https://openreview.net/forum?id=i5yKW1pmjW},
+note={}
 }
 ```

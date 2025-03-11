@@ -1,15 +1,15 @@
 ---
-title: "Benchmarking Label Noise in Instance Segmentation: Spatial Noise Matters"
+title: "Noisy Annotations in Semantic Segmentation"
 collection: publications
-permalink: /publication/Benchmarking Label Noise in Instance Segmentation - Spatial Noise Matters
-excerpt: 'We propose a benchmark for spatial label nosise for instanse segmentation, both with man main and machine made noise'
+permalink: /publication/Noisy Annotations in Semantic Segmentation
+excerpt: 'Explore the effects of label noise in segmentation datasets, with real and syntetic data'
 date: 2024-07-01
 venue: 'Preprint'
 paperurl: 'https://arxiv.org/pdf/2406.10891'
 citation: #'Your Name, You. (2009). &quot;Paper Title Number 1.&quot; <i>Journal 1</i>. 1(1).'
 ---
 
-Obtaining accurate labels for instance segmentation is particularly challenging due to the complex nature of the task. Each image necessitates multiple annotations, encompassing not only the object's class but also its precise spatial boundaries. These requirements elevate the likelihood of errors and inconsistencies in both manual and automated annotation processes. By simulating different noise conditions, we provide a realistic scenario for assessing the robustness and generalization capabilities of instance segmentation models in different segmentation tasks, introducing COCO-N and Cityscapes-N. We also propose a benchmark for weakly annotation noise, dubbed COCO-WAN, which utilizes foundation models and weak annotations to simulate semi-automated annotation tools and their noisy labels. This study sheds light on the quality of segmentation masks produced by various models and challenges the efficacy of popular methods designed to address learning with label noise
+Instance segmentation requires not only correct class labels but also precise spatial delineation, making it highly susceptible to annotation noise. Such inaccuracies, stemming from human error or automated tools, can substantially degrade performance in safety-critical domains ranging from autonomous driving to medical imaging. In this work, we systematically investigate how various forms of noisy annotations—including class confusion, boundary distortions and disoriented annotation tools context —affect segmentation models across multiple datasets. We introduce \textbf{\texttt{COCO}-N}, \textbf{\texttt{CityScapes}-N}, and \textbf{\texttt{VIPER}-N} to simulate realistic noise in both real-world and synthetic data, and further propose \textbf{\texttt{COCO}-WAN}, a weakly annotated benchmark leveraging promptable foundation models. Experimental results reveal that even modest labeling and annotating  errors lead to notable drops in segmentation quality, highlighting the limitations of current learning-from-noise approaches in handling spatial inaccuracies. Our findings underscore the critical need for robust segmentation pipelines that focus on annotation quality, and motivate future work on noise-aware training strategies (e.g. learning with noisy annotations) for real-world applications.
 
 
 bibtex:

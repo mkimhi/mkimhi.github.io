@@ -3,9 +3,9 @@ title: "Robot Instance Segmentation with Few Annotations for Grasping"
 collection: publications
 permalink: /publication/Robot Instance Segmentation with Few Annotations for Grasping
 excerpt: 'We improve perception for robotic grasping with temporal and identification consistency'
-date: 2024-06-20
-venue: 'Preprint'
-paperurl: 'https://arxiv.org/pdf/2407.01302'
+date: 2025-02-20
+venue: 'WACV 2025'
+paperurl: 'https://openaccess.thecvf.com/content/WACV2025/papers/Kimhi_Robot_Instance_Segmentation_with_Few_Annotations_for_Grasping_WACV_2025_paper.pdf'
 citation: #'Your Name, You. (2009). &quot;Paper Title Number 1.&quot; <i>Journal 1</i>. 1(1).'
 ---
 
@@ -15,12 +15,12 @@ https://github.com/mkimhi/RISE
 
 bibtex:
 ```
-@misc{kimhi2024robot,
-    title={Robot Instance Segmentation with Few Annotations for Grasping},
-    author={Moshe Kimhi and David Vainshtein and Chaim Baskin and Dotan Di Castro},
-    year={2024},
-    eprint={2407.01302},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
+@InProceedings{Kimhi_2025_WACV,
+    author    = {Kimhi, Moshe and Vainshtein, David and Baskin, Chaim and Di Castro, Dotan},
+    title     = {Robot Instance Segmentation with Few Annotations for Grasping},
+    booktitle = {Proceedings of the Winter Conference on Applications of Computer Vision (WACV)},
+    month     = {February},
+    year      = {2025},
+    pages     = {7928-7938}
 }
 ```

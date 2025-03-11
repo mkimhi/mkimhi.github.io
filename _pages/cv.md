@@ -17,7 +17,7 @@ Education
 
 Work experience
 ======
-* 2022 - now: Head TA for deep learning
+* 2022 - 2025: Head TA for deep learning
 
 * 2022-2023: TA for algorithms and aplications in computer vision
 
@@ -46,11 +46,6 @@ Publications
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-Talks
-======
-  <ul>{% for post in site.talks reversed %}
-    {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
   
 Teaching
 ======
@@ -60,5 +55,5 @@ Teaching
   
 Service and leadership
 ======
-* Serves in the IDK reservs, rank of a Major (Company commander)
+* Serves in the IDF reservs, rank of a Major (Company commander)
 
