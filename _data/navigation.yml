@@ -1,23 +1,12 @@
-# main links links
+# main links
 main:
   - title: "Publications"
     url: /publications/
-- title: "Preprints"
+  - title: "Preprints"
     url: /preprints/
-#  - title: "Talks"
-#    url: /talks/    
-
   - title: "Teaching"
     url: /teaching/    
-    
   - title: "Projects"
     url: /projects/
-        
-#  - title: "Blog Posts"
-#    url: /year-archive/
-    
   - title: "CV"
     url: /cv/
-    
-#  - title: "Guide"
-#    url: /markdown/
