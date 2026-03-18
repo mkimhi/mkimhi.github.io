@@ -53,7 +53,8 @@
 
         .authors p {
             margin: 8px 0;
-            opacity: 0.95;
+            opacity: 1;
+            color: white;
         }
 
         .star {
@@ -63,8 +64,28 @@
 
         .affiliation {
             font-size: 0.85em;
-            opacity: 0.8;
+            opacity: 1;
             margin-top: 10px;
+            color: white;
+        }
+
+        .logos {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .logos img {
+            height: 40px;
+            opacity: 0.95;
+            transition: opacity 0.2s ease;
+        }
+
+        .logos img:hover {
+            opacity: 1;
         }
 
         .links {
@@ -367,10 +388,15 @@
             <h1>Maximal Brain Damage Without Data or Optimization: Disrupting Neural Networks via Sign-Bit Flips</h1>
 
             <div class="authors">
-                <p><strong>Ido Galil</strong><span class="star">*</span> (NVIDIA)</p>
-                <p><strong>Moshe Kimhi</strong><span class="star">*</span> (Technion, IBM Research)</p>
-                <p><strong>Ran El-Yaniv</strong> (Technion, NVIDIA)</p>
+                <p><strong>Ido Galil</strong><span class="star">*</span> • NVIDIA</p>
+                <p><strong>Moshe Kimhi</strong><span class="star">*</span> • Technion, IBM Research</p>
+                <p><strong>Ran El-Yaniv</strong> • Technion, NVIDIA</p>
                 <p class="affiliation"><span class="star">*</span><em>Equal contribution</em></p>
+            </div>
+
+            <div class="logos">
+                <img src="https://logowik.com/content/uploads/images/technion-israel-institute-of-technology1200.jpg" alt="Technion Logo">
+                <img src="https://upload.wikimedia.org/wikipedia/sco/2/21/Nvidia_logo.svg" alt="NVIDIA Logo">
             </div>
 
             <div class="links">
@@ -396,7 +422,7 @@
         <!-- Hero Figure -->
         <section class="figure-section">
             <div class="figure-container">
-                <img src="./dalmatian_figure.png" alt="DNL effect on convolutional kernel">
+                <img src="dalmatian_figure.png" alt="DNL effect on convolutional kernel">
                 <div class="figure-caption">
                     One sign-bit flip in an early-layer edge detector kernel fundamentally alters learned representations. The transformed kernel generates corrupted feature maps that propagate through the network, severely impairing recognition. This single-bit perturbation illustrates the critical vulnerability of early-layer parameters.
                 </div>
@@ -427,9 +453,6 @@
             <p>
                 <strong>Enhanced 1-Pass DNL:</strong> Refines parameter selection with a single forward and backward pass on random inputs, achieving stronger attacks with minimal overhead.
             </p>
-            <div class="formula-box">
-                Maximize parameter disruption via gradient-weighted sensitivity on random inputs
-            </div>
             <h3>Why Sign-Bit Flips Matter</h3>
             <ul>
                 <li><strong>Clean disruption:</strong> Flipping the sign bit instantly negates weights, maximizing feature map corruption</li>
@@ -444,7 +467,7 @@
         <section>
             <h2>Image Classification Results</h2>
             <div class="results-intro">
-                Evaluated on 60 classifiers including 48 ImageNet models from timm and Torchvision repositories across diverse architectures (ResNet, EfficientNet, ViT, RegNet, etc.).
+                Evaluated on 60 classifiers including 48 ImageNet models from timm and Torchvision repositories across diverse architectures.
             </div>
 
             <div class="domain-section">
@@ -470,6 +493,7 @@
 
             <div class="figure-container">
                 <img src="model_size_vs_damage.png" alt="Model size vs. vulnerability">
+
                 <div class="figure-caption">
                     Accuracy reduction (AR) as a function of model scale. Larger models show slightly lower AR for fixed flip counts, but remain highly vulnerable. Early-layer targeting dominates architecture choice in determining susceptibility.
                 </div>
@@ -486,6 +510,7 @@
                 <div>
                     <div class="figure-container">
                         <img src="mask_clean.jpg" alt="Clean Mask R-CNN detection">
+
                         <div class="figure-caption">
                             <strong>Baseline:</strong> Mask R-CNN correctly detects and segments objects with high confidence.
                         </div>
@@ -494,6 +519,7 @@
                 <div>
                     <div class="figure-container">
                         <img src="mask_attacked.jpg" alt="Attacked Mask R-CNN">
+
                         <div class="figure-caption">
                             <strong>After 1-2 flips:</strong> Detection and segmentation collapse to random outputs.
                         </div>
@@ -577,7 +603,7 @@
         <section>
             <h2>Attack Strategy Comparison</h2>
             <div class="figure-container">
-                <img src="./images/attack_strategies.png" alt="Comparison of attack strategies">
+                <img src="attack_strategies.png" alt="Comparison of attack strategies">
                 <div class="figure-caption">
                     Performance of different targeting heuristics across 48 ImageNet models. Magnitude-based selection combined with early-layer targeting significantly outperforms random flips and matches top-k magnitude selection while remaining data-free and computationally lightweight.
                 </div>
@@ -613,7 +639,7 @@
 
     <footer>
         <div class="container">
-            <p><strong>Accepted to TMLR</strong> (Transactions on Machine Learning Research)</p>
+            <p><strong>Accepted to TMLR</strong> (Transactions on Machine Learning Research) • Featured Certification</p>
             <p><a href="https://openreview.net/forum?id=kN1s53X3zl">OpenReview Forum</a></p>
             <p style="margin-top: 15px; font-size: 0.8em;">March 2026</p>
         </div>
