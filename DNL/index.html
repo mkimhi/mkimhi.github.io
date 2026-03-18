@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maximal Brain Damage: Sign-Bit Flips in Neural Networks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: #fafbfc;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #0a496b;
+            color: white;
+            padding: 60px 20px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            line-height: 1.3;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .authors {
+            margin: 30px 0;
+            font-size: 0.95em;
+        }
+
+        .authors p {
+            margin: 8px 0;
+            opacity: 0.95;
+        }
+
+        .star {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .affiliation {
+            font-size: 0.85em;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .links {
+            margin: 30px 0;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .icon-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .icon-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .icon-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            padding: 3px 8px;
+            background: rgba(255, 107, 107, 0.9);
+            color: white;
+            border-radius: 3px;
+            font-size: 0.75em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border-radius: 6px;
+            padding: 45px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            border-left: 5px solid #57a7e6;
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: #0a496b;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        section h3 {
+            font-size: 1.2em;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #34495e;
+        }
+
+        .intro-text {
+            font-size: 1.05em;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #fff9e6 0%, #fff3cc 100%);
+            padding: 1px 5px;
+            border-radius: 2px;
+            font-weight: 600;
+            color: #d68910;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.8;
+        }
+
+        /* Figures */
+        .figure-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .figure-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .figure-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            display: inline-block;
+        }
+
+        .figure-caption {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 12px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .two-column-figures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 900px) {
+            .two-column-figures {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Results Grid */
+        .results-intro {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            border-left: 4px solid #57a7e6;
+        }
+
+        .domain-section {
+            margin-bottom: 35px;
+        }
+
+        .domain-section h3 {
+            color: #0a496b;
+            margin-bottom: 18px;
+            font-size: 1.15em;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .result-box {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 4px;
+            border-left: 3px solid #57a7e6;
+            transition: all 0.2s ease;
+        }
+
+        .result-box:hover {
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .result-box h4 {
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            color: #0a496b;
+            font-weight: 600;
+        }
+
+        .result-box p {
+            margin: 6px 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .metric {
+            font-weight: 700;
+            color: #e74c3c;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: #f8f9fa;
+            border-left: 3px solid #57a7e6;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #2c3e50;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #ecf0f1;
+            border-radius: 4px;
+            padding: 18px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 20px;
+            color: #95a5a6;
+            font-size: 0.85em;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin: 8px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            section {
+                padding: 30px 20px;
+            }
+
+            section h2 {
+                font-size: 1.4em;
+            }
+
+            .links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .icon-link {
+                text-align: center;
+                justify-content: center;
+            }
+
+            .two-column-figures {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 60px 0 40px;
+            color: #bdc3c7;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Maximal Brain Damage Without Data or Optimization: Disrupting Neural Networks via Sign-Bit Flips</h1>
+
+            <div class="authors">
+                <p><strong>Ido Galil</strong><span class="star">*</span> (NVIDIA)</p>
+                <p><strong>Moshe Kimhi</strong><span class="star">*</span> (Technion, IBM Research)</p>
+                <p><strong>Ran El-Yaniv</strong> (Technion, NVIDIA)</p>
+                <p class="affiliation"><span class="star">*</span><em>Equal contribution</em></p>
+            </div>
+
+            <div class="links">
+                <a href="https://arxiv.org/pdf/2502.07408" class="icon-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+                        <polyline points="13 2 13 9 20 9"/>
+                    </svg>
+                    arXiv
+                </a>
+                <a href="https://github.com/mkimhi/brain_damage" class="icon-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    Code
+                    <span class="coming-soon">Soon</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Figure -->
+        <section class="figure-section">
+            <div class="figure-container">
+                <img src="./dalmatian_figure.png" alt="DNL effect on convolutional kernel">
+                <div class="figure-caption">
+                    One sign-bit flip in an early-layer edge detector kernel fundamentally alters learned representations. The transformed kernel generates corrupted feature maps that propagate through the network, severely impairing recognition. This single-bit perturbation illustrates the critical vulnerability of early-layer parameters.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Overview</h2>
+            <p class="intro-text">
+                <span class="highlight">Deep neural networks are vulnerable to catastrophic failure from flipping just a few sign bits in model parameters</span>. We present <strong>Deep Neural Lesion (DNL)</strong>, a data-free method that identifies and exploits critical parameters across vision and language domains.
+            </p>
+            <p>
+                Our approach requires only write access to stored weights—no training data, no optimization, minimal computation. This makes it practical under realistic threat models where attackers compromise model storage through firmware exploits, rootkits, DMA attacks, or Rowhammer vulnerabilities.
+            </p>
+            <ul>
+                <li><strong>ResNet-50:</strong> 2 sign flips → 99.8% accuracy drop</li>
+                <li><strong>Mask R-CNN / YOLOv8-seg:</strong> 1–2 flips collapse detection and segmentation</li>
+                <li><strong>Qwen3-30B & Nemotron 8B:</strong> Few flips reduce reasoning and task accuracy to near-zero</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Methodology</h2>
+            <h3>Attack Variants</h3>
+            <p>
+                <strong>Pass-Free DNL:</strong> Identifies critical parameters using magnitude-based heuristics and early-layer targeting with zero additional computation.
+            </p>
+            <p>
+                <strong>Enhanced 1-Pass DNL:</strong> Refines parameter selection with a single forward and backward pass on random inputs, achieving stronger attacks with minimal overhead.
+            </p>
+            <div class="formula-box">
+                Maximize parameter disruption via gradient-weighted sensitivity on random inputs
+            </div>
+            <h3>Why Sign-Bit Flips Matter</h3>
+            <ul>
+                <li><strong>Clean disruption:</strong> Flipping the sign bit instantly negates weights, maximizing feature map corruption</li>
+                <li><strong>Hardware feasibility:</strong> Bit flips in fixed positions are more reliably achievable in physical attacks</li>
+                <li><strong>Early-layer criticality:</strong> High-magnitude weights in early layers have outsized impact on all downstream representations</li>
+                <li><strong>Universal vulnerability:</strong> Pattern holds across CNNs, Transformers, and MoE architectures</li>
+            </ul>
+        </section>
+
+        <div class="section-divider">◆</div>
+
+        <section>
+            <h2>Image Classification Results</h2>
+            <div class="results-intro">
+                Evaluated on 60 classifiers including 48 ImageNet models from timm and Torchvision repositories across diverse architectures (ResNet, EfficientNet, ViT, RegNet, etc.).
+            </div>
+
+            <div class="domain-section">
+                <h3>Model Vulnerability Hierarchy</h3>
+                <div class="results-grid">
+                    <div class="result-box">
+                        <h4>ResNet-50</h4>
+                        <p><span class="metric">2 flips</span>: 99.8% drop</p>
+                        <p style="font-size: 0.85em;">76.1% → 0.0%</p>
+                    </div>
+                    <div class="result-box">
+                        <h4>EfficientNet-B7</h4>
+                        <p><span class="metric">3 flips</span>: 95%+ drop</p>
+                        <p style="font-size: 0.85em;">Scales worse than ResNet</p>
+                    </div>
+                    <div class="result-box">
+                        <h4>Vision Transformer</h4>
+                        <p><span class="metric">Early blocks</span> critical</p>
+                        <p style="font-size: 0.85em;">Similar pattern to CNNs</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="figure-container">
+                <img src="model_size_vs_damage.png" alt="Model size vs. vulnerability">
+                <div class="figure-caption">
+                    Accuracy reduction (AR) as a function of model scale. Larger models show slightly lower AR for fixed flip counts, but remain highly vulnerable. Early-layer targeting dominates architecture choice in determining susceptibility.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Detection & Segmentation Results</h2>
+            <div class="results-intro">
+                Object detection and instance segmentation systems collapse dramatically with just 1-2 parameter flips in backbone networks.
+            </div>
+
+            <div class="two-column-figures">
+                <div>
+                    <div class="figure-container">
+                        <img src="mask_clean.jpg" alt="Clean Mask R-CNN detection">
+                        <div class="figure-caption">
+                            <strong>Baseline:</strong> Mask R-CNN correctly detects and segments objects with high confidence.
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="figure-container">
+                        <img src="mask_attacked.jpg" alt="Attacked Mask R-CNN">
+                        <div class="figure-caption">
+                            <strong>After 1-2 flips:</strong> Detection and segmentation collapse to random outputs.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-box">
+                    <h4>Mask R-CNN</h4>
+                    <p><span class="metric">1–2 flips</span> in backbone</p>
+                    <p style="font-size: 0.85em;">AP → 0, Mask AP → 0</p>
+                </div>
+                <div class="result-box">
+                    <h4>YOLOv8-seg</h4>
+                    <p><span class="metric">1–2 early flips</span></p>
+                    <p style="font-size: 0.85em;">Segmentation incoherent</p>
+                </div>
+                <div class="result-box">
+                    <h4>Key Finding</h4>
+                    <p>Backbone criticality</p>
+                    <p style="font-size: 0.85em;">Head can recover</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Language Models Results</h2>
+            <div class="results-intro">
+                Reasoning and generation models exhibit severe vulnerability to targeted parameter bit flips. Both MoE and dense architectures are affected.
+            </div>
+
+            <div class="results-grid">
+                <div class="result-box">
+                    <h4>Qwen3-30B-A3B</h4>
+                    <p><span class="metric">2 flips</span> (different experts)</p>
+                    <p style="font-size: 0.85em;">78% → 0% reasoning</p>
+                </div>
+                <div class="result-box">
+                    <h4>Qwen3-4B</h4>
+                    <p><span class="metric">14 flips all layers</span></p>
+                    <p style="font-size: 0.85em;">100% accuracy reduction</p>
+                </div>
+                <div class="result-box">
+                    <h4>Nemotron 8B</h4>
+                    <p><span class="metric">32 flips</span> first 5 blocks</p>
+                    <p style="font-size: 0.85em;">Complete collapse</p>
+                </div>
+                <div class="result-box">
+                    <h4>BERT (Text Encoder)</h4>
+                    <p>Exponent flips more effective</p>
+                    <p style="font-size: 0.85em;">than sign flips</p>
+                </div>
+                <div class="result-box">
+                    <h4>RoBERTa</h4>
+                    <p>Early layers still critical</p>
+                    <p style="font-size: 0.85em;">Encoder-specific pattern</p>
+                </div>
+                <div class="result-box">
+                    <h4>DistilBERT</h4>
+                    <p>Compressed model</p>
+                    <p style="font-size: 0.85em;">Enhanced vulnerability</p>
+                </div>
+            </div>
+
+            <h3>Language Model Attack Patterns</h3>
+            <p>
+                <strong>Decoder-only models (Qwen, Nemotron):</strong> Sign-bit attacks are highly effective, especially when targeting the first 5 blocks. Two targeted flips can reduce Qwen3-30B accuracy from 78% to 0%.
+            </p>
+            <p>
+                <strong>MoE routing:</strong> Targeting different experts in Mixture-of-Experts models amplifies the attack impact, as each token's routing path becomes compromised.
+            </p>
+            <p>
+                <strong>Encoder models (BERT, RoBERTa, DistilBERT):</strong> Exponent-bit attacks are more destructive than sign flips, causing extreme rescaling rather than simple negation.
+            </p>
+            <p>
+                <strong>Generation behavior:</strong> Attacked models degenerate into repetitive, nonsensical text rather than near-miss errors—indicating catastrophic failure rather than graceful degradation.
+            </p>
+        </section>
+
+        <section>
+            <h2>Attack Strategy Comparison</h2>
+            <div class="figure-container">
+                <img src="./images/attack_strategies.png" alt="Comparison of attack strategies">
+                <div class="figure-caption">
+                    Performance of different targeting heuristics across 48 ImageNet models. Magnitude-based selection combined with early-layer targeting significantly outperforms random flips and matches top-k magnitude selection while remaining data-free and computationally lightweight.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Defense & Implications</h2>
+            <p>
+                While the vulnerability is severe, we demonstrate that <span class="highlight">selective hardening of critical parameters provides practical defense</span>. By protecting only the top 0.1-1% most vulnerable weights, models achieve substantial resilience without major performance overhead.
+            </p>
+            <h3>Key Takeaways</h3>
+            <ul>
+                <li>Critical parameters are universally identifiable across architectures and domains</li>
+                <li>Defense cost scales better than attack identification for large models</li>
+                <li>Once attackers gain parameter write access, minimal computation suffices for catastrophic failure</li>
+                <li>Data-free nature makes detection and attribution exceptionally challenging</li>
+            </ul>
+        </section>
+
+        <section id="bibtex">
+            <h2>Citation</h2>
+            <div class="code-block"><code>@article{galil2025maximal,
+  title={Maximal Brain Damage Without Data or Optimization:
+         Disrupting Neural Networks via Sign-Bit Flips},
+  author={Galil, Ido and Kimhi, Moshe and El-Yaniv, Ran},
+  journal={Transactions on Machine Learning Research},
+  year={2025},
+  url={https://arxiv.org/pdf/2502.07408}
+}</code></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Accepted to TMLR</strong> (Transactions on Machine Learning Research)</p>
+            <p><a href="https://openreview.net/forum?id=kN1s53X3zl">OpenReview Forum</a></p>
+            <p style="margin-top: 15px; font-size: 0.8em;">March 2026</p>
+        </div>
+    </footer>
+</body>
+</html>
