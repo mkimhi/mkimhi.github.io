@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CARES — Context-Aware Resolution Selector for VLMs</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #07111f;
@@ -79,7 +71,7 @@ h1 span { color: var(--accent); }
   transition: 0.3s ease;
 }
 .inst-logo:hover {
-  filter: brightness(0) invert(1) grayscale(1);
+  filter: none;
   opacity: 0.5;
 }
 
@@ -130,13 +122,6 @@ h3 { margin-bottom: 16px; color: var(--primary-light); }
   border-radius: var(--radius);
   overflow: hidden;
 }
-.example-card img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  border-bottom: 1px solid var(--border);
-}
 .example-body {
   padding: 20px;
 }
@@ -145,40 +130,55 @@ h3 { margin-bottom: 16px; color: var(--primary-light); }
   flex-direction: column;
   gap: 12px;
 }
+.chat-demo img {
+  width: 80%;
+  display: block;
+  margin: 4px auto 2px;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #091423;
+}
 .msg {
   padding: 12px 14px;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 0.95rem;
   line-height: 1.5;
+  max-width: 88%;
 }
 .msg-user {
   background: #0f2036;
   border: 1px solid #1e3554;
+  align-self: flex-end;
 }
 .msg-cares {
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.10);
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  align-self: center;
+  max-width: 72%;
 }
 .msg-chat {
   background: rgba(59, 130, 246, 0.12);
   border: 1px solid rgba(59, 130, 246, 0.35);
+  align-self: flex-start;
 }
 .msg-label {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-light);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
-.inline-image-tag {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: var(--bg-accent);
-  border: 1px solid var(--border);
-  font-size: 0.85rem;
-  color: var(--text-dim);
+.system-label {
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.9;
+  margin-bottom: 4px;
 }
 
 /* RESULTS TABLE */
@@ -190,7 +190,7 @@ th { background: var(--bg-accent); padding: 10px 6px; color: var(--primary-light
 td { padding: 10px 6px; border: 1px solid var(--border); font-weight: 400; }
 .sub-head { font-size: 0.7rem; color: var(--text-light); }
 .highlight-row { background: rgba(245, 158, 11, 0.14); }
-.best { color: var(--accent); }
+.best { color: inherit; }
 
 .table-controls {
   display: flex;
@@ -250,143 +250,52 @@ footer { padding: 40px 0; text-align: center; font-size: 0.85rem; color: var(--t
   }
 }
 </style>
-</head>
-<body>
-
-<nav class="navbar">
-  <div class="navbar-inner">
-    <a href="#" class="navbar-brand">CARES</a>
-    <ul class="navbar-links">
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#approach">Approaches</a></li>
-      <li><a href="#examples">Examples</a></li>
-      <li><a href="#results">Results</a></li>
-      <li><a href="#citation">Citation</a></li>
-    </ul>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="container">
-    <h1><span>CARES</span></h1>
-    <p class="subtitle">Context-Aware Resolution Selector for Vision Language Models</p>
-    
-    <div class="authors">
-      <div><strong>Moshe Kimhi</strong><sup>1,2,*</sup>,</div>
-      <div><strong>Nimrod Shabtay</strong><sup>1,3,*</sup>,</div>
-      <div><strong>Raja Giryes</strong><sup>3</sup>,</div>
-      <div><strong>Chaim Baskin</strong><sup>4,†</sup>,</div>
-      <div><strong>Eli Schwartz</strong><sup>1,†</sup></div>
-    </div>
-
-    <div class="author-notes">
-      <span><sup>*</sup> Equal contribution</span>
-      &nbsp;|&nbsp;
-      <span><sup>†</sup> Equal supervision</span>
-    </div>
-
-    <div class="logo-strip">
-      <img src="https://avatars.githubusercontent.com/u/22341564?s=280&v=4" alt="IBM" class="inst-logo">
-      <img src="https://www.nbn.org.il/jobboard/wp-content/uploads/2022/12/technion-logo.jpg" alt="Technion" class="inst-logo">
-      <img src="https://shop.tau.ac.il/cdn/shop/files/TAU_Logo_Eng_BW_Neg.png?v=1733920489&width=1478" alt="TAU" class="inst-logo">
-      <img src="https://chaimbaskin.bgu.ac.il/wp-content/themes/dna/img/logo-uni.png" alt="BGU" class="inst-logo">
-    </div>
-
-    <div class="links">
-      <a href="https://arxiv.org/pdf/2510.19496" class="link-btn">
-        <img src="https://static.arxiv.org/static/browse/0.3.4/images/icons/favicon.ico" alt=""> arXiv
-      </a>
-      <a href="https://github.com/mkimhi/CARES" class="link-btn">
-        <img src="https://github.githubassets.com/favicons/favicon.svg" alt=""> Code
-      </a>
-      <a href="https://huggingface.co/Kimhi/smolvlm-res-gate" class="link-btn">
-        <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt=""> SmolVLM Gate
-      </a>
-      <a href="https://huggingface.co/Kimhi/granite-docling-res-gate-lora" class="link-btn">
-        <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt=""> Granite AR
-      </a>
-      <a href="https://huggingface.co/datasets/Kimhi/hardness_data_mix" class="link-btn">
-        <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt=""> Dataset
-      </a>
-    </div>
-  </div>
-</section>
-
-<section id="overview">
-  <div class="container">
-    <h2>Overview</h2>
-    
-    <div class="figure">
-      <img src="cares.png" alt="CARES Methodology Overview">
-      <div class="figure-caption">
-        CARES predicts the minimal sufficient resolution for a given image-query pair, with both a classifier-based variant and an autoregressive predictor.
-      </div>
-    </div>
-
-    <div class="abstract-card">
-      Large vision-language models (VLMs) commonly process images at native or high resolution to remain effective across tasks. This inflates visual tokens, often to 97–99% of total tokens, resulting in high compute and latency even when lower-resolution images would suffice. We introduce CARES, a Context-Aware Resolution Selector that predicts the minimal sufficient input resolution for a given image-query pair before the target VLM is invoked. We study two variants: a lightweight classification model built on compact VLM features that assigns the pair to a resolution bucket, and a fine-tuned tiny autoregressive VLM that predicts the required resolution directly. While the first offers a simple and efficient feature-based selector, the second provides a flexible text-generation interface that is easy to serve with standard VLM stacks. Across five multimodal benchmarks spanning documents and natural images, as well as diverse target VLMs, CARES preserves task performance while reducing compute by up to 80%.
-    </div>
-  </div>
-</section>
-
-<section id="approach">
-  <div class="container">
-    <h2>Technical Approaches</h2>
-    <div class="approach-card">
-      <span class="badge badge-blue">Approach 1</span>
-      <h3>Discrete Resolution Classifier</h3>
-      <p>This variant uses compact VLM features to classify each image-query pair into a discrete resolution bucket. It is designed as a lightweight selector that captures the visual difficulty of the task while remaining efficient and easy to train.</p>
-    </div>
-
-    <div class="approach-card">
-      <span class="badge badge-orange">Approach 2</span>
-      <h3>Autoregressive (AR) Predictor</h3>
-      <p>This variant fine-tunes a tiny VLM to predict the target resolution autoregressively. It outputs the resolution directly as text, making it especially convenient for deployment with standard serving frameworks such as vLLM or Ollama.</p>
-    </div>
-  </div>
-</section>
 
 <section id="examples">
   <div class="container">
     <h2>Example Conversations</h2>
     <div class="examples-grid">
       <div class="example-card">
-        <img src="cups.jpg" alt="Cup-size example image">
         <div class="example-body">
           <div class="chat-demo">
             <div class="msg msg-user">
-              <div class="msg-label">usr</div>
-              <div><span class="inline-image-tag">&lt;image&gt;</span></div>
+              <div class="msg-label">User</div>
               <div>In which cup size category is Pakistan listed?</div>
             </div>
+
+            <img src="cups.jpg" alt="Cup-size example image">
+
             <div class="msg msg-cares">
-              <div class="msg-label">cares</div>
-              <div>765</div>
+              <div class="system-label">CARES system message</div>
+              <div>Selected resolution: 765</div>
             </div>
+
             <div class="msg msg-chat">
-              <div class="msg-label">chat</div>
-              <div>Cup B</div>
+              <div class="msg-label">Assistant</div>
+              <div>Pakistan is listed under <strong>Cup B</strong>.</div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="example-card">
-        <img src="cups.jpg" alt="Cup-size example image">
         <div class="example-body">
           <div class="chat-demo">
             <div class="msg msg-user">
-              <div class="msg-label">usr</div>
-              <div><span class="inline-image-tag">&lt;image&gt;</span></div>
+              <div class="msg-label">User</div>
               <div>The pink cup in the image represents which size?</div>
             </div>
+
+            <img src="cups.jpg" alt="Cup-size example image">
+
             <div class="msg msg-cares">
-              <div class="msg-label">cares</div>
-              <div>386</div>
+              <div class="system-label">CARES system message</div>
+              <div>Selected resolution: 386</div>
             </div>
+
             <div class="msg msg-chat">
-              <div class="msg-label">chat</div>
-              <div>Cup D</div>
+              <div class="msg-label">Assistant</div>
+              <div>The pink cup represents <strong>Cup D</strong>.</div>
             </div>
           </div>
         </div>
@@ -394,340 +303,3 @@ footer { padding: 40px 0; text-align: center; font-size: 0.85rem; color: var(--t
     </div>
   </div>
 </section>
-
-<section id="results">
-  <div class="container">
-    <h2>Benchmark Results</h2>
-    <p>Benchmark performance and estimated prefill-stage savings for Cost (measured in FLOPS for local models or $ for API models).</p>
-    
-    <div class="table-container">
-      <div class="table-wrap">
-        <table id="summary-table">
-          <thead>
-            <tr>
-              <th rowspan="2">Model</th>
-              <th colspan="2">Ai2D</th>
-              <th colspan="2">ChartQA</th>
-              <th colspan="2">DocVQA</th>
-              <th colspan="2">OCRBench</th>
-              <th colspan="2">Average</th>
-            </tr>
-            <tr class="sub-head">
-              <th>Score</th><th>Cost</th>
-              <th>Score</th><th>Cost</th>
-              <th>Score</th><th>Cost</th>
-              <th>Score</th><th>Cost</th>
-              <th>Score</th><th>Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Granite-Vision 2B</td>
-              <td>0.74</td><td>-</td>
-              <td>0.86</td><td>-</td>
-              <td>0.90</td><td>-</td>
-              <td>0.80</td><td>-</td>
-              <td>0.59</td><td>-</td>
-            </tr>
-            <tr class="highlight-row">
-              <td>+ CARES</td>
-              <td>0.73</td><td>-67%</td>
-              <td>0.87</td><td>-69%</td>
-              <td>0.90</td><td>-68%</td>
-              <td>0.80</td><td>-68%</td>
-              <td class="best">0.60</td><td>-63%</td>
-            </tr>
-            <tr class="highlight-row">
-              <td>+ CARES-AR</td>
-              <td>0.71</td><td>-81%</td>
-              <td>0.84</td><td>-81%</td>
-              <td>0.88</td><td>-82%</td>
-              <td>0.77</td><td>-75%</td>
-              <td>0.58</td><td>-67%</td>
-            </tr>
-
-            <tr>
-              <td>InternVL3-8B</td>
-              <td>0.84</td><td>-</td>
-              <td>0.86</td><td>-</td>
-              <td>0.92</td><td>-</td>
-              <td>0.85</td><td>-</td>
-              <td>0.77</td><td>-</td>
-            </tr>
-            <tr class="highlight-row">
-              <td>+ CARES</td>
-              <td>0.84</td><td>-66%</td>
-              <td>0.86</td><td>-68%</td>
-              <td>0.92</td><td>-69%</td>
-              <td>0.85</td><td>-70%</td>
-              <td class="best">0.77</td><td>-64%</td>
-            </tr>
-            <tr class="highlight-row">
-              <td>+ CARES-AR</td>
-              <td>0.84</td><td>-86%</td>
-              <td>0.86</td><td>-81%</td>
-              <td>0.92</td><td>-80%</td>
-              <td>0.85</td><td>-78%</td>
-              <td>0.76</td><td>-76%</td>
-            </tr>
-
-            <tr>
-              <td>Qwen2.5-VL-72B</td>
-              <td>0.87</td><td>-</td>
-              <td>0.87</td><td>-</td>
-              <td>0.96</td><td>-</td>
-              <td>0.75</td><td>-</td>
-              <td>0.79</td><td>-</td>
-            </tr>
-            <tr class="highlight-row">
-              <td>+ CARES</td>
-              <td>0.87</td><td>-85%</td>
-              <td>0.84</td><td>-77%</td>
-              <td>0.95</td><td>-84%</td>
-              <td>0.76</td><td>-64%</td>
-              <td class="best">0.80</td><td>-70%</td>
-            </tr>
-
-            <tr>
-              <td>GPT-4o</td>
-              <td>0.78</td><td>-</td>
-              <td>0.56</td><td>-</td>
-              <td>0.80</td><td>-</td>
-              <td>0.77</td><td>-</td>
-              <td>0.69</td><td>-</td>
-            </tr>
-            <tr class="highlight-row">
-              <td>+ CARES</td>
-              <td>0.78</td><td>-60%</td>
-              <td>0.56</td><td>-60%</td>
-              <td>0.80</td><td>-36%</td>
-              <td>0.75</td><td>-33%</td>
-              <td>0.68</td><td>-55%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="table-controls">
-        <button class="toggle-btn" id="toggle-results-btn" onclick="toggleResults()">Show full table</button>
-      </div>
-
-      <div id="full-results">
-        <div class="table-wrap">
-          <table id="benchmark-table" class="full-table">
-            <thead>
-              <tr>
-                <th rowspan="2">Model</th>
-                <th colspan="2">Ai2D</th>
-                <th colspan="2">ChartQA</th>
-                <th colspan="2">DocVQA</th>
-                <th colspan="2">OCRBench</th>
-                <th colspan="2">SeedBench-2</th>
-                <th colspan="2">MMMU</th>
-                <th colspan="2">RealWorldQA</th>
-                <th colspan="2">InfoVQA</th>
-                <th colspan="2">MathVista</th>
-                <th colspan="2">Average</th>
-              </tr>
-              <tr class="sub-head">
-                <th>Score</th><th>Cost</th>
-                <th>Score</th><th>Cost</th>
-                <th>Score</th><th>Cost</th>
-                <th>Score</th><th>Cost</th>
-                <th>Score</th><th>Cost</th>
-                <th>Score</th><th>Cost</th>
-                <th>Score</th><th>Cost</th>
-                <th>Score</th><th>Cost</th>
-                <th>Score</th><th>Cost</th>
-                <th>Score</th><th>Cost</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Granite-Vision 2B</td>
-                <td>0.74</td><td>-</td>
-                <td>0.86</td><td>-</td>
-                <td>0.90</td><td>-</td>
-                <td>0.80</td><td>-</td>
-                <td>0.72</td><td>-</td>
-                <td>0.29</td><td>-</td>
-                <td>0.17</td><td>-</td>
-                <td>0.35</td><td>-</td>
-                <td>0.48</td><td>-</td>
-                <td>0.59</td><td>-</td>
-              </tr>
-              
-              <tr class="highlight-row">
-                <td>+ CARES</td>
-                <td>0.73</td><td>-67%</td>
-                <td>0.87</td><td>-69%</td>
-                <td>0.90</td><td>-68%</td>
-                <td>0.80</td><td>-68%</td>
-                <td>0.72</td><td>-44%</td>
-                <td>0.29</td><td>-85%</td>
-                <td>0.19</td><td>-72%</td>
-                <td>0.40</td><td>-72%</td>
-                <td>0.48</td><td>-22%</td>
-                <td class="best">0.60</td><td>-63%</td>
-              </tr>
-              
-              <tr class="highlight-row">
-                <td>+ CARES-AR</td>
-                <td>0.71</td><td>-81%</td>
-                <td>0.84</td><td>-81%</td>
-                <td>0.88</td><td>-82%</td>
-                <td>0.77</td><td>-75%</td>
-                <td>0.72</td><td>-10%</td>
-                <td>0.30</td><td>-84%</td>
-                <td>0.15</td><td>-82%</td>
-                <td>0.39</td><td>-81%</td>
-                <td>0.44</td><td>-25%</td>
-                <td>0.58</td><td>-67%</td>
-              </tr>
-              
-              <tr>
-                <td>InternVL3-8B</td>
-                <td>0.84</td><td>-</td>
-                <td>0.86</td><td>-</td>
-                <td>0.92</td><td>-</td>
-                <td>0.85</td><td>-</td>
-                <td>0.79</td><td>-</td>
-                <td>0.56</td><td>-</td>
-                <td>0.68</td><td>-</td>
-                <td>0.72</td><td>-</td>
-                <td>0.69</td><td>-</td>
-                <td>0.77</td><td>-</td>
-              </tr>
-              
-              <tr class="highlight-row">
-                <td>+ CARES</td>
-                <td>0.84</td><td>-66%</td>
-                <td>0.86</td><td>-68%</td>
-                <td>0.92</td><td>-69%</td>
-                <td>0.85</td><td>-70%</td>
-                <td>0.79</td><td>-44%</td>
-                <td>0.56</td><td>-86%</td>
-                <td>0.68</td><td>-82%</td>
-                <td>0.74</td><td>-72%</td>
-                <td>0.69</td><td>-22%</td>
-                <td class="best">0.77</td><td>-64%</td>
-              </tr>
-              
-              <tr class="highlight-row">
-                <td>+ CARES-AR</td>
-                <td>0.84</td><td>-86%</td>
-                <td>0.86</td><td>-81%</td>
-                <td>0.92</td><td>-80%</td>
-                <td>0.85</td><td>-78%</td>
-                <td>0.72</td><td>-84%</td>
-                <td>0.55</td><td>-85%</td>
-                <td>0.68</td><td>-82%</td>
-                <td>0.74</td><td>-81%</td>
-                <td>0.68</td><td>-31%</td>
-                <td>0.76</td><td>-76%</td>
-              </tr>
-              
-              <tr>
-                <td>Qwen2.5-VL-72B</td>
-                <td>0.87</td><td>-</td>
-                <td>0.87</td><td>-</td>
-                <td>0.96</td><td>-</td>
-                <td>0.75</td><td>-</td>
-                <td>0.81</td><td>-</td>
-                <td>0.62</td><td>-</td>
-                <td>0.77</td><td>-</td>
-                <td>0.73</td><td>-</td>
-                <td>0.74</td><td>-</td>
-                <td>0.79</td><td>-</td>
-              </tr>
-              
-              <tr class="highlight-row">
-                <td>+ CARES</td>
-                <td>0.87</td><td>-85%</td>
-                <td>0.84</td><td>-77%</td>
-                <td>0.95</td><td>-84%</td>
-                <td>0.76</td><td>-64%</td>
-                <td>0.79</td><td>-77%</td>
-                <td>0.62</td><td>-86%</td>
-                <td>0.79</td><td>-82%</td>
-                <td>0.84</td><td>-72%</td>
-                <td>0.74</td><td>-7%</td>
-                <td class="best">0.80</td><td>-70%</td>
-              </tr>
-              
-              <tr>
-                <td>GPT-4o</td>
-                <td>0.78</td><td>-</td>
-                <td>0.56</td><td>-</td>
-                <td>0.80</td><td>-</td>
-                <td>0.77</td><td>-</td>
-                <td>0.76</td><td>-</td>
-                <td>0.57</td><td>-</td>
-                <td>0.61</td><td>-</td>
-                <td>0.75</td><td>-</td>
-                <td>0.64</td><td>-</td>
-                <td>0.69</td><td>-</td>
-              </tr>
-              
-              <tr class="highlight-row">
-                <td>+ CARES</td>
-                <td>0.78</td><td>-60%</td>
-                <td>0.56</td><td>-60%</td>
-                <td>0.80</td><td>-36%</td>
-                <td>0.75</td><td>-33%</td>
-                <td>0.75</td><td>-47%</td>
-                <td>0.56</td><td>-85%</td>
-                <td>0.61</td><td>-84%</td>
-                <td>0.73</td><td>-76%</td>
-                <td>0.61</td><td>-17%</td>
-                <td>0.68</td><td>-55%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="citation">
-  <div class="container">
-    <h2>Citation</h2>
-    <div class="cite-block">
-<pre>@misc{kimhi2025carescontextawareresolutionselector,
-      title={CARES: Context-Aware Resolution Selector for VLMs},
-      author={Moshe Kimhi and Nimrod Shabtay and Raja Giryes and Chaim Baskin and Eli Schwartz},
-      year={2025},
-      eprint={2510.19496},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}</pre>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <p>© 2026 Moshe Kimhi et al. | Technion, IBM Research, TAU, BGU</p>
-  </div>
-</footer>
-
-<script>
-function toggleResults() {
-  const fullResults = document.getElementById('full-results');
-  const btn = document.getElementById('toggle-results-btn');
-  const isVisible = fullResults.style.display === 'block';
-
-  if (isVisible) {
-    fullResults.style.display = 'none';
-    btn.textContent = 'Show full table';
-  } else {
-    fullResults.style.display = 'block';
-    btn.textContent = 'Hide full table';
-  }
-}
-</script>
-
-</body>
-</html>
-```
