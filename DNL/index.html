@@ -71,15 +71,19 @@
 
         .logos {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
             align-items: center;
-            margin: 25px 0;
+            margin: 25px auto;
             flex-wrap: wrap;
+            background: white;
+            padding: 25px;
+            border-radius: 6px;
+            width: fit-content;
         }
 
         .logos img {
-            height: 40px;
+            height: 70px;
             opacity: 0.95;
             transition: opacity 0.2s ease;
         }
@@ -205,7 +209,6 @@
             max-width: 100%;
             height: auto;
             border-radius: 4px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
             display: inline-block;
         }
 
@@ -495,7 +498,7 @@
                 <img src="model_size_vs_damage.png" alt="Model size vs. vulnerability">
 
                 <div class="figure-caption">
-                    Accuracy reduction (AR) as a function of model scale. Larger models show slightly lower AR for fixed flip counts, but remain highly vulnerable. Early-layer targeting dominates architecture choice in determining susceptibility.
+                    Accuracy reduction (AR) as a function of model scale across diverse architectures. All models remain highly vulnerable, with early-layer targeting dominating architecture choice in determining susceptibility.
                 </div>
             </div>
         </section>
@@ -529,14 +532,14 @@
 
             <div class="results-grid">
                 <div class="result-box">
+                    <h4>YOLOv8-seg</h4>
+                    <p><span class="metric">1–2 early flips</span></p>
+                    <p style="font-size: 0.85em;">Detection & segmentation collapse</p>
+                </div>
+                <div class="result-box">
                     <h4>Mask R-CNN</h4>
                     <p><span class="metric">1–2 flips</span> in backbone</p>
                     <p style="font-size: 0.85em;">AP → 0, Mask AP → 0</p>
-                </div>
-                <div class="result-box">
-                    <h4>YOLOv8-seg</h4>
-                    <p><span class="metric">1–2 early flips</span></p>
-                    <p style="font-size: 0.85em;">Segmentation incoherent</p>
                 </div>
                 <div class="result-box">
                     <h4>Key Finding</h4>
@@ -570,18 +573,13 @@
                 </div>
                 <div class="result-box">
                     <h4>BERT (Text Encoder)</h4>
-                    <p>Exponent flips more effective</p>
-                    <p style="font-size: 0.85em;">than sign flips</p>
+                    <p><span class="metric">Early layers</span> critical</p>
+                    <p style="font-size: 0.85em;">Encoder vulnerability</p>
                 </div>
                 <div class="result-box">
                     <h4>RoBERTa</h4>
                     <p>Early layers still critical</p>
-                    <p style="font-size: 0.85em;">Encoder-specific pattern</p>
-                </div>
-                <div class="result-box">
-                    <h4>DistilBERT</h4>
-                    <p>Compressed model</p>
-                    <p style="font-size: 0.85em;">Enhanced vulnerability</p>
+                    <p style="font-size: 0.85em;">Consistent pattern</p>
                 </div>
             </div>
 
@@ -593,7 +591,7 @@
                 <strong>MoE routing:</strong> Targeting different experts in Mixture-of-Experts models amplifies the attack impact, as each token's routing path becomes compromised.
             </p>
             <p>
-                <strong>Encoder models (BERT, RoBERTa, DistilBERT):</strong> Exponent-bit attacks are more destructive than sign flips, causing extreme rescaling rather than simple negation.
+                <strong>Encoder models (BERT, RoBERTa):</strong> Early-layer sign-bit flips remain highly destructive across diverse architectures.
             </p>
             <p>
                 <strong>Generation behavior:</strong> Attacked models degenerate into repetitive, nonsensical text rather than near-miss errors—indicating catastrophic failure rather than graceful degradation.
@@ -614,6 +612,9 @@
             <h2>Defense & Implications</h2>
             <p>
                 While the vulnerability is severe, we demonstrate that <span class="highlight">selective hardening of critical parameters provides practical defense</span>. By protecting only the top 0.1-1% most vulnerable weights, models achieve substantial resilience without major performance overhead.
+            </p>
+            <p>
+                DNL easily bypasses common defenses such as weight quantization, pruning, and simple checksumming schemes. The data-free nature and reliance on magnitude-based targeting make it robust against defenses that assume adversaries lack threat model knowledge or computational resources.
             </p>
             <h3>Key Takeaways</h3>
             <ul>
