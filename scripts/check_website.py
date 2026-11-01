@@ -9,7 +9,9 @@ with sync_playwright() as p:
  page=b.new_page(viewport={'width':1440,'height':1000});page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(BASE);assert page.locator('.paper').count()==13
  assert page.locator('main > section').evaluate_all('(sections)=>sections.map(s=>s.id)') == ['about','perspective','research','talks']
- assert page.locator('#about #portrait-source').count() == 1
+ assert page.locator('#about .hero-copy > .portrait').count() == 1
+ assert page.locator('#about > .network-figure').count() == 1
+ assert page.locator('.hero-copy').evaluate('(el) => el.firstElementChild.classList.contains("portrait")')
  about_text = page.locator('#about').inner_text()
  assert about_text.index('Chaim Baskin') < about_text.index('Ehud Rivlin')
  assert 'INSIGHT Lab at Ben-Gurion University' in about_text
