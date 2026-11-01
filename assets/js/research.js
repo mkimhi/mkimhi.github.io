@@ -44,6 +44,25 @@
     });
   });
 
+  document.querySelectorAll('[data-copy-bibtex]').forEach(button => {
+    button.addEventListener('click', async () => {
+      const citation = button.closest('.paper-citation');
+      const code = citation.querySelector('code');
+      const status = citation.querySelector('[role="status"]');
+      try {
+        await navigator.clipboard.writeText(code.textContent);
+        status.textContent = 'Copied';
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        status.textContent = 'Text selected. Copy it or download the .bib file.';
+      }
+    });
+  });
+
   const sectionLinks = [...document.querySelectorAll('.depth-bar nav a')];
   function updatePosition() {
     const sections = sectionLinks.map(link => document.querySelector(link.getAttribute('href')));
@@ -83,10 +102,10 @@
       const cropHeight = cropWidth * 5 / 4;
       context.drawImage(portrait, (portrait.naturalWidth - cropWidth) / 2, (portrait.naturalHeight - cropHeight) / 2, cropWidth, cropHeight, 0, 0, canvas.width, canvas.height);
       const color = Number(colorDepth.value);
-      if (color < 4) {
+      if (color < 7) {
         const image = context.getImageData(0, 0, canvas.width, canvas.height);
         const pixels = image.data;
-        const levels = [256, 2, 4, 16][color];
+        const levels = [256, 2, 4, 8, 16, 32, 64][color];
         const step = 255 / (levels - 1);
         for (let i = 0; i < pixels.length; i += 4) {
           if (color === 0) {
@@ -100,10 +119,10 @@
         }
         context.putImageData(image, 0, 0);
       }
-      canvas.hidden = original && color === 4;
-      const colorLabels = ['Grayscale', '8 colors', '64 colors', '4,096 colors', 'RGB'];
+      canvas.hidden = original && color === 7;
+      const colorLabels = ['Grayscale', '3-bit RGB', '6-bit RGB', '9-bit RGB', '12-bit RGB', '15-bit RGB', '18-bit RGB', 'RGB'];
       document.querySelector('#color-depth-value').textContent = colorLabels[color];
-      colorDepth.setAttribute('aria-valuetext', color === 4 ? 'Full RGB color' : colorLabels[color]);
+      colorDepth.setAttribute('aria-valuetext', color === 7 ? 'Full RGB color' : colorLabels[color]);
       const description = original ? 'Original' : `${width} × ${canvas.height}`;
       document.querySelector('#resolution-value').textContent = description;
       resolution.setAttribute('aria-valuetext', original ? 'Original resolution' : `${width} by ${canvas.height} pixels`);

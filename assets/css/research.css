@@ -175,7 +175,7 @@ input[type=range]::-moz-range-thumb{width:7px;height:7px;border-radius:50%;borde
 .hero-about .hero-name{margin-bottom:20px}
 .hero-about h1{font-size:clamp(56px,6vw,82px)}
 .hero-about .hero-copy>p:not(.eyebrow):not(.hero-name):not(.position){font-size:14px;color:var(--muted)}
-.hero-about .portrait{max-width:220px;width:100%;justify-self:start}
+.hero-about .portrait{max-width:260px;width:100%;justify-self:start}
 .coffee-invite{border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
 .coffee-invite a{white-space:nowrap}
 .hero-about .network-figure{width:100%;max-width:480px;justify-self:end;margin:0}
@@ -188,7 +188,7 @@ input[type=range]::-moz-range-thumb{width:7px;height:7px;border-radius:50%;borde
 .portrait-controls label{flex:0 0 48px}
 .portrait-controls output{min-width:62px}
 
-.hero-artifacts{display:grid;grid-template-columns:220px minmax(0,1fr);align-items:center;gap:80px;margin-bottom:48px}
+.hero-artifacts{display:grid;grid-template-columns:260px minmax(0,1fr);align-items:center;gap:80px;margin-bottom:48px}
 .hero-about .hero-copy{max-width:760px}
 @media(max-width:600px){
 .hero-about{padding-top:30px}
@@ -202,4 +202,22 @@ input[type=range]::-moz-range-thumb{width:7px;height:7px;border-radius:50%;borde
 .hero-artifacts .network-figure button{font-size:10px;padding:5px 0;min-height:32px}
 .hero-artifacts .network-note{font-size:16px;margin:9px 0}
 .hero-artifacts .network-key{gap:5px;font-size:7px;flex-wrap:wrap}
+}
+
+.paper-image{width:170px;padding:7px}
+.paper-image img{height:110px}
+.paper-citation{margin-top:12px;font-size:11px}
+.paper-citation summary{color:var(--accent);width:max-content;padding:3px 0}
+.citation-actions{display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin:16px 0 10px;font-size:11px}
+.citation-actions button{background:transparent;border:1px solid var(--line);color:var(--ink);padding:5px 12px}
+.citation-actions [role=status]{color:var(--muted)}
+.paper-citation pre{background:#eeeee6;border:1px solid var(--line);padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;font:11px/1.7 ui-monospace,monospace}
+@media(max-width:600px){
+.paper{display:grid;grid-template-columns:25px minmax(0,1fr);gap:12px}
+.paper-index{grid-column:1;grid-row:1}
+.paper-main{grid-column:2;grid-row:2}
+.paper-image{display:block;grid-column:2;grid-row:1;width:100%;max-width:280px}
+.paper-image img{height:125px}
+body[data-depth="0"] .paper-main{grid-row:1}
+footer span:nth-child(2){display:block;width:100%;order:3}
 }

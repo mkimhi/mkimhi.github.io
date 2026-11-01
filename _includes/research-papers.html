@@ -8,7 +8,9 @@
 <h3><a href="{{ paper.url }}">{{ paper.title }}</a></h3>
 <p class="paper-summary">{{ paper.summary }}</p>
 <details class="paper-details"><summary>Authors & affiliations</summary><p class="authors">{{ paper.authors | replace: 'Moshe Kimhi', '<strong>Moshe Kimhi</strong>' }}</p>{% if paper.affiliations != '' %}<p class="affiliations">{{ paper.affiliations }}</p>{% else %}<p class="affiliations">See the linked paper for author affiliations.</p>{% endif %}</details>
-<div class="paper-links"><a href="{{ paper.url }}">Paper ↗</a>{% if paper.project != '' %}<a href="{{ paper.project }}">Project ↗</a>{% endif %}{% if paper.code != '' %}<a href="{{ paper.code }}">Code ↗</a>{% endif %}</div></div>
+<div class="paper-links"><a href="{{ paper.url }}">Paper ↗</a>{% if paper.project != '' %}<a href="{{ paper.project }}">Project ↗</a>{% endif %}{% if paper.code != '' %}<a href="{{ paper.code }}">Code ↗</a>{% endif %}</div>
+<details class="paper-citation" id="bibtex-{{ paper.id }}"><summary>BibTeX</summary><div class="citation-actions"><button type="button" data-copy-bibtex aria-label="Copy BibTeX for {{ paper.title | escape }}">Copy</button><a href="/files/bibtex/{{ paper.id }}.bib" download>Download .bib ↓</a><span role="status"></span></div><pre><code>{{ paper.bibtex | escape }}</code></pre></details>
+</div>
 {% if paper.image != '' %}<a class="paper-image" href="{{ paper.url }}" tabindex="-1" aria-hidden="true"><img src="{{ paper.image }}" alt="" loading="lazy"></a>{% endif %}
 </article>
 {% endfor %}

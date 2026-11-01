@@ -18,6 +18,29 @@ with sync_playwright() as p:
  assert page.locator('#talks .talk-meta').all_text_contents() == ['Mobileye · July 13','Google Research Conference · October 13']
  assert page.locator('a[href="/cv/"]').count() == 0
  assert page.locator('.coffee-invite a').get_attribute('href').startswith('mailto:moshekimhi91@gmail.com')
+ assert page.locator('.paper-citation').count() == 13
+ assert page.locator('.paper-image img').count() == 13
+ assert 'I review for' not in about_text
+ assert 'I teach deep learning and computer vision.' in about_text
+ assert page.locator('#about a[href*=cs236781]').count() == 0
+ assert page.locator('#color-depth').get_attribute('max') == '7'
+ assert page.locator('footer').inner_text().find('I admire you if you read all the way down here') >= 0
+ for paper in page.locator('.paper').all():
+  image = paper.locator('.paper-image img')
+  image.scroll_into_view_if_needed()
+  page.wait_for_function('(img) => img.complete && img.naturalWidth > 0', arg=image.element_handle())
+  citation = paper.locator('.paper-citation')
+  citation.locator('summary').click()
+  assert citation.locator('code').inner_text().startswith('@')
+  download = page.request.get(BASE + citation.locator('a[download]').get_attribute('href'))
+  assert download.ok and download.text().strip() == citation.locator('code').inner_text().strip()
+  citation.locator('summary').click()
+ page.context.grant_permissions(['clipboard-read', 'clipboard-write'])
+ page.locator('#bibtex-cares summary').click()
+ page.locator('#bibtex-cares [data-copy-bibtex]').click()
+ page.wait_for_function("document.querySelector('#bibtex-cares [role=status]').textContent === 'Copied'")
+ assert page.evaluate('navigator.clipboard.readText()').startswith('@inproceedings')
+ page.locator('#bibtex-cares summary').click()
  page.locator('#depth').fill('0');assert not page.locator('.paper-summary').first.is_visible()
  page.locator('#depth').fill('2');assert page.locator('.paper-details[open]').count()==13
  page.get_by_role('button',name='Robustness',exact=True).click();assert page.locator('.paper:visible').count()==2
@@ -31,7 +54,7 @@ with sync_playwright() as p:
  page.locator('#resolution').fill('5')
  assert not page.locator('#portrait-resolution').is_visible()
 
- assert page.locator('#portrait-source').get_attribute('src') == '/me.PNG'
+ assert page.locator('#portrait-source').get_attribute('src') == '/images/me.jpg'
  page.locator('#color-depth').fill('0')
  assert page.locator('#color-depth-value').inner_text() == 'Grayscale'
  assert page.locator('#portrait-resolution').is_visible()
@@ -48,7 +71,7 @@ with sync_playwright() as p:
    return pixels.every((value, index) => index % 4 === 3 || value === 0 || value === 255);
  }''')
  assert page.locator('#resolution-value').inner_text() == '8 × 10'
- page.locator('#color-depth').fill('4');page.locator('#resolution').fill('5')
+ page.locator('#color-depth').fill('7');page.locator('#resolution').fill('5')
  assert not page.locator('#portrait-resolution').is_visible()
 
  page.locator('#cares').scroll_into_view_if_needed();page.wait_for_timeout(600)
