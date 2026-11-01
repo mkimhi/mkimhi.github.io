@@ -69,7 +69,8 @@
   const portrait = document.querySelector('#portrait-source');
   const canvas = document.querySelector('#portrait-resolution');
   const resolution = document.querySelector('#resolution');
-  if (portrait && canvas && resolution) {
+  const colorDepth = document.querySelector('#color-depth');
+  if (portrait && canvas && resolution && colorDepth) {
     const context = canvas.getContext('2d');
     const sizes = [8, 16, 32, 64, 128];
     function renderPortrait() {
@@ -81,7 +82,28 @@
       const cropWidth = Math.min(portrait.naturalWidth, portrait.naturalHeight * 4 / 5);
       const cropHeight = cropWidth * 5 / 4;
       context.drawImage(portrait, (portrait.naturalWidth - cropWidth) / 2, (portrait.naturalHeight - cropHeight) / 2, cropWidth, cropHeight, 0, 0, canvas.width, canvas.height);
-      canvas.hidden = original;
+      const color = Number(colorDepth.value);
+      if (color < 4) {
+        const image = context.getImageData(0, 0, canvas.width, canvas.height);
+        const pixels = image.data;
+        const levels = [256, 2, 4, 16][color];
+        const step = 255 / (levels - 1);
+        for (let i = 0; i < pixels.length; i += 4) {
+          if (color === 0) {
+            const gray = Math.round(.2126 * pixels[i] + .7152 * pixels[i + 1] + .0722 * pixels[i + 2]);
+            pixels[i] = pixels[i + 1] = pixels[i + 2] = gray;
+          } else {
+            for (let channel = 0; channel < 3; channel++) {
+              pixels[i + channel] = Math.round(pixels[i + channel] / step) * step;
+            }
+          }
+        }
+        context.putImageData(image, 0, 0);
+      }
+      canvas.hidden = original && color === 4;
+      const colorLabels = ['Grayscale', '8 colors', '64 colors', '4,096 colors', 'RGB'];
+      document.querySelector('#color-depth-value').textContent = colorLabels[color];
+      colorDepth.setAttribute('aria-valuetext', color === 4 ? 'Full RGB color' : colorLabels[color]);
       const description = original ? 'Original' : `${width} × ${canvas.height}`;
       document.querySelector('#resolution-value').textContent = description;
       resolution.setAttribute('aria-valuetext', original ? 'Original resolution' : `${width} by ${canvas.height} pixels`);
@@ -89,11 +111,12 @@
     function enablePortrait() {
       if (!context || !portrait.naturalWidth) return;
       renderPortrait();
-      document.querySelector('.portrait-controls').hidden = false;
+      document.querySelectorAll('.portrait-controls').forEach(control => { control.hidden = false; });
     }
     portrait.addEventListener('load', enablePortrait);
     if (portrait.complete) enablePortrait();
     resolution.addEventListener('input', renderPortrait);
+    colorDepth.addEventListener('input', renderPortrait);
   }
 
   const network = document.querySelector('#network');

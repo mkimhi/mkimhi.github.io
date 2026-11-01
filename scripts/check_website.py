@@ -30,6 +30,27 @@ with sync_playwright() as p:
  assert page.locator('#portrait-resolution').is_visible()
  page.locator('#resolution').fill('5')
  assert not page.locator('#portrait-resolution').is_visible()
+
+ assert page.locator('#portrait-source').get_attribute('src') == '/me.PNG'
+ page.locator('#color-depth').fill('0')
+ assert page.locator('#color-depth-value').inner_text() == 'Grayscale'
+ assert page.locator('#portrait-resolution').is_visible()
+ assert page.locator('#portrait-resolution').evaluate('''canvas => {
+   const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+   for (let i = 0; i < pixels.length; i += 4) {
+     if (pixels[i] !== pixels[i+1] || pixels[i] !== pixels[i+2]) return false;
+   }
+   return true;
+ }''')
+ page.locator('#resolution').fill('0');page.locator('#color-depth').fill('1')
+ assert page.locator('#portrait-resolution').evaluate('''canvas => {
+   const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+   return pixels.every((value, index) => index % 4 === 3 || value === 0 || value === 255);
+ }''')
+ assert page.locator('#resolution-value').inner_text() == '8 × 10'
+ page.locator('#color-depth').fill('4');page.locator('#resolution').fill('5')
+ assert not page.locator('#portrait-resolution').is_visible()
+
  page.locator('#cares').scroll_into_view_if_needed();page.wait_for_timeout(600)
  anchor_top = page.locator('#cares').bounding_box()['y']
  page.locator('#depth').fill('2')
@@ -46,4 +67,4 @@ with sync_playwright() as p:
  page.emulate_media(reduced_motion='reduce');page.goto(BASE)
  page.locator('#signal').click();assert page.locator('#network').evaluate('(el) => el.getAnimations({subtree:true}).length') == 0
  assert not errors,errors
- b.close();print('PASS: 13 publications, depth states, filters, network, portrait resolution, scroll preservation, reduced motion, keyboard range, 3 viewport widths, publications archive; no JS errors')
+ b.close();print('PASS: 13 publications, depth states, filters, network, portrait resolution and color quantization, scroll preservation, reduced motion, keyboard range, 3 viewport widths, publications archive; no JS errors')
