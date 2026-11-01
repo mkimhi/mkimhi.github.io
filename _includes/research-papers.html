@@ -1,0 +1,15 @@
+<div class="filters" role="group" aria-label="Filter research by topic"><button class="active" data-filter="All" aria-pressed="true">All work</button><button data-filter="Efficiency" aria-pressed="false">Efficiency</button><button data-filter="Learning" aria-pressed="false">Learning</button><button data-filter="Robustness" aria-pressed="false">Robustness</button><button data-filter="Vision" aria-pressed="false">Vision</button></div>
+<p id="result-count" class="sr-only" aria-live="polite"></p>
+<div class="papers">
+{% for paper in site.data.research %}
+<article class="paper" id="{{ paper.id }}" data-topic="{{ paper.topic }}">
+<div class="paper-index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}<span>{{ paper.year }}</span></div>
+<div class="paper-main"><div class="paper-meta">{{ paper.venue }} · {{ paper.year }}{% if paper.award != '' %}<span class="award">{{ paper.award }}</span>{% endif %}</div>
+<h3><a href="{{ paper.url }}">{{ paper.title }}</a></h3>
+<p class="paper-summary">{{ paper.summary }}</p>
+<details class="paper-details"><summary>Authors & affiliations</summary><p class="authors">{{ paper.authors | replace: 'Moshe Kimhi', '<strong>Moshe Kimhi</strong>' }}</p>{% if paper.affiliations != '' %}<p class="affiliations">{{ paper.affiliations }}</p>{% else %}<p class="affiliations">See the linked paper for author affiliations.</p>{% endif %}</details>
+<div class="paper-links"><a href="{{ paper.url }}">Paper ↗</a>{% if paper.project != '' %}<a href="{{ paper.project }}">Project ↗</a>{% endif %}{% if paper.code != '' %}<a href="{{ paper.code }}">Code ↗</a>{% endif %}</div></div>
+{% if paper.image != '' %}<a class="paper-image" href="{{ paper.url }}" tabindex="-1" aria-hidden="true"><img src="{{ paper.image }}" alt="" loading="lazy"></a>{% endif %}
+</article>
+{% endfor %}
+</div>

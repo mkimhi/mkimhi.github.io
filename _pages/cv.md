@@ -17,6 +17,8 @@ Education
 
 Work experience
 ======
+* Research Scientist, Google Research
+
 * 2022 - 2025: Head TA for deep learning
 
 * 2022-2023: TA for algorithms and aplications in computer vision
@@ -42,8 +44,8 @@ Skills
 
 Publications
 ======
-  <ul>{% for post in site.publications reversed %}
-    {% include archive-single-cv.html %}
+  <ul>{% for paper in site.data.research %}
+    <li><a href="{{ paper.url }}">{{ paper.title }}</a> — {{ paper.venue }}, {{ paper.year }}{% if paper.award != '' %} · {{ paper.award }}{% endif %}</li>
   {% endfor %}</ul>
   
   
