@@ -8,6 +8,14 @@ with sync_playwright() as p:
  b=p.chromium.launch(args=['--no-sandbox']); errors=[]
  page=b.new_page(viewport={'width':1440,'height':1000});page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(BASE);assert page.locator('.paper').count()==13
+ assert page.locator('main > section').evaluate_all('(sections)=>sections.map(s=>s.id)') == ['about','perspective','research','talks']
+ assert page.locator('#about #portrait-source').count() == 1
+ about_text = page.locator('#about').inner_text()
+ assert about_text.index('Chaim Baskin') < about_text.index('Ehud Rivlin')
+ assert 'INSIGHT Lab at Ben-Gurion University' in about_text
+ assert page.locator('#talks .talk-meta').all_text_contents() == ['Mobileye · July 13','Google Research Conference · October 13']
+ assert page.locator('a[href="/cv/"]').count() == 0
+ assert page.locator('.coffee-invite a').get_attribute('href').startswith('mailto:moshekimhi91@gmail.com')
  page.locator('#depth').fill('0');assert not page.locator('.paper-summary').first.is_visible()
  page.locator('#depth').fill('2');assert page.locator('.paper-details[open]').count()==13
  page.get_by_role('button',name='Robustness',exact=True).click();assert page.locator('.paper:visible').count()==2

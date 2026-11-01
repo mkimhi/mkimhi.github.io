@@ -1,4 +1,12 @@
 [
-  {"title": "Efficient Image Encoding for Vision-Language Models"},
-  {"title": "Memory in Perception Encoders for Autonomous Driving"}
+  {
+    "title": "Efficient Image Encoding for Vision-Language Models",
+    "company": "Mobileye",
+    "date": "July 13"
+  },
+  {
+    "title": "Memory in Perception Encoders for Autonomous Driving",
+    "company": "Google Research Conference",
+    "date": "October 13"
+  }
 ]

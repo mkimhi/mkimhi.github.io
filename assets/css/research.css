@@ -170,3 +170,15 @@ input[type=range]::-moz-range-thumb{width:7px;height:7px;border-radius:50%;borde
 .talk-index{font:20px var(--serif);color:var(--accent)}
 .talk h3{font-size:30px;margin:0}
 @media(max-width:600px){.hero-identity{gap:16px;margin-bottom:28px}.hero-identity img{width:84px;height:90px}.hero-name{font-size:27px}.hero-identity .eyebrow{font-size:8px;letter-spacing:1px}.talk h3{font-size:26px}}
+
+.hero-about{grid-template-columns:1.35fr 1fr;gap:80px;padding:65px 0}
+.hero-about .hero-name{margin-bottom:20px}
+.hero-about h1{font-size:clamp(56px,6vw,82px)}
+.hero-about .hero-copy>p:not(.eyebrow):not(.hero-name):not(.position){font-size:14px;color:var(--muted)}
+.hero-about .portrait{max-width:330px;width:100%;justify-self:center}
+.coffee-invite{border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
+.coffee-invite a{white-space:nowrap}
+.perspective .network-figure{grid-column:1/-1;width:100%;max-width:480px;margin:0 auto}
+.talk-meta{font-size:11px;color:var(--muted);margin:0 0 9px}
+@media(max-width:900px){.hero-about{gap:35px}.depth-bar nav{gap:12px}}
+@media(max-width:600px){.hero-about{grid-template-columns:1fr;gap:40px;padding:45px 0}.hero-about .portrait{grid-row:1;max-width:250px;justify-self:start}.hero-about h1{font-size:58px}.header nav{gap:14px}.hero-about .hero-name{font-size:30px}}

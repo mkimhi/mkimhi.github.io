@@ -1,5 +1,5 @@
 <div class="talk-list">
 {% for talk in site.data.featured_talks %}
-<div class="talk"><span class="talk-index" aria-hidden="true">0{{ forloop.index }}</span><h3>{{ talk.title }}</h3></div>
+<div class="talk"><span class="talk-index" aria-hidden="true">0{{ forloop.index }}</span><div><p class="talk-meta">{{ talk.company }} · {{ talk.date }}</p><h3>{{ talk.title }}</h3></div></div>
 {% endfor %}
 </div>

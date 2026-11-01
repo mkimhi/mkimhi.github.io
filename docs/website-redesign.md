@@ -37,3 +37,7 @@ Repeat with `python scripts/check_website.py http://localhost:4000` after servin
 ## Design refinement
 
 Design takes priority; remaining Scholar reconciliation is deferred at the owner's request. The network now animates individual signal paths. The sticky reading bar shows section location and page progress, offers clickable depth endpoints, and preserves the central visible paper when depth changes. A portrait resolution experiment lets visitors explore progressively coarser image representations with native keyboard-accessible controls. Motion preferences disable signal animations. Browser checks also cover resolution controls, scroll preservation, and reduced motion.
+
+## Published content update
+
+The page order is About, Perspective, Publications, Talks. The interactive resolution portrait is now in the opening About section, and the network illustration accompanies Perspective. Chaim Baskin appears before Ehud Rivlin, with the INSIGHT Lab at BGU explicitly named. Contact and coffee scheduling use moshekimhi91@gmail.com; the coffee link opens an email rather than an unspecified booking service. Talks include Mobileye (July 13) and Google Research Conference (October 13); no year was supplied, so none is invented. The CV page and navigation links were removed at the owner's request.
