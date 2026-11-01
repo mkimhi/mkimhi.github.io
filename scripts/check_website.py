@@ -9,9 +9,9 @@ with sync_playwright() as p:
  page=b.new_page(viewport={'width':1440,'height':1000});page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(BASE);assert page.locator('.paper').count()==13
  assert page.locator('main > section').evaluate_all('(sections)=>sections.map(s=>s.id)') == ['about','perspective','research','talks']
- assert page.locator('#about .hero-copy > .portrait').count() == 1
- assert page.locator('#about > .network-figure').count() == 1
- assert page.locator('.hero-copy').evaluate('(el) => el.firstElementChild.classList.contains("portrait")')
+ assert page.locator('#about .hero-artifacts > .portrait').count() == 1
+ assert page.locator('#about .hero-artifacts > .network-figure').count() == 1
+ assert page.locator('#about').evaluate('(el) => el.firstElementChild.classList.contains("hero-artifacts")')
  about_text = page.locator('#about').inner_text()
  assert about_text.index('Chaim Baskin') < about_text.index('Ehud Rivlin')
  assert 'INSIGHT Lab at Ben-Gurion University' in about_text
@@ -59,6 +59,10 @@ with sync_playwright() as p:
  page.screenshot(path='/tmp/desktop-final.png',full_page=True)
  for width in [375,768,1440]:
   page.set_viewport_size({'width':width,'height':850});page.goto(BASE);assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),width
+  portrait_box = page.locator('.hero-artifacts .portrait').bounding_box()
+  network_box = page.locator('.hero-artifacts .network-figure').bounding_box()
+  assert max(portrait_box['y'] + portrait_box['height'], network_box['y'] + network_box['height']) < 700
+  assert network_box['x'] >= portrait_box['x'] + portrait_box['width']
   page.locator('#depth').focus();page.keyboard.press('ArrowRight');assert page.locator('#depth').input_value()=='2'
   if width==375:page.screenshot(path='/tmp/mobile.png',full_page=True)
  page.get_by_role('button',name='Overview',exact=True).click();assert page.locator('#depth').input_value()=='0'

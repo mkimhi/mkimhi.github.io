@@ -45,3 +45,5 @@ The page order is About, Perspective, Publications, Talks. The interactive resol
 The opening layout now places the interactive portrait above the About label in the left column, with the bottleneck network restored to the top-right column. Perspective follows without the network illustration.
 
 The owner-supplied `me.PNG` is now the homepage portrait and profile avatar. A second native range control below Resolution changes color independently: full RGB, 4,096 colors, 64 colors, 8 colors, or grayscale. RGB palettes use per-channel quantization; grayscale uses luminance. The default shows the full-color original. Browser checks verify grayscale channels, the eight-color palette, and combined resolution/color settings.
+
+The portrait and bottleneck network now share a compact two-column opening row, including on phones, before the About text. Browser checks assert both visuals remain side by side and within the first 700 pixels at phone, tablet, and desktop widths.
