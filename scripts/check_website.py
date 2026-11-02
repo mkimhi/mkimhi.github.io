@@ -14,7 +14,7 @@ with sync_playwright() as p:
  assert page.locator('#about').evaluate('(el) => el.firstElementChild.classList.contains("hero-artifacts")')
  about_text = page.locator('#about').inner_text()
  assert about_text.index('Chaim Baskin') < about_text.index('Ehud Rivlin')
- assert 'INSIGHT Lab at Ben-Gurion University' in about_text
+ assert 'INSIGHT Lab at Ben-Gurion University' not in about_text
  assert page.locator('#talks .talk-meta').all_text_contents() == ['Mobileye · July 13','Google Research Conference · October 13']
  assert page.locator('a[href="/cv/"]').count() == 0
  assert page.locator('.coffee-invite a').get_attribute('href').startswith('mailto:moshekimhi91@gmail.com')
@@ -54,7 +54,7 @@ with sync_playwright() as p:
  page.locator('#resolution').fill('5')
  assert not page.locator('#portrait-resolution').is_visible()
 
- assert page.locator('#portrait-source').get_attribute('src') == '/images/me.jpg'
+ assert page.locator('#portrait-source').get_attribute('src') == '/me2.png'
  page.locator('#color-depth').fill('0')
  assert page.locator('#color-depth-value').inner_text() == 'Grayscale'
  assert page.locator('#portrait-resolution').is_visible()
@@ -74,6 +74,40 @@ with sync_playwright() as p:
  page.locator('#color-depth').fill('7');page.locator('#resolution').fill('5')
  assert not page.locator('#portrait-resolution').is_visible()
 
+ page.locator('#edges').fill('100')
+ assert page.locator('#edges-value').inner_text() == '100%'
+ assert page.locator('#portrait-resolution').is_visible()
+ assert page.locator('#portrait-resolution').evaluate("canvas => { const p = canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data; let dark = false, light = false; for(let i=0;i<p.length;i+=4) { if(p[i] !== p[i+1] || p[i] !== p[i+2]) return false; dark ||= p[i]<100; light ||= p[i]>200; } return dark && light; }")
+ page.locator('#edges').fill('0')
+ assert not page.locator('#portrait-resolution').is_visible()
+ for count in [1,7,3]:
+  page.locator('#bottleneck').fill(str(count))
+  assert page.locator('#network .bottleneck').count() == count
+  assert page.locator('#network line').count() == 59 + 13 * count
+ page.locator('#signal').click()
+ page.locator('#bottleneck').fill('2')
+ assert page.locator('#network').evaluate('(el) => el.getAnimations({subtree:true}).length') == 0
+ page.locator('#bottleneck').focus();page.keyboard.press('ArrowRight')
+ assert page.locator('#bottleneck').input_value() == '3'
+ page.locator('.meeting-request summary').click()
+ page.locator('#meeting-form button').click()
+ assert page.locator('#meeting-name').evaluate('(el) => !el.validity.valid')
+ page.locator('#meeting-name').fill('Test Visitor')
+ page.locator('#meeting-email').fill('visitor@example.com')
+ page.locator('#meeting-details').fill('Vision & learning? Next Tuesday at 10 UTC.\nA speaking invitation.')
+ for kind in ['Consulting','Speaking event']:
+  page.locator('#meeting-type').select_option(label=kind)
+  # Capture external navigation so no email client needs to be installed.
+  with page.expect_event('request', predicate=lambda req: req.url.startswith('mailto:')) as draft:
+   page.locator('#meeting-form button').click()
+  from urllib.parse import urlparse, parse_qs
+  request = urlparse(draft.value.url)
+  fields = parse_qs(request.query)
+  assert request.path == 'moshekimhi91@gmail.com'
+  assert fields['subject'] == [kind + ' meeting request']
+  assert 'Vision & learning? Next Tuesday at 10 UTC.' in fields['body'][0]
+  assert 'visitor@example.com' in fields['body'][0]
+ page.locator('.meeting-request summary').click()
  page.locator('#cares').scroll_into_view_if_needed();page.wait_for_timeout(600)
  anchor_top = page.locator('#cares').bounding_box()['y']
  page.locator('#depth').fill('2')
@@ -94,4 +128,4 @@ with sync_playwright() as p:
  page.emulate_media(reduced_motion='reduce');page.goto(BASE)
  page.locator('#signal').click();assert page.locator('#network').evaluate('(el) => el.getAnimations({subtree:true}).length') == 0
  assert not errors,errors
- b.close();print('PASS: 13 publications, depth states, filters, network, portrait resolution and color quantization, scroll preservation, reduced motion, keyboard range, 3 viewport widths, publications archive; no JS errors')
+ b.close();print('PASS: 13 publications, depth states, filters, network, portrait resolution, color quantization and edge drawing, adjustable bottleneck, meeting email drafts, scroll preservation, reduced motion, keyboard range, 3 viewport widths, publications archive; no JS errors')

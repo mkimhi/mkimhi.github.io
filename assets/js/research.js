@@ -89,7 +89,8 @@
   const canvas = document.querySelector('#portrait-resolution');
   const resolution = document.querySelector('#resolution');
   const colorDepth = document.querySelector('#color-depth');
-  if (portrait && canvas && resolution && colorDepth) {
+  const edgeDepth = document.querySelector('#edges');
+  if (portrait && canvas && resolution && colorDepth && edgeDepth) {
     const context = canvas.getContext('2d');
     const sizes = [8, 16, 32, 64, 128];
     function renderPortrait() {
@@ -119,7 +120,29 @@
         }
         context.putImageData(image, 0, 0);
       }
-      canvas.hidden = original && color === 7;
+      const blend = Number(edgeDepth.value) / 100;
+      if (blend > 0) {
+        const image = context.getImageData(0, 0, canvas.width, canvas.height);
+        const pixels = image.data;
+        const gray = new Float32Array(canvas.width * canvas.height);
+        for (let i = 0; i < gray.length; i++) {
+          gray[i] = .2126 * pixels[i * 4] + .7152 * pixels[i * 4 + 1] + .0722 * pixels[i * 4 + 2];
+        }
+        for (let y = 0; y < canvas.height; y++) {
+          for (let x = 0; x < canvas.width; x++) {
+            const sample = (dx, dy) => gray[Math.max(0, Math.min(canvas.height - 1, y + dy)) * canvas.width + Math.max(0, Math.min(canvas.width - 1, x + dx))];
+            const gx = -sample(-1, -1) + sample(1, -1) - 2 * sample(-1, 0) + 2 * sample(1, 0) - sample(-1, 1) + sample(1, 1);
+            const gy = -sample(-1, -1) - 2 * sample(0, -1) - sample(1, -1) + sample(-1, 1) + 2 * sample(0, 1) + sample(1, 1);
+            const ink = 255 - Math.min(255, Math.hypot(gx, gy));
+            const offset = (y * canvas.width + x) * 4;
+            for (let c = 0; c < 3; c++) pixels[offset + c] = pixels[offset + c] * (1 - blend) + ink * blend;
+          }
+        }
+        context.putImageData(image, 0, 0);
+      }
+      canvas.hidden = original && color === 7 && blend === 0;
+      document.querySelector('#edges-value').textContent = `${edgeDepth.value}%`;
+      edgeDepth.setAttribute('aria-valuetext', `${edgeDepth.value} percent edge drawing`);
       const colorLabels = ['Grayscale', '3-bit RGB', '6-bit RGB', '9-bit RGB', '12-bit RGB', '15-bit RGB', '18-bit RGB', 'RGB'];
       document.querySelector('#color-depth-value').textContent = colorLabels[color];
       colorDepth.setAttribute('aria-valuetext', color === 7 ? 'Full RGB color' : colorLabels[color]);
@@ -136,32 +159,67 @@
     if (portrait.complete) enablePortrait();
     resolution.addEventListener('input', renderPortrait);
     colorDepth.addEventListener('input', renderPortrait);
+    edgeDepth.addEventListener('input', renderPortrait);
+  }
+
+  const meetingForm = document.querySelector('#meeting-form');
+  if (meetingForm) {
+    meetingForm.hidden = false;
+    meetingForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const data = new FormData(meetingForm);
+      const subject = `${data.get('type')} meeting request`;
+      const body = `Hi Moshe,\r\n\r\nI’d like to discuss ${data.get('type').toLowerCase()}.\r\n\r\n${data.get('details')}\r\n\r\nFrom: ${data.get('name')}\r\nReply to: ${data.get('email')}`;
+      window.location.href = `mailto:moshekimhi91@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
   }
 
   const network = document.querySelector('#network');
   if (!network) return;
   const ns = 'http://www.w3.org/2000/svg';
-  const layers = [5, 7, 3, 6, 4].map((count, layer) =>
-    Array.from({length: count}, (_, index) => ({x: 30 + layer * 112, y: 170 + (index - (count - 1) / 2) * 39})));
+  let layers;
   function element(tag, attributes) {
     const node = document.createElementNS(ns, tag);
     Object.entries(attributes).forEach(([key, value]) => node.setAttribute(key, value));
     network.append(node);
     return node;
   }
-  const edges = [];
-  layers.slice(0, -1).forEach((layer, index) => layer.forEach((start, source) => layers[index + 1].forEach((end, target) => {
-    const line = element('line', {x1:start.x,y1:start.y,x2:end.x,y2:end.y,class:'network-edge'});
-    edges.push({line, layer:index, source, target});
-  })));
-  layers.forEach((layer, index) => layer.forEach(node => {
-    node.element = element('circle', {cx:node.x,cy:node.y,r:index === 2 ? 6 : 4.5,class:`network-node${index === 2 ? ' bottleneck' : ''}`});
-  }));
-  [['INPUT', 30], ['BOTTLENECK', 254], ['OUTPUT', 478]].forEach(([label, x]) => {
-    element('text', {x,y:325,'text-anchor':'middle',class:'network-label'}).textContent = label;
-  });
+  let edges = [];
   let timer;
   let animations = [];
+  const bottleneck = document.querySelector('#bottleneck');
+  function drawNetwork() {
+    clearTimeout(timer);
+    animations.forEach(animation => animation.cancel());
+    animations = [];
+    network.replaceChildren();
+    network.classList.remove('network-active');
+    const count = Number(bottleneck?.value || 3);
+    layers = [5, 7, count, 6, 4].map((size, layer) =>
+      Array.from({length: size}, (_, index) => ({x: 30 + layer * 112, y: 170 + (index - (size - 1) / 2) * 39})));
+    edges = [];
+    layers.slice(0, -1).forEach((layer, index) => layer.forEach((start, source) => layers[index + 1].forEach((end, target) => {
+      const line = element('line', {x1:start.x,y1:start.y,x2:end.x,y2:end.y,class:'network-edge'});
+      edges.push({line, layer:index, source, target});
+    })));
+    layers.forEach((layer, index) => layer.forEach(node => {
+      node.element = element('circle', {cx:node.x,cy:node.y,r:index === 2 ? 6 : 4.5,class:`network-node${index === 2 ? ' bottleneck' : ''}`});
+    }));
+    [['INPUT', 30], ['BOTTLENECK', 254], ['OUTPUT', 478]].forEach(([label, x]) => {
+      element('text', {x,y:325,'text-anchor':'middle',class:'network-label'}).textContent = label;
+    });
+    network.setAttribute('aria-label', `A neural network with ${count} neurons in its bottleneck and ${edges.length} connections`);
+    if (bottleneck) {
+      bottleneck.setAttribute('aria-valuetext', `${count} ${count === 1 ? 'neuron' : 'neurons'}`);
+      document.querySelector('#bottleneck-value').textContent = `${count} ${count === 1 ? 'neuron' : 'neurons'}`;
+      document.querySelector('#network-stats').textContent = `${edges.length} connections · change the width, then send a signal`;
+    }
+  }
+  drawNetwork();
+  if (bottleneck) {
+    document.querySelector('.network-controls').hidden = false;
+    bottleneck.addEventListener('input', drawNetwork);
+  }
   const signal = () => {
     clearTimeout(timer);
     animations.forEach(animation => animation.cancel());

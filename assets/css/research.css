@@ -8,7 +8,7 @@ a:hover{color:var(--accent)}
 button,input{font:inherit}
 button,a,input{touch-action:manipulation}
 button{cursor:pointer}
-a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
 .header,main,footer{max-width:1240px;margin:auto;padding-left:48px;padding-right:48px}
 .header{height:106px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
 .wordmark{font:42px var(--serif);text-decoration:none}
@@ -142,6 +142,18 @@ input[type=range]::-moz-range-thumb{width:7px;height:7px;border-radius:50%;borde
 .network-key i{display:inline-block;width:6px;height:6px;border-radius:50%;border:1px solid #6c7b66;margin-right:5px}
 .network-key .key-bottleneck{border-color:var(--accent);background:#ead6c8}
 #signal{min-height:36px}
+.network-controls{display:flex;align-items:center;gap:12px;font-size:10px;color:var(--muted)}
+.network-controls input{flex:1;min-width:20px;width:70px}
+.network-controls output{white-space:nowrap;font-size:9px}
+.network-stats{font-size:10px;color:var(--muted);margin:8px 0 12px}
+.meeting-request{border-top:1px solid var(--line);padding-top:18px;margin-top:24px;font-size:13px}
+.meeting-request summary{color:var(--accent);width:fit-content}
+.meeting-request form{display:grid;gap:9px;max-width:480px;margin-top:20px}
+.meeting-request label{font-size:12px}
+.meeting-request input,.meeting-request select,.meeting-request textarea{width:100%;min-width:0;background:transparent;color:var(--ink);border:1px solid var(--line);padding:10px;font:14px var(--sans);border-radius:0}
+.meeting-request textarea{resize:vertical}
+.meeting-request button{justify-self:start;border:0;margin-top:6px}
+.meeting-request .meeting-help{font-size:11px;color:var(--muted)}
 .paper{transition:background-color .2s}
 .paper:hover{background:#ebece433}
 .paper-meta{font-size:11px}
@@ -202,6 +214,10 @@ input[type=range]::-moz-range-thumb{width:7px;height:7px;border-radius:50%;borde
 .hero-artifacts .network-figure button{font-size:10px;padding:5px 0;min-height:32px}
 .hero-artifacts .network-note{font-size:16px;margin:9px 0}
 .hero-artifacts .network-key{gap:5px;font-size:7px;flex-wrap:wrap}
+.hero-artifacts .network-controls{flex-wrap:wrap;gap:4px;font-size:8px}
+.hero-artifacts .network-controls label{width:100%}
+.hero-artifacts .network-controls output{font-size:8px}
+.hero-artifacts .network-stats{font-size:8px;line-height:1.4}
 }
 
 .paper-image{width:170px;padding:7px}
