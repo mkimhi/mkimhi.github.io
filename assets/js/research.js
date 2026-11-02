@@ -66,12 +66,12 @@
   const sectionLinks = [...document.querySelectorAll('.depth-bar nav a')];
   function updatePosition() {
     const sections = sectionLinks.map(link => document.querySelector(link.getAttribute('href')));
-    const current = sections.filter(section => section.getBoundingClientRect().top <= innerHeight * .4).pop();
+    const remaining = document.documentElement.scrollHeight - innerHeight;
+    const current = scrollY >= remaining - 2 ? sections[sections.length - 1] : sections.filter(section => section.getBoundingClientRect().top <= innerHeight * .4).pop();
     sectionLinks.forEach((link, index) => {
       if (sections[index] === current) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
-    const remaining = document.documentElement.scrollHeight - innerHeight;
     document.querySelector('.depth-bar')?.style.setProperty('--reading-progress', `${remaining > 0 ? scrollY / remaining * 100 : 0}%`);
   }
   if (sectionLinks.length) {

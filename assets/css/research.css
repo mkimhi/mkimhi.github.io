@@ -154,6 +154,7 @@ input[type=range]::-moz-range-thumb{width:7px;height:7px;border-radius:50%;borde
 .meeting-request textarea{resize:vertical}
 .meeting-request button{justify-self:start;border:0;margin-top:6px}
 .meeting-request .meeting-help{font-size:11px;color:var(--muted)}
+.meeting>p:not(.eyebrow){max-width:650px;font-size:14px;color:var(--muted)}
 .paper{transition:background-color .2s}
 .paper:hover{background:#ebece433}
 .paper-meta{font-size:11px}

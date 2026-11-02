@@ -8,7 +8,10 @@ with sync_playwright() as p:
  b=p.chromium.launch(args=['--no-sandbox']); errors=[]
  page=b.new_page(viewport={'width':1440,'height':1000});page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(BASE);assert page.locator('.paper').count()==13
- assert page.locator('main > section').evaluate_all('(sections)=>sections.map(s=>s.id)') == ['about','perspective','research','talks']
+ assert page.locator('main > section').evaluate_all('(sections)=>sections.map(s=>s.id)') == ['about','perspective','research','talks','meeting']
+ assert page.locator('.depth-bar a[href="#meeting"]').inner_text() == '05 Set a meeting'
+ assert 'I consult and teach on AI and computer vision' in page.locator('#meeting').inner_text()
+ assert page.locator('#meeting #meeting-form').count() == 1
  assert page.locator('#about .hero-artifacts > .portrait').count() == 1
  assert page.locator('#about .hero-artifacts > .network-figure').count() == 1
  assert page.locator('#about').evaluate('(el) => el.firstElementChild.classList.contains("hero-artifacts")')
@@ -95,7 +98,7 @@ with sync_playwright() as p:
  page.locator('#meeting-name').fill('Test Visitor')
  page.locator('#meeting-email').fill('visitor@example.com')
  page.locator('#meeting-details').fill('Vision & learning? Next Tuesday at 10 UTC.\nA speaking invitation.')
- for kind in ['Consulting','Speaking event']:
+ for kind in ['Consulting','Speaking event','Teaching session']:
   page.locator('#meeting-type').select_option(label=kind)
   # Capture external navigation so no email client needs to be installed.
   with page.expect_event('request', predicate=lambda req: req.url.startswith('mailto:')) as draft:
@@ -124,6 +127,8 @@ with sync_playwright() as p:
   if width==375:page.screenshot(path='/tmp/mobile.png',full_page=True)
  page.get_by_role('button',name='Overview',exact=True).click();assert page.locator('#depth').input_value()=='0'
  page.get_by_role('button',name='In depth',exact=True).click();assert page.locator('#depth').input_value()=='2'
+ page.locator('.depth-bar a[href="#meeting"]').click()
+ page.wait_for_function("document.querySelector('.depth-bar a[href=\"#meeting\"]').getAttribute('aria-current') === 'location'")
  page.goto(BASE + '/publications/');assert page.locator('.paper').count()==13
  page.emulate_media(reduced_motion='reduce');page.goto(BASE)
  page.locator('#signal').click();assert page.locator('#network').evaluate('(el) => el.getAnimations({subtree:true}).length') == 0

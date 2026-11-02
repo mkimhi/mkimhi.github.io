@@ -22,18 +22,12 @@ redirect_from:
 <p>I’m a Research Scientist at Google Research and a PhD student in Computer Science at the Technion, advised by <a href="https://insight.bgu.ac.il/">Chaim Baskin</a> and <a href="https://research.google/people/ehud-rivlin/">Ehud Rivlin</a>.</p>
 <p class="detail-copy">My research spans vision-language models, representation learning, semi-supervised learning, noisy labels, and robust AI systems. I hold BSc and MSc degrees in Electrical and Computer Engineering from the Technion. I teach deep learning and computer vision.</p>
 <p class="coffee-invite">Have an interesting problem in mind? <a href="mailto:moshekimhi91@gmail.com?subject=Coffee%20and%20interesting%20problems">Let’s schedule a coffee ↗</a></p>
-<details class="meeting-request"><summary>Schedule a meeting ↗</summary><p>For consulting or a speaking event, tell me a little about what you have in mind.</p><form id="meeting-form" hidden>
-<label for="meeting-type">I’m interested in</label><select id="meeting-type" name="type"><option>Consulting</option><option>Speaking event</option></select>
-<label for="meeting-name">Your name</label><input id="meeting-name" name="name" autocomplete="name" maxlength="100" required>
-<label for="meeting-email">Your email</label><input id="meeting-email" name="email" type="email" autocomplete="email" maxlength="254" required>
-<label for="meeting-details">Topic, preferred dates &amp; time zone</label><textarea id="meeting-details" name="details" rows="4" maxlength="1200" required></textarea>
-<button class="primary" type="submit">Draft meeting email ↗</button><p class="meeting-help">Opens a draft in your email app for you to review and send. Dates are confirmed by email.</p>
-</form><p>Email me directly: <a href="mailto:moshekimhi91@gmail.com?subject=Meeting%20request">moshekimhi91@gmail.com ↗</a></p></details>
+
 <div class="socials"><a href="mailto:moshekimhi91@gmail.com">Email ↗</a><a href="https://scholar.google.com/citations?user=uz7qJbsAAAAJ&hl=en">Scholar ↗</a><a href="https://github.com/mkimhi">GitHub ↗</a><a href="https://www.linkedin.com/in/moshekimhi/">LinkedIn ↗</a></div>
 </div>
 
 </section>
-<div class="depth-bar"><div><label for="depth">Reading depth</label><span id="depth-description" aria-live="polite">A little context</span></div><div class="depth-control"><button type="button" data-depth-choice="0">Overview</button><input type="range" id="depth" min="0" max="2" step="1" value="1" aria-valuetext="Context: paper summaries"><button type="button" data-depth-choice="2">In depth</button></div><nav aria-label="Page sections"><a href="#about">01 About</a><a href="#perspective">02 Perspective</a><a href="#research">03 Publications</a><a href="#talks">04 Talks</a></nav></div>
+<div class="depth-bar"><div><label for="depth">Reading depth</label><span id="depth-description" aria-live="polite">A little context</span></div><div class="depth-control"><button type="button" data-depth-choice="0">Overview</button><input type="range" id="depth" min="0" max="2" step="1" value="1" aria-valuetext="Context: paper summaries"><button type="button" data-depth-choice="2">In depth</button></div><nav aria-label="Page sections"><a href="#about">01 About</a><a href="#perspective">02 Perspective</a><a href="#research">03 Publications</a><a href="#talks">04 Talks</a><a href="#meeting">05 Set a meeting</a></nav></div>
 <section id="perspective" class="section perspective"><div><p class="eyebrow">02 / PERSPECTIVE</p><h2>A modern<br><em>glassblower.</em></h2><svg class="vessel" viewBox="0 0 400 200" role="img" aria-label="An abstract glass vessel with a narrow neck expanding into a broad body"><g fill="none" stroke="currentColor" stroke-width="1"> <path d="M20 85H115C160 85 155 25 245 25C335 25 370 70 370 100S335 175 245 175C155 175 160 115 115 115H20"/>
 <path d="M20 90H115C170 90 175 45 245 45S350 80 350 100S315 155 245 155S170 110 115 110H20"/><path d="M20 95H115C180 95 195 70 245 70S330 90 330 100S295 130 245 130S180 105 115 105H20"/><path d="M20 100H370"/></g></svg></div><div class="perspective-copy"><p class="large">I see myself as a modern glassblower: finding the narrow neck, then reshaping it.</p><p>In neural networks, the bottleneck might be data, compute, memory, or the pipeline connecting them. I’m interested in identifying what limits a system, understanding why, and opening up room for it to do more.</p><p>I’m a strong believer in <a href="https://en.wikipedia.org/wiki/Jevons_paradox">Jevons paradox ↗</a>: greater efficiency can increase total demand. For me, making AI more efficient is a way to unlock new uses, broader access, and more ambitious questions.</p><p class="detail-copy">That perspective connects my work on adaptive resolution, learning with imperfect data, quantization, and neural network robustness. The recurring question is simple: where does an intervention matter most?</p></div></section>
 <section id="research" class="section"><div class="section-heading"><div><p class="eyebrow">03 / PUBLICATIONS</p><h2>Find the constraint.<br><em>Expand what’s possible.</em></h2></div><p>From visual tokens to training labels, I look for the small changes that make a large difference.</p></div>
@@ -41,5 +35,15 @@ redirect_from:
 </section>
 <section id="talks" class="section talks"><p class="eyebrow">04 / TALKS</p><h2>Ideas, <em>in conversation.</em></h2>
 {% include featured-talks.html %}
+</section>
+<section id="meeting" class="section meeting"><p class="eyebrow">05 / SET A MEETING</p><h2>Let’s talk <em>AI &amp; vision.</em></h2>
+<p>I consult and teach on AI and computer vision, helping teams turn research ideas into practical systems. Get in touch for consulting, tailored teaching sessions, or a speaking event.</p>
+<details class="meeting-request"><summary>Schedule a meeting ↗</summary><p>For consulting, a teaching session, or a speaking event, tell me a little about what you have in mind.</p><form id="meeting-form" hidden>
+<label for="meeting-type">I’m interested in</label><select id="meeting-type" name="type"><option>Consulting</option><option>Speaking event</option><option>Teaching session</option></select>
+<label for="meeting-name">Your name</label><input id="meeting-name" name="name" autocomplete="name" maxlength="100" required>
+<label for="meeting-email">Your email</label><input id="meeting-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+<label for="meeting-details">Topic, preferred dates &amp; time zone</label><textarea id="meeting-details" name="details" rows="4" maxlength="1200" required></textarea>
+<button class="primary" type="submit">Draft meeting email ↗</button><p class="meeting-help">Opens a draft in your email app for you to review and send. Dates are confirmed by email.</p>
+</form><p>Email me directly: <a href="mailto:moshekimhi91@gmail.com?subject=Meeting%20request">moshekimhi91@gmail.com ↗</a></p></details>
 </section>
 </main>
