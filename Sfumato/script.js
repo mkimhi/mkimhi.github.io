@@ -59,7 +59,7 @@ const SCENES_DATA = {
     modes: {
       raw: { label: "Raw RGB Image", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene4_raw.webp" },
       clean: { label: "Clean Reference (LVIS v1)", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene4_clean.webp" },
-      cblnl_cleaned: { label: "CB-LNL Cleaned (Ours — Sfumato Copula)", mask_iou: 98.1, boundary_iou: 94.2, image: "assets/scenes/scene4_cblnl_cleaned.webp" },
+      cblnl_cleaned: { label: "CB-LNL Cleaned (Ours — Sfumato Copula)", mask_iou: 96.0, boundary_iou: 95.3, image: "assets/scenes/scene4_cblnl_cleaned.webp" },
       realnoise: { label: "Real Human (COCO-RealNoise)", mask_iou: 95.0, boundary_iou: 84.4, image: "assets/scenes/scene4_realnoise.webp" },
       wan_box: { label: "SAM2 Box (WAN-Box Noisy)", mask_iou: 76.2, boundary_iou: 73.4, image: "assets/scenes/scene4_wan_box.webp" },
       wan_point: { label: "SAM2 Click (WAN-Point Center)", mask_iou: 56.4, boundary_iou: 51.5, image: "assets/scenes/scene4_wan_point.webp" },
@@ -70,20 +70,92 @@ const SCENES_DATA = {
       erode: { label: "Morphological Erosion", mask_iou: 50.1, boundary_iou: 46.5, image: "assets/scenes/scene4_erode.webp" },
       dilate: { label: "Morphological Dilation (Outward Bleed)", mask_iou: 52.4, boundary_iou: 26.7, image: "assets/scenes/scene4_dilate.webp" }
     }
+  },
+  scene5: {
+    title: "Scene 5: Person & Train Platform (COCO #117125)",
+    objects: "person, train",
+    modes: {
+      raw: { label: "Raw RGB Image", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene5_raw.webp" },
+      clean: { label: "Clean Reference (LVIS v1)", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene5_clean.webp" },
+      cblnl_cleaned: { label: "CB-LNL Cleaned (Ours — Sfumato Copula)", mask_iou: 88.4, boundary_iou: 86.2, image: "assets/scenes/scene5_cblnl_cleaned.webp" },
+      realnoise: { label: "Real Human (COCO-RealNoise)", mask_iou: 98.3, boundary_iou: 91.6, image: "assets/scenes/scene5_realnoise.webp" },
+      wan_box: { label: "SAM2 Box (WAN-Box Noisy)", mask_iou: 71.8, boundary_iou: 68.5, image: "assets/scenes/scene5_wan_box.webp" },
+      wan_point: { label: "SAM2 Click (WAN-Point Center)", mask_iou: 23.8, boundary_iou: 16.0, image: "assets/scenes/scene5_wan_point.webp" },
+      cocon_med: { label: "COCO-N Medium (Procedural)", mask_iou: 66.8, boundary_iou: 66.8, image: "assets/scenes/scene5_cocon_med.webp" },
+      cocon_hard: { label: "COCO-N Hard (Severe Stress)", mask_iou: 50.9, boundary_iou: 50.9, image: "assets/scenes/scene5_cocon_hard.webp" },
+      approx: { label: "Polygon Simplification (Inward Cut)", mask_iou: 77.9, boundary_iou: 63.2, image: "assets/scenes/scene5_approx.webp" },
+      drift: { label: "Rigid Spatial Drift", mask_iou: 81.8, boundary_iou: 31.6, image: "assets/scenes/scene5_drift.webp" },
+      erode: { label: "Morphological Erosion", mask_iou: 67.4, boundary_iou: 28.4, image: "assets/scenes/scene5_erode.webp" },
+      dilate: { label: "Morphological Dilation (Outward Bleed)", mask_iou: 38.8, boundary_iou: 15.8, image: "assets/scenes/scene5_dilate.webp" }
+    }
+  },
+  scene6: {
+    title: "Scene 6: Street Pedestrians, Car & Truck (COCO #542510)",
+    objects: "car, person, truck",
+    modes: {
+      raw: { label: "Raw RGB Image", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene6_raw.webp" },
+      clean: { label: "Clean Reference (LVIS v1)", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene6_clean.webp" },
+      cblnl_cleaned: { label: "CB-LNL Cleaned (Ours — Sfumato Copula)", mask_iou: 97.8, boundary_iou: 94.5, image: "assets/scenes/scene6_cblnl_cleaned.webp" },
+      realnoise: { label: "Real Human (COCO-RealNoise)", mask_iou: 86.6, boundary_iou: 66.6, image: "assets/scenes/scene6_realnoise.webp" },
+      wan_box: { label: "SAM2 Box (WAN-Box Noisy)", mask_iou: 90.3, boundary_iou: 80.4, image: "assets/scenes/scene6_wan_box.webp" },
+      wan_point: { label: "SAM2 Click (WAN-Point Center)", mask_iou: 61.0, boundary_iou: 53.6, image: "assets/scenes/scene6_wan_point.webp" },
+      cocon_med: { label: "COCO-N Medium (Procedural)", mask_iou: 88.9, boundary_iou: 76.1, image: "assets/scenes/scene6_cocon_med.webp" },
+      cocon_hard: { label: "COCO-N Hard (Severe Stress)", mask_iou: 70.9, boundary_iou: 43.8, image: "assets/scenes/scene6_cocon_hard.webp" },
+      approx: { label: "Polygon Simplification (Inward Cut)", mask_iou: 85.2, boundary_iou: 69.2, image: "assets/scenes/scene6_approx.webp" },
+      drift: { label: "Rigid Spatial Drift", mask_iou: 67.1, boundary_iou: 43.5, image: "assets/scenes/scene6_drift.webp" },
+      erode: { label: "Morphological Erosion", mask_iou: 59.5, boundary_iou: 35.2, image: "assets/scenes/scene6_erode.webp" },
+      dilate: { label: "Morphological Dilation (Outward Bleed)", mask_iou: 66.5, boundary_iou: 28.9, image: "assets/scenes/scene6_dilate.webp" }
+    }
+  },
+  scene7: {
+    title: "Scene 7: Articulated Athlete & Frisbee (COCO #240028)",
+    objects: "frisbee, person",
+    modes: {
+      raw: { label: "Raw RGB Image", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene7_raw.webp" },
+      clean: { label: "Clean Reference (LVIS v1)", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene7_clean.webp" },
+      cblnl_cleaned: { label: "CB-LNL Cleaned (Ours — Sfumato Copula)", mask_iou: 95.7, boundary_iou: 92.3, image: "assets/scenes/scene7_cblnl_cleaned.webp" },
+      realnoise: { label: "Real Human (COCO-RealNoise)", mask_iou: 86.4, boundary_iou: 76.0, image: "assets/scenes/scene7_realnoise.webp" },
+      wan_box: { label: "SAM2 Box (WAN-Box Noisy)", mask_iou: 88.2, boundary_iou: 84.9, image: "assets/scenes/scene7_wan_box.webp" },
+      wan_point: { label: "SAM2 Click (WAN-Point Center)", mask_iou: 60.7, boundary_iou: 53.3, image: "assets/scenes/scene7_wan_point.webp" },
+      cocon_med: { label: "COCO-N Medium (Procedural)", mask_iou: 60.2, boundary_iou: 50.8, image: "assets/scenes/scene7_cocon_med.webp" },
+      cocon_hard: { label: "COCO-N Hard (Severe Stress)", mask_iou: 54.0, boundary_iou: 44.5, image: "assets/scenes/scene7_cocon_hard.webp" },
+      approx: { label: "Polygon Simplification (Inward Cut)", mask_iou: 78.5, boundary_iou: 57.9, image: "assets/scenes/scene7_approx.webp" },
+      drift: { label: "Rigid Spatial Drift", mask_iou: 56.2, boundary_iou: 23.3, image: "assets/scenes/scene7_drift.webp" },
+      erode: { label: "Morphological Erosion", mask_iou: 37.9, boundary_iou: 21.5, image: "assets/scenes/scene7_erode.webp" },
+      dilate: { label: "Morphological Dilation (Outward Bleed)", mask_iou: 43.8, boundary_iou: 18.3, image: "assets/scenes/scene7_dilate.webp" }
+    }
+  },
+  scene8: {
+    title: "Scene 8: Urban Driving Scene (VIPER 1920×1080 #4949)",
+    objects: "car, pedestrian, traffic light",
+    modes: {
+      raw: { label: "Raw RGB Image", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene8_raw.webp" },
+      clean: { label: "Clean Reference (VIPER 1080p)", mask_iou: 100.0, boundary_iou: 100.0, image: "assets/scenes/scene8_clean.webp" },
+      cblnl_cleaned: { label: "CB-LNL Cleaned (Ours — Sfumato Copula)", mask_iou: 93.3, boundary_iou: 92.1, image: "assets/scenes/scene8_cblnl_cleaned.webp" },
+      realnoise: { label: "VIPER-N Easy (Human-Calibrated)", mask_iou: 85.0, boundary_iou: 85.0, image: "assets/scenes/scene8_realnoise.webp" },
+      wan_box: { label: "SAM2 Box (Loose Detector Box)", mask_iou: 56.6, boundary_iou: 44.4, image: "assets/scenes/scene8_wan_box.webp" },
+      wan_point: { label: "SAM2 Click (Part Truncation)", mask_iou: 49.9, boundary_iou: 39.1, image: "assets/scenes/scene8_wan_point.webp" },
+      cocon_med: { label: "VIPER-N Medium (Procedural)", mask_iou: 67.4, boundary_iou: 66.7, image: "assets/scenes/scene8_cocon_med.webp" },
+      cocon_hard: { label: "VIPER-N Hard (Severe Driving Stress)", mask_iou: 57.3, boundary_iou: 53.0, image: "assets/scenes/scene8_cocon_hard.webp" },
+      approx: { label: "Polygon Simplification (Inward Cut)", mask_iou: 79.1, boundary_iou: 74.5, image: "assets/scenes/scene8_approx.webp" },
+      drift: { label: "Rigid Spatial Drift", mask_iou: 58.5, boundary_iou: 43.8, image: "assets/scenes/scene8_drift.webp" },
+      erode: { label: "Morphological Erosion", mask_iou: 49.9, boundary_iou: 39.1, image: "assets/scenes/scene8_erode.webp" },
+      dilate: { label: "Morphological Dilation (Outward Bleed)", mask_iou: 56.6, boundary_iou: 44.4, image: "assets/scenes/scene8_dilate.webp" }
+    }
   }
 };
 
 const MODE_DESCRIPTIONS = {
-  realnoise: "<strong>Real Human Noise (COCO-RealNoise):</strong> Original crowdsourced MS-COCO polygons use a median of only <strong>42.4%</strong> as many vertices as LVIS re-annotations, cutting corners across concavities and limbs while preserving high interior Mask IoU.",
+  realnoise: "<strong>Real Human Noise (COCO-RealNoise):</strong> Crowdsourced polygons use a median of only <strong>42.4%</strong> as many vertices as LVIS re-annotations, cutting across concavities and limbs while maintaining high interior Mask IoU.",
   wan_box: "<strong>SAM2 Jittered Detector Boxes (WAN-Box Noisy):</strong> When detector boxes expand slightly (ω ∈ [1.05, 1.25]), SAM2 snaps to background clutter edges, causing <strong>25.6%</strong> of small objects to suffer outward contour bleed-out.",
-  wan_point: "<strong>SAM2 Single Center Click (WAN-Point):</strong> Point prompts suffer severe <strong>part-vs.-whole ambiguity</strong> on large articulated objects (38%–43% under-segmentation), segmenting a sub-part instead of the full instance.",
-  cocon_med: "<strong>COCO-N Medium (Calibrated Procedural Tier):</strong> Combines Douglas–Peucker simplification, hand-eye drift, symmetric scale, 8% within-supercategory confusion, and 8% omission—matching weak auto-annotation fidelity (mean BIoU = 0.630).",
-  cocon_hard: "<strong>COCO-N Hard (Severe Stress Tier):</strong> High-severity multi-factor geometric and semantic corruption (mean BIoU = 0.447), where standard BCE collapses and CB-LNL gains +1.53 Mask AP.",
-  approx: "<strong>Isolated Polygon Simplification:</strong> Ramer–Douglas–Peucker corner cutting removes concavities and articulated limbs. Highlighted coral regions show inward polygon shortcuts healed by our Foreground Continuation Copula C<sub>λ</sub>(p<sub>in</sub>, p<sub>out</sub>).",
-  drift: "<strong>Isolated Rigid Spatial Drift:</strong> A 4–6 px translation barely changes object area on large instances, but devastates Boundary AP (17.10 → 11.43) and small-object AP<sub>S</sub> (16.38 → 8.24).",
+  wan_point: "<strong>SAM2 Single Center Click (WAN-Point):</strong> Single-click prompts suffer severe <strong>part-vs.-whole ambiguity</strong> on large objects (38%–43% under-segmentation), segmenting a sub-part instead of the full object.",
+  cocon_med: "<strong>COCO-N / VIPER-N Medium (Procedural Tier):</strong> Combines Douglas–Peucker simplification, hand-eye drift, symmetric scale, 8% within-supercategory confusion, and 8% omission—calibrated to weak auto-annotation fidelity.",
+  cocon_hard: "<strong>COCO-N / VIPER-N Hard (Severe Stress Tier):</strong> High-severity multi-factor geometric and semantic corruption, where standard BCE collapses and CB-LNL gains +1.53 Mask AP.",
+  approx: "<strong>Isolated Polygon Simplification:</strong> Ramer–Douglas–Peucker corner cutting removes concavities and limbs. Coral highlights show inward shortcuts healed by our Foreground Continuation Copula C<sub>λ</sub>(p<sub>in</sub>, p<sub>out</sub>).",
+  drift: "<strong>Isolated Rigid Spatial Drift:</strong> A 4–6 px translation barely changes object area on large instances, but cuts Boundary AP (17.10 → 11.43) and small-object AP<sub>S</sub> (16.38 → 8.24).",
   erode: "<strong>Isolated Morphological Erosion:</strong> Consistent inward contour bias cuts Boundary AP in half (17.10 → 8.59), proving that systematic directional bias is far more destructive than zero-mean variance (Unbiased 50/50 Scale = 15.29).",
   dilate: "<strong>Isolated Morphological Dilation:</strong> Outward background bleed across the contour. Both sides of the displaced border lie in background, firing our Inverse-Background Copula C<sub>λ</sub>(1−p<sub>in</sub>, 1−p<sub>out</sub>) to erode the bleed inward.",
-  raw: "<strong>Raw RGB Image:</strong> Unannotated scene image from MS-COCO 2017. Drag the curtain to inspect how the right-hand reference or CB-LNL repaired mask aligns with soft natural object edges."
+  raw: "<strong>Raw RGB Image:</strong> Unannotated scene image. Drag the curtain to inspect how the right-hand reference or CB-LNL repaired mask aligns with soft natural object edges."
 };
 
 let currentScene = "scene1";
@@ -236,6 +308,18 @@ function initExplorer() {
     });
   }
 
+  // Mona Lisa detail zoom toggle
+  const zoomBtn = document.getElementById("toggle-mona-zoom");
+  const monaImg = document.getElementById("mona-lisa-img");
+  if (zoomBtn && monaImg) {
+    let zoomed = false;
+    zoomBtn.addEventListener("click", () => {
+      zoomed = !zoomed;
+      monaImg.src = zoomed ? "assets/figures/mona_lisa_detail.webp" : "assets/figures/mona_lisa_sfumato.webp";
+      zoomBtn.textContent = zoomed ? "Show Full Portrait" : "Zoom into Sfumato Eye & Veil Contour 🔍";
+    });
+  }
+
   updateExplorerView();
   setCurtainPosition(52);
 }
@@ -282,7 +366,7 @@ function updateCopulaInspector() {
 
   document.getElementById("val-lam").textContent = lam.toFixed(2);
   document.getElementById("val-pin").textContent = pIn.toFixed(2);
-  document.getElementById("val-pout").textContent = `${pOut.toFixed(2)} (q_out = ${qOut.toFixed(2)})`;
+  document.getElementById("val-pout").textContent = `${pOut.toFixed(2)} (1−p_out = ${qOut.toFixed(2)})`;
   document.getElementById("val-pu").textContent = pU.toFixed(2);
 
   const singlePixelBce = -Math.log(Math.max(1e-4, pU));
@@ -290,7 +374,6 @@ function updateCopulaInspector() {
   const jCut = frechetCopula(pIn, pOut, lam);
   const jBleed = frechetCopula(qIn, qOut, lam);
 
-  // Fréchet union soft target U_lam(u)
   const bFg = 0.55 * jEdge + 0.45 * jCut;
   const cUnionFg = frechetCopula(pU, bFg, lam);
   const uSoft = Math.min(0.99, Math.max(0.01, pU + 0.45 * (bFg - cUnionFg) - 0.45 * jBleed));
@@ -310,13 +393,13 @@ function updateCopulaInspector() {
   const verdictEl = document.getElementById("copula-verdict");
   if (verdictEl) {
     if (jEdge >= jCut && jEdge >= jBleed && jEdge > 0.55) {
-      verdictEl.innerHTML = `<strong>Verdict — State 1 (True Clean <em>Sfumato</em> Edge):</strong> Single-pixel probability is soft (<code>p(u)=${pU.toFixed(2)}</code>, near the ln 2 = 0.693 entropy floor), which fools pointwise BCE into flagging a false error. Because interior foreground (<code>p<sub>in</sub>=${pIn.toFixed(2)}</code>) and inverse-exterior background (<code>1−p<sub>out</sub>=${qOut.toFixed(2)}</code>) jointly agree (<strong>J<sub>edge</sub> = ${jEdge.toFixed(2)}</strong>), <code>CB-LNL</code> recognizes a valid soft boundary and suppresses false-positive penalties (<em>Sfumato</em> FPR = <strong>23.3%</strong>).`;
+      verdictEl.innerHTML = `<strong>State 1 (True Clean <em>Sfumato</em> Edge):</strong> Single-pixel probability sits near 0.50 (<code>p(u)=${pU.toFixed(2)}</code>), which fools pointwise BCE into flagging a false error. Because inner foreground (<code>p<sub>in</sub>=${pIn.toFixed(2)}</code>) and exterior background (<code>1−p<sub>out</sub>=${qOut.toFixed(2)}</code>) agree (<strong>J<sub>edge</sub> = ${jEdge.toFixed(2)}</strong>), <code>CB-LNL</code> preserves the soft edge.`;
     } else if (jCut >= jBleed && jCut > 0.55) {
-      verdictEl.innerHTML = `<strong>Verdict — State 2 (Inward Polygon Cut Detected):</strong> Both sides of the annotated contour lie inside the foreground object (<code>p<sub>in</sub>=${pIn.toFixed(2)}</code>, <code>p<sub>out</sub>=${pOut.toFixed(2)}</code>). The <strong>Foreground Continuation Copula J<sub>cut</sub> = ${jCut.toFixed(2)}</strong> fires and heals the polygon shortcut outward toward <code>1.0</code> (soft target <code>U<sub>λ</sub> = ${uSoft.toFixed(2)}</code>).`;
+      verdictEl.innerHTML = `<strong>State 2 (Inward Polygon Cut):</strong> Both sides of the contour lie inside the object (<code>p<sub>in</sub>=${pIn.toFixed(2)}</code>, <code>p<sub>out</sub>=${pOut.toFixed(2)}</code>). <strong>J<sub>cut</sub> = ${jCut.toFixed(2)}</strong> heals the shortcut outward toward <code>1.0</code> (<code>U<sub>λ</sub> = ${uSoft.toFixed(2)}</code>).`;
     } else if (jBleed > 0.55) {
-      verdictEl.innerHTML = `<strong>Verdict — State 3 (Outward Background Bleed Detected):</strong> Both sides of the annotated contour lie in background clutter (<code>1−p<sub>in</sub>=${qIn.toFixed(2)}</code>, <code>1−p<sub>out</sub>=${qOut.toFixed(2)}</code>). The <strong>Inverse-Background Copula J<sub>bleed</sub> = ${jBleed.toFixed(2)}</strong> fires and erodes the bleed inward toward <code>0.0</code> (soft target <code>U<sub>λ</sub> = ${uSoft.toFixed(2)}</code>).`;
+      verdictEl.innerHTML = `<strong>State 3 (Outward Background Bleed):</strong> Both sides lie in background (<code>1−p<sub>in</sub>=${qIn.toFixed(2)}</code>, <code>1−p<sub>out</sub>=${qOut.toFixed(2)}</code>). <strong>J<sub>bleed</sub> = ${jBleed.toFixed(2)}</strong> erodes the bleed inward toward <code>0.0</code> (<code>U<sub>λ</sub> = ${uSoft.toFixed(2)}</code>).`;
     } else {
-      verdictEl.innerHTML = `<strong>Verdict — Mixed / Transitional Contour Zone:</strong> Soft Fréchet copula target blends evidence smoothly to <code>U<sub>λ</sub>(u) = ${uSoft.toFixed(2)}</code>.`;
+      verdictEl.innerHTML = `<strong>Transitional Zone:</strong> Soft Fréchet copula target blends evidence smoothly to <code>U<sub>λ</sub>(u) = ${uSoft.toFixed(2)}</code>.`;
     }
   }
 }
@@ -350,47 +433,7 @@ function initCopulaInspector() {
   updateCopulaInspector();
 }
 
-/* FIGURE GALLERY TABS */
-const FIGURE_GALLERY = {
-  fig1: {
-    src: "assets/figures/fig1_real_noise_audit.webp",
-    caption: "<strong>Figure 1 — Empirical Audit of Real-World Human Annotation Noise (24,809 COCO vs. LVIS images; 59,840 matched object pairs).</strong> (a) While standard Mask IoU appears high (median 0.85), Boundary IoU reveals heavy tail degradation (median 0.76, mean 0.730, with 47.0% below BIoU = 0.75). (b) <em>Scale-Asymmetric Vulnerability Crossover:</em> Small objects suffer the worst inner Mask IoU loss (0.77) due to hand-eye drift, whereas Large objects suffer severe Boundary IoU collapse (0.63, with 59.2% below BIoU = 0.70) due to human polygon simplification. (c) Cross-regime fidelity spectrum. (d) Prevalence of real human error modes."
-  },
-  fig2: {
-    src: "assets/figures/fig2_visual_taxonomy.webp",
-    caption: "<strong>Figure 2 — Qualitative Comparison Across Our Benchmark Suite.</strong> From left to right on identical MS-COCO training images: Clean Reference (high-precision LVIS v1 contours), COCO-RealNoise (crowdsourced human polygons), COCO-WAN (SAM2 point-prompted masks exhibiting part-vs.-whole ambiguity), and COCO-N (Easy, Medium, Hard)."
-  },
-  fig3: {
-    src: "assets/figures/fig3_loss_entanglement.webp",
-    caption: "<strong>Figure 3 — Per-Instance Training Telemetry & The Semantic–Spatial Separability Gap.</strong> (a) Full-mask BCE exhibits only a 1.45× separation between clean and contour-corrupted masks (AUROC = 0.55) because 85%–95% of interior pixels are uncorrupted. (b) Boundary-band BCE lifts separation to 0.74 AUROC before hitting the ln 2 ≈ 0.693 nats clean-edge entropy floor. (c) Directional Fréchet copula refinement in CB-LNL breaks through the single-pixel floor to achieve 0.91–0.96 AUROC."
-  },
-  fig_ops: {
-    src: "assets/figures/fig_supp_operators.webp",
-    caption: "<strong>Figure S3 — Multi-Scene Visual Gallery of Isolated Spatial Noise Operators & Automated CB-LNL Mask Cleaning.</strong> Across four MS-COCO scenes, we compare Clean Reference (LVIS v1), Polygon Simplification (inward corner cutting), Rigid Spatial Drift, Morphological Erosion, Morphological Dilation (outward bleed), and the masks automatically repaired by our CB-LNL Cleaned pipeline."
-  },
-  fig_cases: {
-    src: "assets/figures/fig_supp_cases.webp",
-    caption: "<strong>Figure S4 — Positive Regimes (Top 2 Rows) vs. Fundamental Failure Modes (Bottom 2 Rows).</strong> Top: CB-LNL heals inward polygon cuts (91.8% repair rate, +14.2% BIoU), erodes outward SAM2 box bleeds (88.5% repair rate, +11.8% BIoU), and fixes within-supercategory class flips (91.4%). Bottom: Local RoI-band copulas reach physical limits on (1) extreme part-click truncation (>40% missing outside B_d), (2) crowded same-class merges, and (3) sub-RoI thin structures (<3 px)."
-  },
-  fig_viper: {
-    src: "assets/figures/viper_comparison.webp",
-    caption: "<strong>Figure S1 — High-Resolution Driving Instance Annotations in VIPER & VIPER-N (1920×1080).</strong> Comparison between clean ground-truth driving masks and our calibrated Easy, Medium, and Hard procedural noise tiers on urban driving scenes."
-  }
-};
-
-function initFigureAndResultsTabs() {
-  for (const btn of document.querySelectorAll("[data-fig-tab]")) {
-    btn.addEventListener("click", () => {
-      const f = FIGURE_GALLERY[btn.dataset.figTab];
-      if (!f) return;
-      document.getElementById("showcase-fig-img").src = f.src;
-      document.getElementById("showcase-fig-cap").innerHTML = f.caption;
-      for (const b of document.querySelectorAll("[data-fig-tab]")) {
-        b.setAttribute("aria-pressed", String(b === btn));
-      }
-    });
-  }
-
+function initResultsTabsAndCopy() {
   for (const btn of document.querySelectorAll("[data-res-tab]")) {
     btn.addEventListener("click", () => {
       const targetId = btn.dataset.resTab;
@@ -420,5 +463,5 @@ function initFigureAndResultsTabs() {
 document.addEventListener("DOMContentLoaded", () => {
   initExplorer();
   initCopulaInspector();
-  initFigureAndResultsTabs();
+  initResultsTabsAndCopy();
 });

@@ -307,5 +307,315 @@
         "image": "assets/scenes/scene4_cblnl_cleaned.webp"
       }
     }
+  },
+  {
+    "scene_id": "scene5",
+    "coco_image_id": 117125,
+    "title": "Scene 5: Person, Train (COCO #117125)",
+    "objects": [
+      "person",
+      "train"
+    ],
+    "modes": {
+      "clean": {
+        "label": "Clean Reference (LVIS v1)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene5_clean.webp"
+      },
+      "realnoise": {
+        "label": "Real Human (COCO-RealNoise)",
+        "mask_iou": 98.3,
+        "boundary_iou": 91.6,
+        "image": "assets/scenes/scene5_realnoise.webp"
+      },
+      "wan_box": {
+        "label": "SAM2 Box (WAN-Box Noisy)",
+        "mask_iou": 71.8,
+        "boundary_iou": 68.5,
+        "image": "assets/scenes/scene5_wan_box.webp"
+      },
+      "wan_point": {
+        "label": "SAM2 Click (WAN-Point Center)",
+        "mask_iou": 23.8,
+        "boundary_iou": 16.0,
+        "image": "assets/scenes/scene5_wan_point.webp"
+      },
+      "cocon_med": {
+        "label": "COCO-N Medium (Procedural)",
+        "mask_iou": 66.8,
+        "boundary_iou": 66.8,
+        "image": "assets/scenes/scene5_cocon_med.webp"
+      },
+      "cocon_hard": {
+        "label": "COCO-N Hard (Severe Stress)",
+        "mask_iou": 50.9,
+        "boundary_iou": 50.9,
+        "image": "assets/scenes/scene5_cocon_hard.webp"
+      },
+      "approx": {
+        "label": "Polygon Simplification (Inward Cut)",
+        "mask_iou": 77.9,
+        "boundary_iou": 63.2,
+        "image": "assets/scenes/scene5_approx.webp"
+      },
+      "drift": {
+        "label": "Rigid Spatial Drift",
+        "mask_iou": 81.8,
+        "boundary_iou": 31.6,
+        "image": "assets/scenes/scene5_drift.webp"
+      },
+      "erode": {
+        "label": "Morphological Erosion",
+        "mask_iou": 67.4,
+        "boundary_iou": 0.0,
+        "image": "assets/scenes/scene5_erode.webp"
+      },
+      "dilate": {
+        "label": "Morphological Dilation (Outward Bleed)",
+        "mask_iou": 38.8,
+        "boundary_iou": 15.8,
+        "image": "assets/scenes/scene5_dilate.webp"
+      },
+      "cblnl_cleaned": {
+        "label": "CB-LNL Cleaned (Ours \u2014 Sfumato Copula)",
+        "mask_iou": 88.4,
+        "boundary_iou": 86.2,
+        "image": "assets/scenes/scene5_cblnl_cleaned.webp"
+      }
+    }
+  },
+  {
+    "scene_id": "scene6",
+    "coco_image_id": 542510,
+    "title": "Scene 6: Car, Person, Truck (COCO #542510)",
+    "objects": [
+      "car",
+      "person",
+      "truck"
+    ],
+    "modes": {
+      "clean": {
+        "label": "Clean Reference (LVIS v1)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene6_clean.webp"
+      },
+      "realnoise": {
+        "label": "Real Human (COCO-RealNoise)",
+        "mask_iou": 86.6,
+        "boundary_iou": 66.6,
+        "image": "assets/scenes/scene6_realnoise.webp"
+      },
+      "wan_box": {
+        "label": "SAM2 Box (WAN-Box Noisy)",
+        "mask_iou": 90.3,
+        "boundary_iou": 80.4,
+        "image": "assets/scenes/scene6_wan_box.webp"
+      },
+      "wan_point": {
+        "label": "SAM2 Click (WAN-Point Center)",
+        "mask_iou": 61.0,
+        "boundary_iou": 53.6,
+        "image": "assets/scenes/scene6_wan_point.webp"
+      },
+      "cocon_med": {
+        "label": "COCO-N Medium (Procedural)",
+        "mask_iou": 88.9,
+        "boundary_iou": 76.1,
+        "image": "assets/scenes/scene6_cocon_med.webp"
+      },
+      "cocon_hard": {
+        "label": "COCO-N Hard (Severe Stress)",
+        "mask_iou": 70.9,
+        "boundary_iou": 43.8,
+        "image": "assets/scenes/scene6_cocon_hard.webp"
+      },
+      "approx": {
+        "label": "Polygon Simplification (Inward Cut)",
+        "mask_iou": 85.2,
+        "boundary_iou": 69.2,
+        "image": "assets/scenes/scene6_approx.webp"
+      },
+      "drift": {
+        "label": "Rigid Spatial Drift",
+        "mask_iou": 67.1,
+        "boundary_iou": 43.5,
+        "image": "assets/scenes/scene6_drift.webp"
+      },
+      "erode": {
+        "label": "Morphological Erosion",
+        "mask_iou": 59.5,
+        "boundary_iou": 35.2,
+        "image": "assets/scenes/scene6_erode.webp"
+      },
+      "dilate": {
+        "label": "Morphological Dilation (Outward Bleed)",
+        "mask_iou": 66.5,
+        "boundary_iou": 28.9,
+        "image": "assets/scenes/scene6_dilate.webp"
+      },
+      "cblnl_cleaned": {
+        "label": "CB-LNL Cleaned (Ours \u2014 Sfumato Copula)",
+        "mask_iou": 97.8,
+        "boundary_iou": 94.5,
+        "image": "assets/scenes/scene6_cblnl_cleaned.webp"
+      }
+    }
+  },
+  {
+    "scene_id": "scene7",
+    "coco_image_id": 240028,
+    "title": "Scene 7: Frisbee, Person (COCO #240028)",
+    "objects": [
+      "frisbee",
+      "person"
+    ],
+    "modes": {
+      "clean": {
+        "label": "Clean Reference (LVIS v1)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene7_clean.webp"
+      },
+      "realnoise": {
+        "label": "Real Human (COCO-RealNoise)",
+        "mask_iou": 86.4,
+        "boundary_iou": 76.0,
+        "image": "assets/scenes/scene7_realnoise.webp"
+      },
+      "wan_box": {
+        "label": "SAM2 Box (WAN-Box Noisy)",
+        "mask_iou": 88.2,
+        "boundary_iou": 84.9,
+        "image": "assets/scenes/scene7_wan_box.webp"
+      },
+      "wan_point": {
+        "label": "SAM2 Click (WAN-Point Center)",
+        "mask_iou": 60.7,
+        "boundary_iou": 53.3,
+        "image": "assets/scenes/scene7_wan_point.webp"
+      },
+      "cocon_med": {
+        "label": "COCO-N Medium (Procedural)",
+        "mask_iou": 60.2,
+        "boundary_iou": 50.8,
+        "image": "assets/scenes/scene7_cocon_med.webp"
+      },
+      "cocon_hard": {
+        "label": "COCO-N Hard (Severe Stress)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene7_cocon_hard.webp"
+      },
+      "approx": {
+        "label": "Polygon Simplification (Inward Cut)",
+        "mask_iou": 78.5,
+        "boundary_iou": 57.9,
+        "image": "assets/scenes/scene7_approx.webp"
+      },
+      "drift": {
+        "label": "Rigid Spatial Drift",
+        "mask_iou": 56.2,
+        "boundary_iou": 23.3,
+        "image": "assets/scenes/scene7_drift.webp"
+      },
+      "erode": {
+        "label": "Morphological Erosion",
+        "mask_iou": 37.9,
+        "boundary_iou": 21.5,
+        "image": "assets/scenes/scene7_erode.webp"
+      },
+      "dilate": {
+        "label": "Morphological Dilation (Outward Bleed)",
+        "mask_iou": 43.8,
+        "boundary_iou": 18.3,
+        "image": "assets/scenes/scene7_dilate.webp"
+      },
+      "cblnl_cleaned": {
+        "label": "CB-LNL Cleaned (Ours \u2014 Sfumato Copula)",
+        "mask_iou": 95.7,
+        "boundary_iou": 92.3,
+        "image": "assets/scenes/scene7_cblnl_cleaned.webp"
+      }
+    }
+  },
+  {
+    "scene_id": "scene8",
+    "coco_image_id": 4949,
+    "title": "Scene 8: Urban Driving Vehicles (VIPER #4949)",
+    "objects": [
+      "car",
+      "pedestrian",
+      "traffic light"
+    ],
+    "modes": {
+      "clean": {
+        "label": "Clean Reference (VIPER 1080p)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene8_clean.webp"
+      },
+      "realnoise": {
+        "label": "VIPER-N Easy (Human-Calibrated)",
+        "mask_iou": 85.0,
+        "boundary_iou": 85.0,
+        "image": "assets/scenes/scene8_realnoise.webp"
+      },
+      "wan_box": {
+        "label": "SAM2 Box (Loose Detector Box)",
+        "mask_iou": 56.6,
+        "boundary_iou": 44.4,
+        "image": "assets/scenes/scene8_wan_box.webp"
+      },
+      "wan_point": {
+        "label": "SAM2 Click (Part Truncation)",
+        "mask_iou": 49.9,
+        "boundary_iou": 39.1,
+        "image": "assets/scenes/scene8_wan_point.webp"
+      },
+      "cocon_med": {
+        "label": "VIPER-N Medium (Procedural)",
+        "mask_iou": 67.4,
+        "boundary_iou": 66.7,
+        "image": "assets/scenes/scene8_cocon_med.webp"
+      },
+      "cocon_hard": {
+        "label": "VIPER-N Hard (Severe Driving Stress)",
+        "mask_iou": 57.3,
+        "boundary_iou": 53.0,
+        "image": "assets/scenes/scene8_cocon_hard.webp"
+      },
+      "approx": {
+        "label": "Polygon Simplification (Inward Cut)",
+        "mask_iou": 79.1,
+        "boundary_iou": 74.5,
+        "image": "assets/scenes/scene8_approx.webp"
+      },
+      "drift": {
+        "label": "Rigid Spatial Drift",
+        "mask_iou": 58.5,
+        "boundary_iou": 43.8,
+        "image": "assets/scenes/scene8_drift.webp"
+      },
+      "erode": {
+        "label": "Morphological Erosion",
+        "mask_iou": 49.9,
+        "boundary_iou": 39.1,
+        "image": "assets/scenes/scene8_erode.webp"
+      },
+      "dilate": {
+        "label": "Morphological Dilation (Outward Bleed)",
+        "mask_iou": 56.6,
+        "boundary_iou": 44.4,
+        "image": "assets/scenes/scene8_dilate.webp"
+      },
+      "cblnl_cleaned": {
+        "label": "CB-LNL Cleaned (Ours \u2014 Sfumato Copula)",
+        "mask_iou": 93.3,
+        "boundary_iou": 92.1,
+        "image": "assets/scenes/scene8_cblnl_cleaned.webp"
+      }
+    }
   }
 ]

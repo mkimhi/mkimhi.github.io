@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Sfumato Supervision: Learning Instance Segmentation with Noisy Labels. Large-scale audit of 24,809 COCO vs. LVIS images, unified noisy-label benchmark suite (COCO-RealNoise, COCO-WAN, COCO-N, VIPER-N), and Copula-Boundary-LNL (CB-LNL).">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#f6f1e7">
   <meta property="og:title" content="Sfumato Supervision: Learning Instance Segmentation with Noisy Labels">
   <meta property="og:description" content="Auditing 59,840 real crowdsourced and foundation-model masks, and breaking through the single-pixel boundary entropy floor via a directional Fréchet copula.">
   <meta property="og:type" content="website">
@@ -20,11 +20,10 @@
     <nav class="navigation" aria-label="Main navigation">
       <a class="wordmark" href="#" aria-label="Sfumato Supervision home"><span>Sfumato</span> Supervision</a>
       <div class="nav-links">
-        <a href="#explorer">Interactive Explorer</a>
-        <a href="#sfumato-inspector">Copula Inspector</a>
-        <a href="#audit">24.8K Audit &amp; Gallery</a>
+        <a href="#explorer">Interactive Explorer (8 Scenes)</a>
         <a href="#results">Benchmark Results</a>
         <a href="#datasets">HF Datasets &amp; Usage</a>
+        <a href="#sfumato-inspector">Copula Simulator</a>
         <a href="#citation">BibTeX</a>
       </div>
     </nav>
@@ -32,6 +31,7 @@
 
   <main id="main">
     <header class="hero container">
+      <div class="sfumato-smoke-backdrop" aria-hidden="true"></div>
       <div class="venue-pill">Instance Segmentation · Noisy Labels · Benchmark &amp; Method</div>
       <div class="hero-name"><span>Sfumato</span> Supervision<span class="name-dot" aria-hidden="true"></span></div>
       <h1>Learning Instance Segmentation with Noisy Labels</h1>
@@ -85,19 +85,37 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 4l-4 16"/></svg>
           Code
         </a>
-        <a class="resource resource-outline" href="#citation">
+        <a class="resource" href="#citation">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5H4v6h5v8H3m17-14h-4v6h5v8h-6"/></svg>
           BibTeX
         </a>
       </div>
 
-      <p class="hero-summary">
-        Natural objects rarely have razor-sharp binary outlines.<br>
-        <strong>Keep the object core crisp. Model contested contours with a directional Fréchet copula.</strong>
-      </p>
-      <p class="hero-description">
-        In his Renaissance treatise on painting (<em>Trattato della Pittura</em>), Leonardo da Vinci pioneered <strong><em>sfumato</em></strong>—blending object contours <em>"without lines or borders, in the manner of smoke."</em> Modern segmentation datasets force annotators and weak prompts into hard binary polygons, creating pervasive geometric and semantic noise. We audit 24,809 overlapping COCO–LVIS images, release a unified noisy-label benchmark suite, prove why classical LNL fails on 2D masks, and introduce <strong><code>CB-LNL</code> (Copula-Boundary-LNL)</strong>.
-      </p>
+      <!-- RENAISSANCE SFUMATO MOTIVATION CARD WITH PAINTING & CREDIT -->
+      <div class="sfumato-art-card" aria-label="Renaissance Sfumato inspiration">
+        <div>
+          <div class="sfumato-painting-frame">
+            <img id="mona-lisa-img" src="assets/figures/mona_lisa_sfumato.webp" alt="Mona Lisa (La Gioconda) by Leonardo da Vinci, c. 1503–1506, illustrating the Renaissance sfumato technique">
+          </div>
+          <div class="painting-credit">
+            Leonardo da Vinci, <em>Mona Lisa (La Gioconda)</em>, c. 1503–1506 · Musée du Louvre, Paris (Public Domain, <a href="https://commons.wikimedia.org/wiki/File:Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg" target="_blank" rel="noopener">Wikimedia Commons / C2RMF</a>).
+          </div>
+        </div>
+        <div class="sfumato-art-copy">
+          <span class="art-eyebrow">The Renaissance Inspiration · “To Vanish Like Smoke”</span>
+          <h2>Why <em>Sfumato</em>? Because nature has no 1D binary outlines.</h2>
+          <p>
+            In his Renaissance treatise on painting (<em>Trattato della Pittura</em>), Leonardo da Vinci observed that physical objects rarely exhibit harsh binary borders, and pioneered <strong><em>sfumato</em></strong> (from the Italian <em>sfumare</em>, “to vanish like smoke”)—blending light and shadow <em>“without lines or borders, in the manner of smoke.”</em>
+          </p>
+          <p>
+            Modern segmentation datasets, by contrast, force human annotators and foundation models into hard binary polygons—producing pervasive corner cutting, contour drift, and box bleed. Just as Leonardo’s <em>sfumato</em> defines an edge by the continuous interplay of inner form and outer shadow, our <strong><code>CB-LNL</code> (Copula-Boundary-LNL)</strong> leaves the unambiguous object core crisp while modeling the contested contour band via a directional <strong>Fréchet copula</strong> coupling inner foreground (<code>p<sub>in</sub></code>) and inverse-exterior background (<code>1 − p<sub>out</sub></code>).
+          </p>
+          <div class="sfumato-art-links">
+            <button type="button" class="art-link-pill" id="toggle-mona-zoom">Zoom into Sfumato Eye &amp; Veil Contour 🔍</button>
+            <a class="art-link-pill" href="https://artincontext.org/sfumato/" target="_blank" rel="noopener">What is Sfumato in Art? (Art in Context) ↗</a>
+          </div>
+        </div>
+      </div>
 
       <div class="headline-results" aria-label="Headline empirical findings">
         <div>
@@ -117,36 +135,39 @@
           <span>downstream Mask AP gain from automated dataset cleaning</span>
         </div>
       </div>
-      <p class="measurement-note">Unified evaluation across ResNet-50-FPN, ConvNeXt-Tiny-FPN, and Swin-Tiny-FPN · MS-COCO, LVIS v1, SAM2, and VIPER (1920×1080)</p>
     </header>
 
-    <!-- SECTION 1: INTERACTIVE SPLIT-CURTAINANNOTATION EXPLORER -->
+    <!-- SECTION 1: INTERACTIVE SPLIT-CURTAIN ANNOTATION EXPLORER (8 SCENES) -->
     <section class="demo-section" id="explorer" aria-labelledby="explorer-title">
       <div class="container">
         <div class="section-heading">
           <div>
-            <span class="eyebrow">01 / Interactive Annotation Noise &amp; Repair Explorer</span>
-            <h2 id="explorer-title">See what noisy polygons miss.<br>Drag the curtain to repair them.</h2>
+            <span class="eyebrow">01 / Interactive Annotation Noise &amp; Repair Explorer (8 Real Scenes)</span>
+            <h2 id="explorer-title">See what coarse polygons miss.<br>Drag the curtain to repair them.</h2>
           </div>
           <button class="pill-btn" id="auto-sweep-btn" type="button">Auto-sweep curtain ▷</button>
         </div>
         <p class="section-intro">
-          Select any real MS-COCO training scene below and switch the <strong>Left Layer</strong> between crowdsourced human polygons (<code>COCO-RealNoise</code>), foundation-model weak prompts (<code>SAM2 Box</code> / <code>Click</code>), procedural stress tiers (<code>COCO-N</code>), or isolated geometric operators (coral highlights indicate contour errors against the clean reference). Drag the split curtain to compare against our <strong><code>CB-LNL Cleaned</code></strong> repair or the <strong><code>Clean Reference (LVIS v1)</code></strong> on the right.
+          Choose any of the <strong>8 real scenes</strong> below (7 MS-COCO scenes + 1 high-resolution 1080p VIPER driving scene) and switch the <strong>Left Curtain</strong> between crowdsourced human polygons (<code>COCO-RealNoise</code>), foundation-model weak prompts (<code>SAM2 Box</code> / <code>Click</code>), procedural stress tiers (<code>COCO-N</code> / <code>VIPER-N</code>), or isolated geometric operators (coral highlights indicate contour errors). Drag the split curtain to compare against our <strong><code>CB-LNL Cleaned</code></strong> repair or the <strong><code>Clean Reference</code></strong> on the right.
         </p>
 
         <div class="explorer-card">
           <div class="explorer-controls-top">
-            <div class="scene-selector-group" role="group" aria-label="Select MS-COCO scene">
-              <span class="control-label">Scene:</span>
-              <button type="button" class="pill-btn" data-scene="scene1" aria-pressed="true">Scene 1 (Cat &amp; Plant)</button>
-              <button type="button" class="pill-btn" data-scene="scene2" aria-pressed="false">Scene 2 (Boat &amp; Dog)</button>
-              <button type="button" class="pill-btn" data-scene="scene3" aria-pressed="false">Scene 3 (Articulated Hulls)</button>
-              <button type="button" class="pill-btn" data-scene="scene4" aria-pressed="false">Scene 4 (Person &amp; Boat)</button>
+            <div class="scene-selector-group" role="group" aria-label="Select scene">
+              <span class="control-label">Scene (8):</span>
+              <button type="button" class="pill-btn" data-scene="scene1" aria-pressed="true">1: Cat &amp; Plant</button>
+              <button type="button" class="pill-btn" data-scene="scene2" aria-pressed="false">2: Boat &amp; Dog</button>
+              <button type="button" class="pill-btn" data-scene="scene3" aria-pressed="false">3: Hulls</button>
+              <button type="button" class="pill-btn" data-scene="scene4" aria-pressed="false">4: Person &amp; Boat</button>
+              <button type="button" class="pill-btn" data-scene="scene5" aria-pressed="false">5: Train Platform</button>
+              <button type="button" class="pill-btn" data-scene="scene6" aria-pressed="false">6: Street Traffic</button>
+              <button type="button" class="pill-btn" data-scene="scene7" aria-pressed="false">7: Athlete &amp; Frisbee</button>
+              <button type="button" class="pill-btn" data-scene="scene8" aria-pressed="false">8: VIPER Driving (1080p)</button>
             </div>
             <div class="scene-selector-group" role="group" aria-label="Select Right Curtain Reference">
-              <span class="control-label">Right Curtain (Target):</span>
+              <span class="control-label">Right Curtain:</span>
               <button type="button" class="regime-pill cblnl-pill" data-right-mode="cblnl_cleaned" aria-pressed="true">✨ CB-LNL Cleaned (Ours)</button>
-              <button type="button" class="regime-pill" data-right-mode="clean" aria-pressed="false">🎯 Clean Reference (LVIS v1)</button>
+              <button type="button" class="regime-pill" data-right-mode="clean" aria-pressed="false">🎯 Clean Reference (LVIS / GT)</button>
             </div>
           </div>
 
@@ -154,21 +175,21 @@
             <div class="regime-box">
               <div class="regime-box-title">
                 <span>Left Curtain — Benchmark Supervision Regimes</span>
-                <span>Coral = Contour Error Zone</span>
+                <span>Coral = Contour Discrepancy</span>
               </div>
               <div class="regime-pills">
                 <button type="button" class="regime-pill" data-left-mode="realnoise" aria-pressed="false">Real Human (COCO-RealNoise)</button>
                 <button type="button" class="regime-pill" data-left-mode="wan_box" aria-pressed="false">SAM2 Box (WAN-Box)</button>
                 <button type="button" class="regime-pill" data-left-mode="wan_point" aria-pressed="false">SAM2 Click (WAN-Point)</button>
-                <button type="button" class="regime-pill" data-left-mode="cocon_med" aria-pressed="false">COCO-N Medium</button>
-                <button type="button" class="regime-pill" data-left-mode="cocon_hard" aria-pressed="false">COCO-N Hard</button>
+                <button type="button" class="regime-pill" data-left-mode="cocon_med" aria-pressed="false">COCO-N / VIPER-N Med</button>
+                <button type="button" class="regime-pill" data-left-mode="cocon_hard" aria-pressed="false">COCO-N / VIPER-N Hard</button>
                 <button type="button" class="regime-pill" data-left-mode="raw" aria-pressed="false">Raw RGB Image</button>
               </div>
             </div>
 
             <div class="regime-box">
               <div class="regime-box-title">
-                <span>Left Curtain — Isolated Spatial Operators (Disentanglement)</span>
+                <span>Left Curtain — Isolated Spatial Operators</span>
                 <span>Single-Factor Corruptions</span>
               </div>
               <div class="regime-pills">
@@ -219,7 +240,7 @@
               </div>
 
               <div class="diagnostic-callout" id="explorer-diagnostic-text">
-                <strong>Isolated Polygon Simplification:</strong> Ramer–Douglas–Peucker corner cutting removes concavities and articulated limbs. Highlighted coral regions show inward polygon shortcuts healed by our Foreground Continuation Copula C<sub>λ</sub>(p<sub>in</sub>, p<sub>out</sub>).
+                <strong>Isolated Polygon Simplification:</strong> Ramer–Douglas–Peucker corner cutting removes concavities and limbs. Coral highlights show inward shortcuts healed by our Foreground Continuation Copula C<sub>λ</sub>(p<sub>in</sub>, p<sub>out</sub>).
               </div>
             </div>
           </div>
@@ -227,150 +248,9 @@
       </div>
     </section>
 
-    <!-- SECTION 2: INTERACTIVE SFUMATO COPULA BOUNDARY INSPECTOR -->
-    <section class="container content-section" id="sfumato-inspector" aria-labelledby="copula-title">
-      <span class="eyebrow">02 / Why Classical LNL Fails &amp; How Sfumato Supervision Works</span>
-      <h2 id="copula-title">Breaking through the ln 2 boundary entropy floor<br>via a directional Fréchet copula.</h2>
-      <p class="section-intro">
-        While classification loss easily detects category flips (<code>AUROC = 0.95</code>, 5.5× separation), full-mask BCE averages over all 28×28 = 784 RoI pixels—where 85%–95% of inner pixels are uncorrupted—diluting contour noise detection to near-chance (<code>AUROC = 0.55</code>). Even isolating the 1-pixel border band <code>B<sub>d</sub></code> hits a physical wall: due to sub-pixel anti-aliasing and RoI quantization, <strong>a 100% clean natural edge sits near <code>p(u) ≈ 0.50</code> with entropy <code>BCE(0.5, 1) = ln 2 ≈ 0.693 nats</code></strong>. Our <strong><code>CB-LNL</code></strong> converts this ill-posed 1D single-pixel check into a <strong>2D directional cross-contour joint agreement test</strong> using the Fréchet copula <code>C<sub>λ</sub>(a, b) = (1 − λ)ab + λ min(a, b)</code>.
-      </p>
-
-      <div class="copula-grid">
-        <div class="copula-card">
-          <span class="eyebrow">Interactive Contour State Simulator</span>
-          <h3>Test the 3 Boundary States of a Contour Pixel <code>u ∈ B<sub>d</sub></code></h3>
-          <div class="state-buttons" role="group" aria-label="Select contour state preset">
-            <button type="button" class="pill-btn" data-copula-preset="state1" aria-pressed="true">State 1: True Clean Sfumato Edge</button>
-            <button type="button" class="pill-btn" data-copula-preset="state2" aria-pressed="false">State 2: Inward Polygon Cut</button>
-            <button type="button" class="pill-btn" data-copula-preset="state3" aria-pressed="false">State 3: Outward Background Bleed</button>
-          </div>
-
-          <div class="slider-group">
-            <label for="copula-lam">
-              <span>Fréchet Copula Dependence <code>λ</code> (0 = Indep. S4MC, 1 = Upper Bound min)</span>
-              <strong id="val-lam">0.53</strong>
-            </label>
-            <input id="copula-lam" type="range" min="0.00" max="1.00" step="0.01" value="0.53">
-          </div>
-
-          <div class="slider-group">
-            <label for="copula-pin">
-              <span>Interior-Facing Foreground Evidence <code>p<sub>in</sub>(u)</code></span>
-              <strong id="val-pin">0.91</strong>
-            </label>
-            <input id="copula-pin" type="range" min="0.05" max="0.98" step="0.01" value="0.91">
-          </div>
-
-          <div class="slider-group">
-            <label for="copula-pout">
-              <span>Exterior-Facing Foreground Prob <code>p<sub>out</sub>(u)</code> (Inverse-Exterior <code>q<sub>out</sub> = 1−p<sub>out</sub></code>)</span>
-              <strong id="val-pout">0.09 (q_out = 0.91)</strong>
-            </label>
-            <input id="copula-pout" type="range" min="0.02" max="0.96" step="0.01" value="0.09">
-          </div>
-
-          <div class="slider-group">
-            <label for="copula-pu">
-              <span>Single-Pixel Contour Probability <code>p(u)</code> on Border Band <code>B<sub>d</sub></code></span>
-              <strong id="val-pu">0.49</strong>
-            </label>
-            <input id="copula-pu" type="range" min="0.05" max="0.95" step="0.01" value="0.49">
-          </div>
-        </div>
-
-        <div class="copula-card">
-          <span class="eyebrow">Live Fréchet Copula Response</span>
-          <h3>Single-Pixel BCE vs. Directional Copula Agreement</h3>
-
-          <div class="copula-bars">
-            <div class="bar-row">
-              <div class="bar-label">
-                <span>1D Single-Pixel Boundary BCE <code>−log p(u)</code></span>
-                <span id="bar-bce-val">0.71 nats (floor ≈ 0.69)</span>
-              </div>
-              <div class="bar-track"><div id="bar-bce-fill" class="bar-fill" style="width: 32%; background: #64748b;"></div></div>
-            </div>
-
-            <div class="bar-row">
-              <div class="bar-label">
-                <span>State 1 — Contrastive Edge Copula <code>C<sub>λ</sub>(p<sub>in</sub>, 1 − p<sub>out</sub>)</code></span>
-                <span id="bar-edge-val">0.87</span>
-              </div>
-              <div class="bar-track"><div id="bar-edge-fill" class="bar-fill" style="width: 87%; background: #1f8a65;"></div></div>
-            </div>
-
-            <div class="bar-row">
-              <div class="bar-label">
-                <span>State 2 — Foreground Continuation Copula <code>C<sub>λ</sub>(p<sub>in</sub>, p<sub>out</sub>)</code> (Inward Cut)</span>
-                <span id="bar-cut-val">0.08</span>
-              </div>
-              <div class="bar-track"><div id="bar-cut-fill" class="bar-fill" style="width: 8%; background: #2563df;"></div></div>
-            </div>
-
-            <div class="bar-row">
-              <div class="bar-label">
-                <span>State 3 — Inverse-Background Copula <code>C<sub>λ</sub>(1 − p<sub>in</sub>, 1 − p<sub>out</sub>)</code> (Outward Bleed)</span>
-                <span id="bar-bleed-val">0.08</span>
-              </div>
-              <div class="bar-track"><div id="bar-bleed-fill" class="bar-fill" style="width: 8%; background: #d97706;"></div></div>
-            </div>
-          </div>
-
-          <div class="diagnostic-callout" id="copula-verdict" style="margin-top: 20px;">
-            <!-- Populated by script.js -->
-          </div>
-        </div>
-      </div>
-
-      <div class="method-steps">
-        <div class="method-step">
-          <span>01 / Disentangle</span>
-          <h3>Isolate the Contour Band <code>B<sub>d</sub></code></h3>
-          <p>Because 85%–95% of inner object core pixels <code>I<sub>d</sub></code> remain uncorrupted even under polygon simplification, <code>Boundary-LNL</code> leaves <code>I<sub>d</sub></code> untouched and fits disentangled 2-GMM cleanliness posteriors over classification and boundary-band losses.</p>
-        </div>
-        <div class="method-step">
-          <span>02 / Couple</span>
-          <h3>Directional Fréchet Copula</h3>
-          <p>Isotropic border averaging cancels out across an edge (0.90 interior + 0.10 exterior = 0.50). <code>CB-LNL</code> decomposes neighborhoods into interior-facing <code>p<sub>in</sub></code> and inverse-exterior <code>1 − p<sub>out</sub></code>, calibrating <code>λ̂</code> online via tangential moment matching.</p>
-        </div>
-        <div class="method-step">
-          <span>03 / Route &amp; Clean</span>
-          <h3>Class–Spatial Routing &amp; Repair</h3>
-          <p>Coupling <code>P<sub>cls</sub>(c | x<sub>i</sub>)</code> with regional mask coherence <code>s<sub>sp</sub>(c)</code> routes supervision away from wrong categories, while offline copula auditing heals polygon cuts and erodes box bleeds across entire datasets.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: 24,809-IMAGE AUDIT & VISUAL GALLERY -->
-    <section class="demo-section" id="audit" aria-labelledby="audit-title">
-      <div class="container">
-        <span class="eyebrow">03 / Large-Scale Empirical Audit &amp; Visual Taxonomy</span>
-        <h2 id="audit-title">24,809 overlapping COCO vs. LVIS images.<br>Four laws of real-world segmentation noise.</h2>
-        <p class="section-intro">
-          Aligning MS-COCO crowdsourced annotations against high-precision LVIS v1 re-annotations across 24,809 shared images (59,840 matched object pairs) uncovers four governing laws: (1) 47.0% of human masks fall below <code>BIoU = 0.75</code> despite high Mask IoU (0.85); (2) human polygons use only 42.4% as many vertices as LVIS; (3) an inverse <strong>Scale-Asymmetric Vulnerability Crossover</strong> where small objects lose Mask IoU to hand-eye drift while large objects suffer severe Boundary IoU collapse (0.632); and (4) 88.9% of human class confusions occur within the exact same super-category.
-        </p>
-
-        <div class="figure-tabs" role="group" aria-label="Select paper figure to inspect">
-          <button type="button" class="pill-btn" data-fig-tab="fig1" aria-pressed="true">Fig 1: 24,809-Image Human Noise Audit</button>
-          <button type="button" class="pill-btn" data-fig-tab="fig2" aria-pressed="false">Fig 2: Benchmark Visual Taxonomy</button>
-          <button type="button" class="pill-btn" data-fig-tab="fig3" aria-pressed="false">Fig 3: Loss Entanglement &amp; AUROC</button>
-          <button type="button" class="pill-btn" data-fig-tab="fig_ops" aria-pressed="false">Fig S3: Isolated Operators &amp; CB-LNL Cleaning</button>
-          <button type="button" class="pill-btn" data-fig-tab="fig_cases" aria-pressed="false">Fig S4: Positive Regimes vs. Failure Modes</button>
-          <button type="button" class="pill-btn" data-fig-tab="fig_viper" aria-pressed="false">Fig S1: VIPER-N Driving Suite (1920×1080)</button>
-        </div>
-
-        <figure class="figure-Stage">
-          <img id="showcase-fig-img" src="assets/figures/fig1_real_noise_audit.webp" alt="Selected benchmark figure">
-          <figcaption id="showcase-fig-cap">
-            <strong>Figure 1 — Empirical Audit of Real-World Human Annotation Noise (24,809 COCO vs. LVIS images; 59,840 matched object pairs).</strong> (a) While standard Mask IoU appears high (median 0.85), Boundary IoU reveals heavy tail degradation (median 0.76, mean 0.730, with 47.0% below BIoU = 0.75). (b) <em>Scale-Asymmetric Vulnerability Crossover:</em> Small objects suffer the worst inner Mask IoU loss (0.77) due to hand-eye drift, whereas Large objects suffer severe Boundary IoU collapse (0.63, with 59.2% below BIoU = 0.70) due to human polygon simplification. (c) Cross-regime fidelity spectrum. (d) Prevalence of real human error modes.
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <!-- SECTION 4: QUANTITATIVE BENCHMARK & VERIFICATION RESULTS -->
+    <!-- SECTION 2: QUANTITATIVE BENCHMARK & VERIFICATION RESULTS -->
     <section class="container content-section" id="results" aria-labelledby="results-title">
-      <span class="eyebrow">04 / Quantitative Benchmark &amp; Multi-Seed Verification</span>
+      <span class="eyebrow">02 / Quantitative Benchmark &amp; Multi-Seed Verification</span>
       <h2 id="results-title">Rigorous evaluation across seeds,<br>frozen predictions, and dataset cleaning.</h2>
       <p class="section-intro">
         All models are evaluated against the strictly fixed LVIS-verified Clean Reference validation split (<code>val_clean_lvis_ref.json</code>). Switch between the four experimental suites below to inspect our 3-seed paired comparisons, frozen-prediction scoring controls, controlled cleaning vs. direct teacher-mask replacement, and multi-architecture vulnerability.
@@ -719,10 +599,10 @@
       </div>
     </section>
 
-    <!-- SECTION 5: HUGGING FACE DATASETS & QUICKSTART -->
+    <!-- SECTION 3: HUGGING FACE DATASETS & QUICKSTART -->
     <section class="demo-section" id="datasets" aria-labelledby="datasets-title">
       <div class="container">
-        <span class="eyebrow">05 / Hugging Face Datasets &amp; Quickstart Guide</span>
+        <span class="eyebrow">03 / Hugging Face Datasets &amp; Quickstart Guide</span>
         <h2 id="datasets-title">Download the annotations.<br>Plug into any COCO pipeline in 3 lines.</h2>
         <p class="section-intro">
           All benchmark annotations—including <strong><code>COCO-RealNoise</code></strong>, <strong><code>COCO-WAN</code> (SAM2)</strong>, <strong><code>COCO-N</code> (Easy/Medium/Hard across 3 seeds)</strong>, all <strong>13 single-factor disentanglement splits</strong>, <strong><code>CB-LNL Cleaned</code></strong> annotations, and <strong><code>VIPER-N</code></strong>—are hosted on Hugging Face in standard MS-COCO JSON format.
@@ -798,11 +678,107 @@ coco_val   = COCO(f"{root}/coco_realnoise/val_clean_lvis_ref.json")</code></pre>
       </div>
     </section>
 
-    <!-- SECTION 6: CITATION -->
+    <!-- SECTION 4: CONCISE SFUMATO COPULA SIMULATOR (MOVED DOWN & SHORTENED) -->
+    <section class="container content-section" id="sfumato-inspector" aria-labelledby="copula-title">
+      <span class="eyebrow">04 / Interactive Sfumato Boundary Simulator</span>
+      <h2 id="copula-title">How directional copulas separate soft true edges from contour errors.</h2>
+      <p class="section-intro">
+        On a natural object contour, even a clean pixel sits near <code>p(u) ≈ 0.50</code>, confounding any single-pixel boundary loss. <strong><code>CB-LNL</code></strong> instead couples interior foreground (<code>p<sub>in</sub></code>) and inverse-exterior background (<code>1 − p<sub>out</sub></code>) via the Fréchet copula <code>C<sub>λ</sub>(a, b) = (1 − λ)ab + λ min(a, b)</code>:
+      </p>
+
+      <div class="copula-grid">
+        <div class="copula-card">
+          <span class="eyebrow">Contour State Presets</span>
+          <h3>Select a Boundary Regime on <code>B<sub>d</sub></code></h3>
+          <div class="state-buttons" role="group" aria-label="Select contour state preset">
+            <button type="button" class="pill-btn" data-copula-preset="state1" aria-pressed="true">1: Clean Sfumato Edge</button>
+            <button type="button" class="pill-btn" data-copula-preset="state2" aria-pressed="false">2: Inward Polygon Cut</button>
+            <button type="button" class="pill-btn" data-copula-preset="state3" aria-pressed="false">3: Outward Box Bleed</button>
+          </div>
+
+          <div class="slider-group">
+            <label for="copula-lam">
+              <span>Fréchet Copula Dependence <code>λ</code></span>
+              <strong id="val-lam">0.53</strong>
+            </label>
+            <input id="copula-lam" type="range" min="0.00" max="1.00" step="0.01" value="0.53">
+          </div>
+
+          <div class="slider-group">
+            <label for="copula-pin">
+              <span>Interior Foreground Evidence <code>p<sub>in</sub>(u)</code></span>
+              <strong id="val-pin">0.91</strong>
+            </label>
+            <input id="copula-pin" type="range" min="0.05" max="0.98" step="0.01" value="0.91">
+          </div>
+
+          <div class="slider-group">
+            <label for="copula-pout">
+              <span>Exterior Foreground Prob <code>p<sub>out</sub>(u)</code></span>
+              <strong id="val-pout">0.09 (1−p_out = 0.91)</strong>
+            </label>
+            <input id="copula-pout" type="range" min="0.02" max="0.96" step="0.01" value="0.09">
+          </div>
+
+          <div class="slider-group">
+            <label for="copula-pu">
+              <span>Single-Pixel Contour Prob <code>p(u)</code></span>
+              <strong id="val-pu">0.49</strong>
+            </label>
+            <input id="copula-pu" type="range" min="0.05" max="0.95" step="0.01" value="0.49">
+          </div>
+        </div>
+
+        <div class="copula-card">
+          <span class="eyebrow">Live Copula Output</span>
+          <h3>1D Pointwise BCE vs. 2D Directional Copulas</h3>
+
+          <div class="copula-bars">
+            <div class="bar-row">
+              <div class="bar-label">
+                <span>1D Single-Pixel Boundary BCE <code>−log p(u)</code></span>
+                <span id="bar-bce-val">0.71 nats (floor ≈ 0.69)</span>
+              </div>
+              <div class="bar-track"><div id="bar-bce-fill" class="bar-fill" style="width: 32%; background: #7c6855;"></div></div>
+            </div>
+
+            <div class="bar-row">
+              <div class="bar-label">
+                <span>State 1 — Contrastive Edge <code>C<sub>λ</sub>(p<sub>in</sub>, 1 − p<sub>out</sub>)</code></span>
+                <span id="bar-edge-val">0.87</span>
+              </div>
+              <div class="bar-track"><div id="bar-edge-fill" class="bar-fill" style="width: 87%; background: #3e694a;"></div></div>
+            </div>
+
+            <div class="bar-row">
+              <div class="bar-label">
+                <span>State 2 — Foreground Continuation <code>C<sub>λ</sub>(p<sub>in</sub>, p<sub>out</sub>)</code> (Cut)</span>
+                <span id="bar-cut-val">0.08</span>
+              </div>
+              <div class="bar-track"><div id="bar-cut-fill" class="bar-fill" style="width: 8%; background: #9e472a;"></div></div>
+            </div>
+
+            <div class="bar-row">
+              <div class="bar-label">
+                <span>State 3 — Inverse-Background <code>C<sub>λ</sub>(1 − p<sub>in</sub>, 1 − p<sub>out</sub>)</code> (Bleed)</span>
+                <span id="bar-bleed-val">0.08</span>
+              </div>
+              <div class="bar-track"><div id="bar-bleed-fill" class="bar-fill" style="width: 8%; background: #b07d35;"></div></div>
+            </div>
+          </div>
+
+          <div class="diagnostic-callout" id="copula-verdict" style="margin-top: 16px;">
+            <!-- Populated by script.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: CITATION -->
     <section class="container content-section citation-box" id="citation" aria-labelledby="citation-title">
       <div class="section-heading">
         <div>
-          <span class="eyebrow">06 / Reference This Work</span>
+          <span class="eyebrow">05 / Reference This Work</span>
           <h2 id="citation-title">Citation</h2>
         </div>
         <button class="pill-btn" type="button" data-copy-target="bibtex-code">Copy BibTeX</button>
@@ -823,7 +799,7 @@ coco_val   = COCO(f"{root}/coco_realnoise/val_clean_lvis_ref.json")</code></pre>
   <footer class="container">
     <a class="wordmark" href="#"><span>Sfumato</span> Supervision</a>
     <p>Technion – Israel Institute of Technology &nbsp;·&nbsp; Ben-Gurion University of the Negev</p>
-    <p><a href="https://arxiv.org/abs/2406.10891">arXiv:2406.10891</a> &nbsp;·&nbsp; <a href="https://huggingface.co/datasets/Kimhi/coco-n">Hugging Face Data</a> &nbsp;·&nbsp; <a href="https://github.com/mkimhi/noisy_labels">GitHub Code</a></p>
+    <p><a href="https://arxiv.org/abs/2406.10891">arXiv:2406.10891</a> &nbsp;·&nbsp; <a href="https://huggingface.co/datasets/Kimhi/coco-n">Hugging Face Data</a> &nbsp;·&nbsp; <a href="https://github.com/mkimhi/noisy_labels">GitHub Code</a> &nbsp;·&nbsp; <a href="https://artincontext.org/sfumato/">About Sfumato</a></p>
   </footer>
 </body>
 </html>
