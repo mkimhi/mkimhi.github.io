@@ -4,14 +4,33 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Sfumato Supervision: Learning Instance Segmentation with Noisy Labels. Large-scale audit of 24,809 COCO vs. LVIS images, unified noisy-label benchmark suite (COCO-RealNoise, COCO-WAN, COCO-N, VIPER-N), and Copula-Boundary-LNL (CB-LNL).">
-  <meta name="theme-color" content="#f6f1e7">
+  <meta name="theme-color" content="#e3d1b7">
   <meta property="og:title" content="Sfumato Supervision: Learning Instance Segmentation with Noisy Labels">
   <meta property="og:description" content="Auditing 59,840 real crowdsourced and foundation-model masks, and breaking through the single-pixel boundary entropy floor via a directional Fréchet copula.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://mkimhi.github.io/Sfumato/assets/figures/fig2_visual_taxonomy.png">
   <title>Sfumato Supervision | Learning Instance Segmentation with Noisy Labels</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261116-earth3">
+  <style>
+    /* Critical inline earth-tone & brushed sfumato rules to prevent stale browser CSS caching */
+    :root {
+      --earth-bg: #e3d1b7;
+      --earth-bg-deep: #d6bfa0;
+      --earth-card: #f3e9d8;
+      --walnut: #382314;
+      --walnut-soft: #543824;
+      --sienna: #8f4022;
+    }
+    body {
+      background-color: #e3d1b7 !important;
+      background-image:
+        radial-gradient(ellipse 85% 55% at 50% 0%, rgba(247, 236, 218, 0.52) 0%, rgba(156, 107, 40, 0.14) 55%, rgba(92, 58, 33, 0.18) 100%),
+        url('assets/figures/sfumato_brush_bg.webp') !important;
+      background-size: 100% 100%, 720px 480px !important;
+      color: #382314 !important;
+    }
+  </style>
+  <script src="script.js?v=20261116-earth3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -31,90 +50,88 @@
 
   <main id="main">
     <header class="hero container">
-      <div class="sfumato-smoke-backdrop" aria-hidden="true"></div>
-      <div class="venue-pill">Instance Segmentation · Noisy Labels · Benchmark &amp; Method</div>
-      <div class="hero-name"><span>Sfumato</span> Supervision<span class="name-dot" aria-hidden="true"></span></div>
-      <h1>Learning Instance Segmentation with Noisy Labels</h1>
-
-      <div class="authors" aria-label="Authors">
-        <span><a href="https://mkimhi.github.io/">Moshe Kimhi</a><sup>1,*</sup></span>
-        <span><a href="https://research.google/people/ehud-rivlin/">Ehud Rivlin</a><sup>1</sup></span>
-        <span><a href="https://insight.bgu.ac.il/">Chaim Baskin</a><sup>2</sup></span>
-      </div>
-
-      <p class="affiliations">
-        <span><sup>1</sup> Technion – Israel Institute of Technology</span>
-        <span><sup>2</sup> Ben-Gurion University of the Negev</span>
-      </p>
-      <p class="correspondence"><sup>*</sup> Corresponding author: <a href="mailto:moshekimhi@cs.technion.ac.il">moshekimhi@cs.technion.ac.il</a></p>
-
-      <div class="logo-strip" aria-label="Institutional affiliations">
-        <a class="logo-item" href="https://www.technion.ac.il/en/" target="_blank" rel="noopener" title="Technion – Israel Institute of Technology">
-          <img src="assets/logos/technion.jpg" alt="Technion – Israel Institute of Technology">
-        </a>
-        <a class="logo-item logo-dark-bg" href="https://in.bgu.ac.il/en/" target="_blank" rel="noopener" title="Ben-Gurion University of the Negev">
-          <img src="assets/logos/bgu.png" alt="Ben-Gurion University of the Negev">
-        </a>
-        <a class="logo-item logo-dark-bg" href="https://insight.bgu.ac.il/" target="_blank" rel="noopener" title="Chaim Baskin Lab — Ben-Gurion University">
-          <img src="https://insight.bgu.ac.il/wp-content/themes/dna/img/logo.png" onerror="this.onerror=null;this.src='assets/logos/baskin_lab.png';" alt="Chaim Baskin Lab (BGU)">
-        </a>
-      </div>
-
-      <div class="resources" aria-label="Project resources">
-        <a class="resource resource-primary" href="https://arxiv.org/abs/2406.10891" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg>
-          arXiv (2406.10891)
-        </a>
-        <a class="resource" href="https://arxiv.org/pdf/2406.10891" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>
-          Paper PDF
-        </a>
-        <a class="resource resource-hf" href="https://huggingface.co/datasets/Kimhi/coco-n" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7c0-1.66 3.58-3 8-3s8 1.34 8 3-3.58 3-8 3-8-1.34-8-3zm0 5c0 1.66 3.58 3 8 3s8-1.34 8-3m-16 5c0 1.66 3.58 3 8 3s8-1.34 8-3V7"/></svg>
-          HF Data: COCO-N Suite
-        </a>
-        <a class="resource resource-hf" href="https://huggingface.co/datasets/Kimhi/viper-n" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7c0-1.66 3.58-3 8-3s8 1.34 8 3-3.58 3-8 3-8-1.34-8-3zm0 5c0 1.66 3.58 3 8 3s8-1.34 8-3m-16 5c0 1.66 3.58 3 8 3s8-1.34 8-3V7"/></svg>
-          HF Data: VIPER-N
-        </a>
-        <a class="resource resource-hf" href="https://huggingface.co/datasets/Kimhi/viper" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7c0-1.66 3.58-3 8-3s8 1.34 8 3-3.58 3-8 3-8-1.34-8-3zm0 5c0 1.66 3.58 3 8 3s8-1.34 8-3m-16 5c0 1.66 3.58 3 8 3s8-1.34 8-3V7"/></svg>
-          HF Data: VIPER (Clean)
-        </a>
-        <a class="resource" href="https://github.com/mkimhi/noisy_labels" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 4l-4 16"/></svg>
-          Code
-        </a>
-        <a class="resource" href="#citation">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5H4v6h5v8H3m17-14h-4v6h5v8h-6"/></svg>
-          BibTeX
-        </a>
-      </div>
-
-      <!-- RENAISSANCE SFUMATO MOTIVATION CARD WITH PAINTING & CREDIT -->
-      <div class="sfumato-art-card" aria-label="Renaissance Sfumato inspiration">
-        <div>
-          <div class="sfumato-painting-frame">
-            <img id="mona-lisa-img" src="assets/figures/mona_lisa_sfumato.webp" alt="Mona Lisa (La Gioconda) by Leonardo da Vinci, c. 1503–1506, illustrating the Renaissance sfumato technique">
-          </div>
-          <div class="painting-credit">
-            Leonardo da Vinci, <em>Mona Lisa (La Gioconda)</em>, c. 1503–1506 · Musée du Louvre, Paris (Public Domain, <a href="https://commons.wikimedia.org/wiki/File:Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg" target="_blank" rel="noopener">Wikimedia Commons / C2RMF</a>).
-          </div>
+      <!-- Compact top-right corner Sfumato inspiration badge (does not block the paper flow) -->
+      <aside class="corner-sfumato-aside" aria-label="Renaissance Sfumato inspiration">
+        <div class="corner-painting-wrap">
+          <img id="corner-sfumato-img" src="assets/figures/la_scapigliata_sfumato.webp" alt="La Scapigliata by Leonardo da Vinci (c. 1508), painted in earth umber and amber sfumato">
         </div>
-        <div class="sfumato-art-copy">
-          <span class="art-eyebrow">The Renaissance Inspiration · “To Vanish Like Smoke”</span>
-          <h2>Why <em>Sfumato</em>? Because nature has no 1D binary outlines.</h2>
-          <p>
-            In his Renaissance treatise on painting (<em>Trattato della Pittura</em>), Leonardo da Vinci observed that physical objects rarely exhibit harsh binary borders, and pioneered <strong><em>sfumato</em></strong> (from the Italian <em>sfumare</em>, “to vanish like smoke”)—blending light and shadow <em>“without lines or borders, in the manner of smoke.”</em>
-          </p>
-          <p>
-            Modern segmentation datasets, by contrast, force human annotators and foundation models into hard binary polygons—producing pervasive corner cutting, contour drift, and box bleed. Just as Leonardo’s <em>sfumato</em> defines an edge by the continuous interplay of inner form and outer shadow, our <strong><code>CB-LNL</code> (Copula-Boundary-LNL)</strong> leaves the unambiguous object core crisp while modeling the contested contour band via a directional <strong>Fréchet copula</strong> coupling inner foreground (<code>p<sub>in</sub></code>) and inverse-exterior background (<code>1 − p<sub>out</sub></code>).
-          </p>
-          <div class="sfumato-art-links">
-            <button type="button" class="art-link-pill" id="toggle-mona-zoom">Zoom into Sfumato Eye &amp; Veil Contour 🔍</button>
-            <a class="art-link-pill" href="https://artincontext.org/sfumato/" target="_blank" rel="noopener">What is Sfumato in Art? (Art in Context) ↗</a>
-          </div>
+        <div class="corner-caption">
+          <strong id="corner-art-title">Leonardo · La Scapigliata</strong>
+          <span id="corner-art-credit">c. 1508 · Earth &amp; amber sfumato</span>
         </div>
+        <div class="corner-actions">
+          <button type="button" id="switch-corner-art" title="Switch painting">Mona Lisa ↻</button>
+          <a href="https://artincontext.org/sfumato/" target="_blank" rel="noopener" title="What is Sfumato in art?">What is Sfumato? ↗</a>
+        </div>
+      </aside>
+
+      <div class="hero-main-col">
+        <div class="venue-pill">Instance Segmentation · Noisy Labels · Benchmark &amp; Method</div>
+        <div class="hero-name"><span>Sfumato</span> Supervision<span class="name-dot" aria-hidden="true"></span></div>
+        <h1>Learning Instance Segmentation with Noisy Labels</h1>
+
+        <div class="authors" aria-label="Authors">
+          <span><a href="https://mkimhi.github.io/">Moshe Kimhi</a><sup>1,*</sup></span>
+          <span><a href="https://research.google/people/ehud-rivlin/">Ehud Rivlin</a><sup>1</sup></span>
+          <span><a href="https://insight.bgu.ac.il/">Chaim Baskin</a><sup>2</sup></span>
+        </div>
+
+        <p class="affiliations">
+          <span><sup>1</sup> Technion – Israel Institute of Technology</span>
+          <span><sup>2</sup> Ben-Gurion University of the Negev</span>
+        </p>
+        <p class="correspondence"><sup>*</sup> Corresponding author: <a href="mailto:moshekimhi@cs.technion.ac.il">moshekimhi@cs.technion.ac.il</a></p>
+
+        <div class="logo-strip" aria-label="Institutional affiliations">
+          <a class="logo-item" href="https://www.technion.ac.il/en/" target="_blank" rel="noopener" title="Technion – Israel Institute of Technology">
+            <img src="assets/logos/technion.jpg" alt="Technion – Israel Institute of Technology">
+          </a>
+          <a class="logo-item logo-dark-bg" href="https://in.bgu.ac.il/en/" target="_blank" rel="noopener" title="Ben-Gurion University of the Negev">
+            <img src="assets/logos/bgu.png" alt="Ben-Gurion University of the Negev">
+          </a>
+          <a class="logo-item logo-dark-bg" href="https://insight.bgu.ac.il/" target="_blank" rel="noopener" title="Chaim Baskin Lab — Ben-Gurion University">
+            <img src="https://insight.bgu.ac.il/wp-content/themes/dna/img/logo.png" onerror="this.onerror=null;this.src='assets/logos/baskin_lab.png';" alt="Chaim Baskin Lab (BGU)">
+          </a>
+        </div>
+
+        <div class="resources" aria-label="Project resources">
+          <a class="resource resource-primary" href="https://arxiv.org/abs/2406.10891" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg>
+            arXiv (2406.10891)
+          </a>
+          <a class="resource" href="https://arxiv.org/pdf/2406.10891" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>
+            Paper PDF
+          </a>
+          <a class="resource resource-hf" href="https://huggingface.co/datasets/Kimhi/coco-n" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7c0-1.66 3.58-3 8-3s8 1.34 8 3-3.58 3-8 3-8-1.34-8-3zm0 5c0 1.66 3.58 3 8 3s8-1.34 8-3m-16 5c0 1.66 3.58 3 8 3s8-1.34 8-3V7"/></svg>
+            HF Data: COCO-N Suite
+          </a>
+          <a class="resource resource-hf" href="https://huggingface.co/datasets/Kimhi/viper-n" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7c0-1.66 3.58-3 8-3s8 1.34 8 3-3.58 3-8 3-8-1.34-8-3zm0 5c0 1.66 3.58 3 8 3s8-1.34 8-3m-16 5c0 1.66 3.58 3 8 3s8-1.34 8-3V7"/></svg>
+            HF Data: VIPER-N
+          </a>
+          <a class="resource resource-hf" href="https://huggingface.co/datasets/Kimhi/viper" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7c0-1.66 3.58-3 8-3s8 1.34 8 3-3.58 3-8 3-8-1.34-8-3zm0 5c0 1.66 3.58 3 8 3s8-1.34 8-3m-16 5c0 1.66 3.58 3 8 3s8-1.34 8-3V7"/></svg>
+            HF Data: VIPER (Clean)
+          </a>
+          <a class="resource" href="https://github.com/mkimhi/noisy_labels" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 4l-4 16"/></svg>
+            Code
+          </a>
+          <a class="resource" href="#citation">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5H4v6h5v8H3m17-14h-4v6h5v8h-6"/></svg>
+            BibTeX
+          </a>
+        </div>
+
+        <p class="hero-summary">
+          Natural objects rarely have razor-sharp binary outlines.<br>
+          <strong>Keep the object core crisp. Model contested contours “in the manner of smoke.”</strong>
+        </p>
+        <p class="hero-description">
+          Inspired by Leonardo da Vinci’s <a href="https://artincontext.org/sfumato/" target="_blank" rel="noopener"><strong><em>sfumato</em></strong></a> technique—blending transitions <em>“without lines or borders, in the manner of smoke”</em>—we audit 24,809 overlapping COCO–LVIS images (showing that 47% of crowdsourced masks suffer severe contour imprecision), establish a unified benchmark suite spanning human, foundation-model (SAM2), and procedural noise, and introduce <strong><code>CB-LNL</code> (Copula-Boundary-LNL)</strong> to couple directional inner-core (<code>p<sub>in</sub></code>) and inverse-exterior (<code>1 − p<sub>out</sub></code>) evidence along object boundaries.
+        </p>
       </div>
 
       <div class="headline-results" aria-label="Headline empirical findings">

@@ -308,15 +308,26 @@ function initExplorer() {
     });
   }
 
-  // Mona Lisa detail zoom toggle
-  const zoomBtn = document.getElementById("toggle-mona-zoom");
-  const monaImg = document.getElementById("mona-lisa-img");
-  if (zoomBtn && monaImg) {
-    let zoomed = false;
-    zoomBtn.addEventListener("click", () => {
-      zoomed = !zoomed;
-      monaImg.src = zoomed ? "assets/figures/mona_lisa_detail.webp" : "assets/figures/mona_lisa_sfumato.webp";
-      zoomBtn.textContent = zoomed ? "Show Full Portrait" : "Zoom into Sfumato Eye & Veil Contour 🔍";
+  // Corner Sfumato artwork switcher (La Scapigliata <-> Mona Lisa)
+  const switchArtBtn = document.getElementById("switch-corner-art");
+  const cornerImg = document.getElementById("corner-sfumato-img");
+  const cornerTitle = document.getElementById("corner-art-title");
+  const cornerCredit = document.getElementById("corner-art-credit");
+  if (switchArtBtn && cornerImg && cornerTitle && cornerCredit) {
+    let showingMona = false;
+    switchArtBtn.addEventListener("click", () => {
+      showingMona = !showingMona;
+      if (showingMona) {
+        cornerImg.src = "assets/figures/mona_lisa_sfumato.webp";
+        cornerTitle.textContent = "Leonardo · Mona Lisa";
+        cornerCredit.textContent = "c. 1503 · Louvre (Public Domain)";
+        switchArtBtn.textContent = "La Scapigliata ↻";
+      } else {
+        cornerImg.src = "assets/figures/la_scapigliata_sfumato.webp";
+        cornerTitle.textContent = "Leonardo · La Scapigliata";
+        cornerCredit.textContent = "c. 1508 · Earth & amber sfumato";
+        switchArtBtn.textContent = "Mona Lisa ↻";
+      }
     });
   }
 
