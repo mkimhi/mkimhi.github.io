@@ -1,5 +1,24 @@
 [
   {
+    "id": "noise",
+    "title": "Sfumato Supervision: Learning Instance Segmentation with Noisy Labels",
+    "authors": "Moshe Kimhi, Ehud Rivlin, Chaim Baskin",
+    "venue": "Preprint",
+    "year": 2026,
+    "topic": "Robustness",
+    "summary": "Audit 24,809 overlapping COCO–LVIS images, benchmark human and foundation-model contour noise, and break through the single-pixel boundary entropy floor via a directional Fréchet copula.",
+    "url": "https://arxiv.org/abs/2406.10891",
+    "affiliations": "Kimhi & Rivlin: Technion · Baskin: Ben-Gurion University.",
+    "award": "",
+    "project": "/Sfumato/",
+    "code": "https://github.com/mkimhi/noisy_labels",
+    "image": "/images/publications/noise.webp",
+    "bibtex": "@article{kimhi2026sfumato,\n author = {Moshe Kimhi and Ehud Rivlin and Chaim Baskin},\n journal = {arXiv preprint arXiv:2406.10891},\n title = {{Sfumato Supervision: Learning Instance Segmentation with Noisy Labels}},\n url = {https://arxiv.org/abs/2406.10891},\n year = {2026}\n}\n",
+    "citation_source": "https://arxiv.org/bibtex/2406.10891",
+    "image_source": "https://arxiv.org/html/2406.10891v3/teaser.png",
+    "image_figure": 1
+  },
+  {
     "id": "awares",
     "title": "Look Where It Matters: High-Resolution Crops Retrieval for Efficient VLMs",
     "authors": "Nimrod Shabtay*, Moshe Kimhi*, Artem Spector, Sivan Haray, Ehud Rivlin, Chaim Baskin, Raja Giryes, Eli Schwartz",
@@ -130,25 +149,6 @@
     "bibtex": "@inproceedings{Kimhi_2025_WACV,\n author = {Kimhi, Moshe and Vainshtein, David and Baskin, Chaim and Di Castro, Dotan},\n booktitle = {Proceedings of the Winter Conference on Applications of Computer Vision (WACV)},\n month = {February},\n pages = {7928-7938},\n title = {{Robot Instance Segmentation with Few Annotations for Grasping}},\n year = {2025}\n}\n",
     "citation_source": "https://openaccess.thecvf.com/content/WACV2025/html/Kimhi_Robot_Instance_Segmentation_with_Few_Annotations_for_Grasping_WACV_2025_paper.html",
     "image_source": "https://arxiv.org/html/2407.01302v2/rise_intro.png",
-    "image_figure": 1
-  },
-  {
-    "id": "noise",
-    "title": "Sfumato Supervision: Learning Instance Segmentation with Noisy Labels",
-    "authors": "Moshe Kimhi, Ehud Rivlin, Chaim Baskin",
-    "venue": "Preprint",
-    "year": 2026,
-    "topic": "Robustness",
-    "summary": "Audit 24,809 overlapping COCO–LVIS images, benchmark human and foundation-model contour noise, and break through the single-pixel boundary entropy floor via a directional Fréchet copula.",
-    "url": "https://arxiv.org/abs/2406.10891",
-    "affiliations": "Kimhi & Rivlin: Technion · Baskin: Ben-Gurion University.",
-    "award": "",
-    "project": "/Sfumato/",
-    "code": "https://github.com/mkimhi/noisy_labels",
-    "image": "/images/publications/noise.webp",
-    "bibtex": "@article{kimhi2026sfumato,\n author = {Moshe Kimhi and Ehud Rivlin and Chaim Baskin},\n journal = {arXiv preprint arXiv:2406.10891},\n title = {{Sfumato Supervision: Learning Instance Segmentation with Noisy Labels}},\n url = {https://arxiv.org/abs/2406.10891},\n year = {2026}\n}\n",
-    "citation_source": "https://arxiv.org/bibtex/2406.10891",
-    "image_source": "https://arxiv.org/html/2406.10891v3/teaser.png",
     "image_figure": 1
   },
   {

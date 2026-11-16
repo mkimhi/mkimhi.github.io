@@ -1,20 +1,19 @@
 ---
-title: Noisy Annotations in Semantic Segmentation
+title: "Sfumato Supervision: Learning Instance Segmentation with Noisy Labels"
 collection: publications
-permalink: /publication/Noisy Annotations in Semantic Segmentation
-excerpt: Measure how spatial annotation errors affect segmentation, from object boundaries
-  to noisy annotation tools.
-date: '2025-04-03'
+permalink: /publication/Sfumato Supervision
+excerpt: "Audit 24,809 overlapping COCO–LVIS images, benchmark human and foundation-model contour noise, and break through the single-pixel boundary entropy floor via a directional Fréchet copula."
+date: '2026-11-16'
 venue: Preprint
 paperurl: https://arxiv.org/abs/2406.10891
 citation: null
-authors: Moshe Kimhi, Omer Kerem, Eden Grad, Ehud Rivlin, Chaim Baskin
+authors: Moshe Kimhi, Ehud Rivlin, Chaim Baskin
 ---
 
-Measure how spatial annotation errors affect segmentation, from object boundaries to noisy annotation tools.
+Audit 24,809 overlapping COCO–LVIS images, benchmark human and foundation-model contour noise, and break through the single-pixel boundary entropy floor via a directional Fréchet copula.
 
-**Authors:** Moshe Kimhi, Omer Kerem, Eden Grad, Ehud Rivlin, Chaim Baskin
+**Authors:** Moshe Kimhi, Ehud Rivlin, Chaim Baskin
 
-Kimhi & Grad: Technion · Kerem & Baskin: Ben-Gurion University · Rivlin: Technion, Verily Life Sciences.
+Kimhi & Rivlin: Technion · Baskin: Ben-Gurion University.
 
-[Read the paper](https://arxiv.org/abs/2406.10891)
+[Project Page](/Sfumato/) · [Read the paper](https://arxiv.org/abs/2406.10891) · [Hugging Face Datasets](https://huggingface.co/datasets/Kimhi/coco-n)
