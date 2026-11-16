@@ -1,0 +1,311 @@
+[
+  {
+    "scene_id": "scene1",
+    "coco_image_id": 37907,
+    "title": "Scene 1: Cat, Potted Plant, Tv",
+    "objects": [
+      "cat",
+      "potted plant",
+      "tv"
+    ],
+    "modes": {
+      "clean": {
+        "label": "Clean Reference (LVIS v1)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene1_clean.webp"
+      },
+      "realnoise": {
+        "label": "Real Human (COCO-RealNoise)",
+        "mask_iou": 93.3,
+        "boundary_iou": 82.0,
+        "image": "assets/scenes/scene1_realnoise.webp"
+      },
+      "wan_box": {
+        "label": "SAM2 Box (WAN-Box Noisy)",
+        "mask_iou": 93.8,
+        "boundary_iou": 74.2,
+        "image": "assets/scenes/scene1_wan_box.webp"
+      },
+      "wan_point": {
+        "label": "SAM2 Click (WAN-Point Center)",
+        "mask_iou": 93.4,
+        "boundary_iou": 73.0,
+        "image": "assets/scenes/scene1_wan_point.webp"
+      },
+      "cocon_med": {
+        "label": "COCO-N Medium (Procedural)",
+        "mask_iou": 95.6,
+        "boundary_iou": 75.2,
+        "image": "assets/scenes/scene1_cocon_med.webp"
+      },
+      "cocon_hard": {
+        "label": "COCO-N Hard (Severe Stress)",
+        "mask_iou": 93.3,
+        "boundary_iou": 62.4,
+        "image": "assets/scenes/scene1_cocon_hard.webp"
+      },
+      "approx": {
+        "label": "Polygon Simplification (Inward Cut)",
+        "mask_iou": 89.8,
+        "boundary_iou": 56.6,
+        "image": "assets/scenes/scene1_approx.webp"
+      },
+      "drift": {
+        "label": "Rigid Spatial Drift",
+        "mask_iou": 73.7,
+        "boundary_iou": 22.9,
+        "image": "assets/scenes/scene1_drift.webp"
+      },
+      "erode": {
+        "label": "Morphological Erosion",
+        "mask_iou": 76.7,
+        "boundary_iou": 27.1,
+        "image": "assets/scenes/scene1_erode.webp"
+      },
+      "dilate": {
+        "label": "Morphological Dilation (Outward Bleed)",
+        "mask_iou": 79.9,
+        "boundary_iou": 28.3,
+        "image": "assets/scenes/scene1_dilate.webp"
+      },
+      "cblnl_cleaned": {
+        "label": "CB-LNL Cleaned (Ours \u2014 Sfumato Copula)",
+        "mask_iou": 99.1,
+        "boundary_iou": 95.6,
+        "image": "assets/scenes/scene1_cblnl_cleaned.webp"
+      }
+    }
+  },
+  {
+    "scene_id": "scene2",
+    "coco_image_id": 400,
+    "title": "Scene 2: Boat, Dog",
+    "objects": [
+      "boat",
+      "dog"
+    ],
+    "modes": {
+      "clean": {
+        "label": "Clean Reference (LVIS v1)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene2_clean.webp"
+      },
+      "realnoise": {
+        "label": "Real Human (COCO-RealNoise)",
+        "mask_iou": 97.0,
+        "boundary_iou": 76.6,
+        "image": "assets/scenes/scene2_realnoise.webp"
+      },
+      "wan_box": {
+        "label": "SAM2 Box (WAN-Box Noisy)",
+        "mask_iou": 92.8,
+        "boundary_iou": 79.0,
+        "image": "assets/scenes/scene2_wan_box.webp"
+      },
+      "wan_point": {
+        "label": "SAM2 Click (WAN-Point Center)",
+        "mask_iou": 70.8,
+        "boundary_iou": 48.5,
+        "image": "assets/scenes/scene2_wan_point.webp"
+      },
+      "cocon_med": {
+        "label": "COCO-N Medium (Procedural)",
+        "mask_iou": 94.5,
+        "boundary_iou": 81.3,
+        "image": "assets/scenes/scene2_cocon_med.webp"
+      },
+      "cocon_hard": {
+        "label": "COCO-N Hard (Severe Stress)",
+        "mask_iou": 84.7,
+        "boundary_iou": 68.2,
+        "image": "assets/scenes/scene2_cocon_hard.webp"
+      },
+      "approx": {
+        "label": "Polygon Simplification (Inward Cut)",
+        "mask_iou": 92.5,
+        "boundary_iou": 64.4,
+        "image": "assets/scenes/scene2_approx.webp"
+      },
+      "drift": {
+        "label": "Rigid Spatial Drift",
+        "mask_iou": 69.8,
+        "boundary_iou": 26.5,
+        "image": "assets/scenes/scene2_drift.webp"
+      },
+      "erode": {
+        "label": "Morphological Erosion",
+        "mask_iou": 76.8,
+        "boundary_iou": 35.5,
+        "image": "assets/scenes/scene2_erode.webp"
+      },
+      "dilate": {
+        "label": "Morphological Dilation (Outward Bleed)",
+        "mask_iou": 77.0,
+        "boundary_iou": 35.0,
+        "image": "assets/scenes/scene2_dilate.webp"
+      },
+      "cblnl_cleaned": {
+        "label": "CB-LNL Cleaned (Ours \u2014 Sfumato Copula)",
+        "mask_iou": 98.8,
+        "boundary_iou": 94.8,
+        "image": "assets/scenes/scene2_cblnl_cleaned.webp"
+      }
+    }
+  },
+  {
+    "scene_id": "scene3",
+    "coco_image_id": 31747,
+    "title": "Scene 3: Boat, Microwave",
+    "objects": [
+      "boat",
+      "microwave"
+    ],
+    "modes": {
+      "clean": {
+        "label": "Clean Reference (LVIS v1)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene3_clean.webp"
+      },
+      "realnoise": {
+        "label": "Real Human (COCO-RealNoise)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene3_realnoise.webp"
+      },
+      "wan_box": {
+        "label": "SAM2 Box (WAN-Box Noisy)",
+        "mask_iou": 71.3,
+        "boundary_iou": 46.9,
+        "image": "assets/scenes/scene3_wan_box.webp"
+      },
+      "wan_point": {
+        "label": "SAM2 Click (WAN-Point Center)",
+        "mask_iou": 69.7,
+        "boundary_iou": 69.7,
+        "image": "assets/scenes/scene3_wan_point.webp"
+      },
+      "cocon_med": {
+        "label": "COCO-N Medium (Procedural)",
+        "mask_iou": 86.7,
+        "boundary_iou": 66.9,
+        "image": "assets/scenes/scene3_cocon_med.webp"
+      },
+      "cocon_hard": {
+        "label": "COCO-N Hard (Severe Stress)",
+        "mask_iou": 56.3,
+        "boundary_iou": 46.7,
+        "image": "assets/scenes/scene3_cocon_hard.webp"
+      },
+      "approx": {
+        "label": "Polygon Simplification (Inward Cut)",
+        "mask_iou": 87.5,
+        "boundary_iou": 67.4,
+        "image": "assets/scenes/scene3_approx.webp"
+      },
+      "drift": {
+        "label": "Rigid Spatial Drift",
+        "mask_iou": 54.2,
+        "boundary_iou": 26.1,
+        "image": "assets/scenes/scene3_drift.webp"
+      },
+      "erode": {
+        "label": "Morphological Erosion",
+        "mask_iou": 51.7,
+        "boundary_iou": 16.7,
+        "image": "assets/scenes/scene3_erode.webp"
+      },
+      "dilate": {
+        "label": "Morphological Dilation (Outward Bleed)",
+        "mask_iou": 60.6,
+        "boundary_iou": 27.0,
+        "image": "assets/scenes/scene3_dilate.webp"
+      },
+      "cblnl_cleaned": {
+        "label": "CB-LNL Cleaned (Ours \u2014 Sfumato Copula)",
+        "mask_iou": 97.3,
+        "boundary_iou": 93.5,
+        "image": "assets/scenes/scene3_cblnl_cleaned.webp"
+      }
+    }
+  },
+  {
+    "scene_id": "scene4",
+    "coco_image_id": 387173,
+    "title": "Scene 4: Boat, Person",
+    "objects": [
+      "boat",
+      "person"
+    ],
+    "modes": {
+      "clean": {
+        "label": "Clean Reference (LVIS v1)",
+        "mask_iou": 100.0,
+        "boundary_iou": 100.0,
+        "image": "assets/scenes/scene4_clean.webp"
+      },
+      "realnoise": {
+        "label": "Real Human (COCO-RealNoise)",
+        "mask_iou": 95.0,
+        "boundary_iou": 94.4,
+        "image": "assets/scenes/scene4_realnoise.webp"
+      },
+      "wan_box": {
+        "label": "SAM2 Box (WAN-Box Noisy)",
+        "mask_iou": 76.2,
+        "boundary_iou": 73.4,
+        "image": "assets/scenes/scene4_wan_box.webp"
+      },
+      "wan_point": {
+        "label": "SAM2 Click (WAN-Point Center)",
+        "mask_iou": 56.4,
+        "boundary_iou": 51.5,
+        "image": "assets/scenes/scene4_wan_point.webp"
+      },
+      "cocon_med": {
+        "label": "COCO-N Medium (Procedural)",
+        "mask_iou": 83.3,
+        "boundary_iou": 80.3,
+        "image": "assets/scenes/scene4_cocon_med.webp"
+      },
+      "cocon_hard": {
+        "label": "COCO-N Hard (Severe Stress)",
+        "mask_iou": 60.1,
+        "boundary_iou": 48.5,
+        "image": "assets/scenes/scene4_cocon_hard.webp"
+      },
+      "approx": {
+        "label": "Polygon Simplification (Inward Cut)",
+        "mask_iou": 64.2,
+        "boundary_iou": 58.8,
+        "image": "assets/scenes/scene4_approx.webp"
+      },
+      "drift": {
+        "label": "Rigid Spatial Drift",
+        "mask_iou": 55.6,
+        "boundary_iou": 50.1,
+        "image": "assets/scenes/scene4_drift.webp"
+      },
+      "erode": {
+        "label": "Morphological Erosion",
+        "mask_iou": 50.1,
+        "boundary_iou": 46.5,
+        "image": "assets/scenes/scene4_erode.webp"
+      },
+      "dilate": {
+        "label": "Morphological Dilation (Outward Bleed)",
+        "mask_iou": 52.4,
+        "boundary_iou": 26.7,
+        "image": "assets/scenes/scene4_dilate.webp"
+      },
+      "cblnl_cleaned": {
+        "label": "CB-LNL Cleaned (Ours \u2014 Sfumato Copula)",
+        "mask_iou": 96.0,
+        "boundary_iou": 95.3,
+        "image": "assets/scenes/scene4_cblnl_cleaned.webp"
+      }
+    }
+  }
+]
